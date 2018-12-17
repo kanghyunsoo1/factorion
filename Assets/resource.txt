@@ -1,0 +1,45 @@
+{"v":[{
+	"resId":0,
+	"resName":"Coal",
+	"minAmount":1000,
+	"maxAmount":5000,
+	"rangeFactor":200,
+	"chance":0.005,
+	"minRange":6.0
+},
+{
+	"resId":1,
+	"resName":"Iron",
+	"minAmount":1000,
+	"maxAmount":5000,
+	"rangeFactor":200,
+	"chance":0.005,
+	"minRange":6.0
+},
+{
+	"resId":2,
+	"resName":"Copper",
+	"minAmount":1000,
+	"maxAmount":5000,
+	"rangeFactor":200,
+	"chance":0.005,
+	"minRange":6.0
+},
+{
+	"resId":3,
+	"resName":"Dudxo",
+	"minAmount":1000,
+	"maxAmount":5000,
+	"rangeFactor":50,
+	"chance":0.005,
+	"minRange":20.0
+},
+{
+	"resId":4,
+	"resName":"Gustn",
+	"minAmount":1000,
+	"maxAmount":5000,
+	"rangeFactor":50,
+	"chance":0.005,
+	"minRange":25.0
+}]}

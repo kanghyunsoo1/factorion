@@ -1,2 +1,13 @@
 GameName#Factorion#팩토리온
+Save#Save#저장하기
 Saving#Saving...#저장중...
+Load#Load#불러오기
+Loading#Loading...#불러오는중...
+Spawning#Spawning Resources...#자원 생성중...
+Exit#Exit#나가기
+Coal#Coal#석탄
+Iron#Iron#철
+Copper#Copper#구리
+Dudxo#Dudxo#두득소
+Gustn#Gustn#거스튼
+Raw#Raw#미 가공된
