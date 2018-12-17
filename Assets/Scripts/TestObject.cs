@@ -6,17 +6,19 @@ public class TestObject : SavableObject
 {
     public int a = 2;
     public string b="234";
-    bool c = false;
+    public bool c = false;
 	void Start () {
-        StartCoroutine(FindObjectOfType<GameSystem>().SaveAll());
+
 	}
-	// Update is called once per frame
+
 	void Update () {
-		
+        transform.Translate(Random.Range(0.1f, 0.1f), Random.Range(0.1f, 0.1f), 0);
+        a += Random.Range(-2, 2);
 	}
 
     public override string ToJson()
     {
+        SetBaseVar();
         return JsonUtility.ToJson(this,true);
     }
 }

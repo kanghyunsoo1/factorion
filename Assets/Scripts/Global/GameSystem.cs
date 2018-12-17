@@ -5,23 +5,29 @@ using UnityEngine;
 public class GameSystem : MonoBehaviour
 {
     string mapName;
+    DataManager dm;
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         mapName = "map0";
-        
+        dm = GetComponent<DataManager>();
+
     }
-    public IEnumerator SaveAll()
+
+    private void Update()
     {
-        GetComponent<GUIManager>().OnSaveStart();
-        yield return null;
-        int i = 0;
-        foreach (SavableObject so in FindObjectsOfType<SavableObject>())
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            PlayerPrefs.SetString(mapName+"_" + i, so.ToJson());
-            Debug.Log(PlayerPrefs.GetString(mapName + "_" + i));
-            i = i + 1;
+            dm.SaveAll(mapName);
         }
-        GetComponent<GUIManager>().OnSaveEnd();
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            dm.Load(mapName);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            PlayerPrefs.DeleteAll();
+        }
     }
+
 }
