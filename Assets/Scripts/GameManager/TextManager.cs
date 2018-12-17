@@ -30,7 +30,7 @@ public class TextManager : MonoBehaviour
         foreach (string str in lines)
         {
             var cols = str.Split('#');
-            dic.Add(cols[0], cols[index]);
+            dic.Add(cols[0].ToLower(), cols[index]);
         }
     }
 
@@ -38,14 +38,14 @@ public class TextManager : MonoBehaviour
     {
         try
         {
-            return dic[key];
+            return dic[key.ToLower()];
         }
         catch (Exception)
         {
             return "Unknown";
         }
     }
-    
+
     void Update()
     {
 

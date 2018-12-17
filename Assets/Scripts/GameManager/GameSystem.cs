@@ -4,29 +4,37 @@ using UnityEngine;
 
 public class GameSystem : MonoBehaviour
 {
-    string mapName;
     DataManager dm;
+    ResourceManager rm;
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        mapName = "map0";
         dm = GetComponent<DataManager>();
+        rm = GetComponent<ResourceManager>();
 
+        Debug.Log("First: "+StaticDatas.isFirst);
+        if (StaticDatas.isFirst)
+        {
+            rm.Spawn();
+        }
+        else
+        {
+            dm.Load(StaticDatas.mapName);
+        }
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            dm.SaveAll(mapName);
+            dm.Save(StaticDatas.mapName);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            dm.Load(mapName);
+            dm.Load(StaticDatas.mapName);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            PlayerPrefs.DeleteAll();
+            dm.Clean(StaticDatas.mapName);
         }
     }
 
