@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraHandler : MonoBehaviour
-{
+public class CameraHandler :MonoBehaviour {
 
     private static readonly float PanSpeed = 20f;
     private static readonly float ZoomSpeedTouch = 0.05f;
@@ -19,21 +18,17 @@ public class CameraHandler : MonoBehaviour
     private bool wasZoomingLastFrame; // Touch mode only
     private Vector2[] lastZoomPositions; // Touch mode only
 
-    void Awake()
-    {
+    void Awake() {
         cam = GetComponent<Camera>();
     }
 
-    void Update()
-    {
+    void Update() {
         HandleTouch();
 
     }
 
-    void HandleTouch()
-    {
-        switch (Input.touchCount)
-        {
+    void HandleTouch() {
+        switch (Input.touchCount) {
 
             case 1: // Panning
                 wasZoomingLastFrame = false;
@@ -41,26 +36,20 @@ public class CameraHandler : MonoBehaviour
                 // If the touch began, capture its position and its finger ID.
                 // Otherwise, if the finger ID of the touch doesn't match, skip it.
                 Touch touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Began)
-                {
+                if (touch.phase == TouchPhase.Began) {
                     lastPanPosition = touch.position;
                     panFingerId = touch.fingerId;
-                }
-                else if (touch.fingerId == panFingerId && touch.phase == TouchPhase.Moved)
-                {
+                } else if (touch.fingerId == panFingerId && touch.phase == TouchPhase.Moved) {
                     PanCamera(touch.position);
                 }
                 break;
 
             case 2: // Zooming
                 Vector2[] newPositions = new Vector2[] { Input.GetTouch(0).position, Input.GetTouch(1).position };
-                if (!wasZoomingLastFrame)
-                {
+                if (!wasZoomingLastFrame) {
                     lastZoomPositions = newPositions;
                     wasZoomingLastFrame = true;
-                }
-                else
-                {
+                } else {
                     // Zoom based on the distance between the new positions compared to the 
                     // distance between the previous positions.
                     float newDistance = Vector2.Distance(newPositions[0], newPositions[1]);
@@ -79,8 +68,7 @@ public class CameraHandler : MonoBehaviour
         }
     }
 
-    void PanCamera(Vector3 newPanPosition)
-    {
+    void PanCamera(Vector3 newPanPosition) {
         // Determine how much to move the camera
         Vector3 offset = cam.ScreenToViewportPoint(lastPanPosition - newPanPosition);
         Vector3 move = new Vector3(offset.x * PanSpeed, offset.y * PanSpeed);
@@ -99,10 +87,8 @@ public class CameraHandler : MonoBehaviour
         lastPanPosition = newPanPosition;
     }
 
-    void ZoomCamera(float offset, float speed)
-    {
-        if (offset == 0)
-        {
+    void ZoomCamera(float offset, float speed) {
+        if (offset == 0) {
             return;
         }
 

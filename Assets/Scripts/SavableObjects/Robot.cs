@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Robot : SavableObject {
-    
-	void Start () {
-		
-	}
-	
-	void Update () {
-		
-	}
+public class Robot :SavableObject {
+
+    void Start() {
+
+    }
+
+    void Update() {
+
+    }
 }
