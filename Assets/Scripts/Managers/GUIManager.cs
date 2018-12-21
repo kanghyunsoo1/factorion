@@ -41,7 +41,7 @@ public class GUIManager : MonoBehaviour
     }
     public void OnSave()
     {
-        dm.Save(StaticDatas.mapName);
+        dm.Save();
     }
     public void OnExit()
     {

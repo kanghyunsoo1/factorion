@@ -4,104 +4,91 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class DataManager : MonoBehaviour
-{
+public class DataManager :MonoBehaviour {
     GUIManager guim;
-    void Start()
-    {
+    string mapName;
+    void Start() {
         guim = GetComponent<GUIManager>();
+        mapName = StaticDatas.mapName;
     }
 
-    public void Save(string mapName)
-    {
-        StartCoroutine(_Save(mapName));
+    public void Save() {
+        StartCoroutine(_Save());
     }
 
-    private IEnumerator _Save(string mapName)
-    {
+    private IEnumerator _Save() {
         guim.OnSaveStart();
         yield return null;
         int i = 0;
-        foreach (SavableObject so in FindObjectsOfType<SavableObject>())
-        {
+
+        PlayerPrefs.SetInt(mapName, 12341234);
+        foreach (SavableObject so in FindObjectsOfType<SavableObject>()) {
             so.BeforeSave();
             PlayerPrefs.SetString(mapName + "_" + i, so.ToJson());
             PlayerPrefs.SetString("name_" + i, so.name.Replace("(Clone)", ""));
             i = i + 1;
         }
-        foreach (SaveAndLoader sal in FindObjectsOfType<SaveAndLoader>())
-        {
-            sal.Save(mapName);
+        foreach (SaveAndLoader sal in FindObjectsOfType<SaveAndLoader>()) {
+            sal.Save();
         }
         PlayerPrefs.Save();
         guim.OnSaveEnd();
     }
 
-    public void Load(string mapName)
-    {
-        StartCoroutine(_Load(mapName));
+    public void Load() {
+        StartCoroutine(_Load());
     }
-
-    private IEnumerator _Load(string mapName)
-    {
+    public bool IsFirst() {
+        return PlayerPrefs.GetInt(mapName) != 12341234;
+    }
+    private IEnumerator _Load() {
         guim.OnLoadStart();
         yield return null;
-        foreach (SavableObject so in FindObjectsOfType<SavableObject>())
-        {
+        if (IsFirst()) {
+            Application.Quit();
+            Debug.Log("Is First!!!!!");
+        }
+        foreach (SavableObject so in FindObjectsOfType<SavableObject>()) {
             Destroy(so.gameObject);
         }
         int i = 0;
-        while (true)
-        {
-            try
-            {
-                if (PlayerPrefs.HasKey(mapName + "_" + i))
-                {
+        while (true) {
+            try {
+                if (PlayerPrefs.HasKey(mapName + "_" + i)) {
                     var name = PlayerPrefs.GetString("name_" + i);
-                    var go = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Savables/" + name + ".prefab", typeof(GameObject)));
+                    var go = (GameObject)Instantiate(Resources.Load<GameObject>("Savables/" + name));
                     var savable = go.GetComponent<SavableObject>();
                     JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(mapName + "_" + i), savable);
                     savable.AfterLoad();
-                }
-                else
-                {
+                } else {
                     break;
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 Debug.Log(e.StackTrace);
             }
             i++;
         }
-        foreach (SaveAndLoader sal in FindObjectsOfType<SaveAndLoader>())
-        {
-            sal.Load(mapName);
+        foreach (SaveAndLoader sal in FindObjectsOfType<SaveAndLoader>()) {
+            sal.Load();
         }
         guim.OnLoadEnd();
     }
 
-    public void Clean(string mapName)
-    {
+    public void Clean() {
 
         int i = 0;
-        while (true)
-        {
+        while (true) {
 
-            if (PlayerPrefs.HasKey(mapName + "_" + i))
-            {
+            if (PlayerPrefs.HasKey(mapName + "_" + i)) {
                 PlayerPrefs.DeleteKey(mapName + "_" + i);
-            }
-            else
-            {
+            } else {
                 break;
             }
             i++;
         }
 
-        foreach (SaveAndLoader sal in FindObjectsOfType<SaveAndLoader>())
-        {
-            sal.Clean(mapName);
+        foreach (SaveAndLoader sal in FindObjectsOfType<SaveAndLoader>()) {
+            sal.Clean();
         }
     }
 }

@@ -2,39 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSystem : MonoBehaviour
-{
+public class GameSystem :MonoBehaviour {
     DataManager dm;
     ResourceManager rm;
-    void Start()
-    {
+    void Start() {
         dm = GetComponent<DataManager>();
         rm = GetComponent<ResourceManager>();
 
-        Debug.Log("First: "+StaticDatas.isFirst);
-        if (StaticDatas.isFirst)
-        {
+        Debug.Log("First: " + dm.IsFirst());
+        if (dm.IsFirst()) {
             rm.Spawn();
-        }
-        else
-        {
-            dm.Load(StaticDatas.mapName);
+        } else {
+            dm.Load();
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            dm.Save(StaticDatas.mapName);
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            dm.Save();
         }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            dm.Load(StaticDatas.mapName);
+        if (Input.GetKeyDown(KeyCode.W)) {
+            dm.Load();
         }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            dm.Clean(StaticDatas.mapName);
+        if (Input.GetKeyDown(KeyCode.E)) {
+            dm.Clean();
         }
     }
 

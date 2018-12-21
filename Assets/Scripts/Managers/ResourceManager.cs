@@ -33,7 +33,7 @@ public class ResourceManager :MonoBehaviour {
                         continue;
                     int chance = (int)(ri.chance * 1000);
                     if (UnityEngine.Random.Range(0, 1000) <= chance) {
-                        GameObject go = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Savables/Resource" + ri.resName + ".prefab"));
+                        GameObject go = Instantiate(Resources.Load<GameObject>("Savables/Resource" + ri.resName));
                         go.transform.position = new Vector3(i, j, 0);
                         go.transform.Rotate(0f, 0f, UnityEngine.Random.Range(0f, 360f));
                         var res = go.GetComponent<Resource>();

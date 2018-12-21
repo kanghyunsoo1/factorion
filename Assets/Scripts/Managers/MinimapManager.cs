@@ -53,7 +53,7 @@ public class MinimapManager :MonoBehaviour {
     }
 
     public Vector2 WorldToMinimapPoint(Vector2 vec) {
-        vec /= (float)StaticDatas.SIZE ;
+        vec /= (float)StaticDatas.SIZE;
         vec *= backRect.width / 2;
         return vec;
     }
