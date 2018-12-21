@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Robot :SavableObject {
 
+
     void Start() {
 
     }
