@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114244987166418126}
   - component: {fileID: 212657948150340864}
   - component: {fileID: 114721840907392532}
+  - component: {fileID: 114381937550613212}
   m_Layer: 0
   m_Name: ResourceIron
   m_TagString: Untagged
@@ -57,6 +58,19 @@ MonoBehaviour:
   rotation: {x: 0, y: 0, z: 0}
   resId: 0
   amount: 0
+--- !u!114 &114381937550613212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1605336506274070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01825f328996dc04a98893bdce0fb407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+  Size: 3
 --- !u!114 &114721840907392532
 MonoBehaviour:
   m_ObjectHideFlags: 1

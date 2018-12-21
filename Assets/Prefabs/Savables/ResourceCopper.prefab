@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114612712007928364}
   - component: {fileID: 212856172943047636}
   - component: {fileID: 114497153917044548}
+  - component: {fileID: 114505643350631978}
   m_Layer: 0
   m_Name: ResourceCopper
   m_TagString: Untagged
@@ -53,6 +54,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928482b7420603747807b54b97e36e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114505643350631978
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1488441206729738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01825f328996dc04a98893bdce0fb407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 0.6886792, g: 0.4242092, b: 0.20465466, a: 1}
+  Size: 3
 --- !u!114 &114612712007928364
 MonoBehaviour:
   m_ObjectHideFlags: 1

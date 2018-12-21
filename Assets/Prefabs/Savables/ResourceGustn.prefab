@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114058024612192892}
   - component: {fileID: 212514405171592370}
   - component: {fileID: 114548226520760156}
+  - component: {fileID: 114622719250185036}
   m_Layer: 0
   m_Name: ResourceGustn
   m_TagString: Untagged
@@ -68,6 +69,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928482b7420603747807b54b97e36e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114622719250185036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1906417566448976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01825f328996dc04a98893bdce0fb407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 0.20392154, g: 0.4658529, b: 0.6901961, a: 1}
+  Size: 3
 --- !u!212 &212514405171592370
 SpriteRenderer:
   m_ObjectHideFlags: 1

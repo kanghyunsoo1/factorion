@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114864797952644778}
   - component: {fileID: 212187509663050952}
   - component: {fileID: 114101381339809216}
+  - component: {fileID: 114333808299692204}
   m_Layer: 0
   m_Name: ResourceCoal
   m_TagString: Untagged
@@ -53,6 +54,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928482b7420603747807b54b97e36e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114333808299692204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1825138002346724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01825f328996dc04a98893bdce0fb407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+  Size: 3
 --- !u!114 &114864797952644778
 MonoBehaviour:
   m_ObjectHideFlags: 1

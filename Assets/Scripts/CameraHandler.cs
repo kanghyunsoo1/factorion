@@ -3,12 +3,11 @@ using System.Collections;
 
 public class CameraHandler :MonoBehaviour {
 
-    private static readonly float PanSpeed = 20f;
-    private static readonly float ZoomSpeedTouch = 0.05f;
+    private static readonly float panSpeed = 4f;
+    private static readonly float zoomSpeedTouch = 0.05f;
 
-    private static readonly float[] BoundsX = new float[] { -40f, 40f };
-    private static readonly float[] BoundsY = new float[] { -40f, 40f };
-    private static readonly float[] ZoomBounds = new float[] { 5f, 20f };
+    private static readonly float[] bounds = new float[] { -StaticDatas.SIZE, StaticDatas.SIZE };
+    private static readonly float[] zoomBounds = new float[] { 7f, 20f };
 
     private Camera cam;
 
@@ -24,7 +23,11 @@ public class CameraHandler :MonoBehaviour {
 
     void Update() {
         HandleTouch();
-
+        var v = cam.transform.position;
+        var c = CameraScreenToUnit();
+        v.x = Mathf.Clamp(v.x, bounds[0] + c.x / 2, bounds[1] - c.x / 2);
+        v.y = Mathf.Clamp(v.y, bounds[0] + c.y / 2, bounds[1] - c.y / 2);
+        cam.transform.position = v;
     }
 
     void HandleTouch() {
@@ -56,7 +59,7 @@ public class CameraHandler :MonoBehaviour {
                     float oldDistance = Vector2.Distance(lastZoomPositions[0], lastZoomPositions[1]);
                     float offset = newDistance - oldDistance;
 
-                    ZoomCamera(offset, ZoomSpeedTouch);
+                    ZoomCamera(offset, zoomSpeedTouch);
 
                     lastZoomPositions = newPositions;
                 }
@@ -71,15 +74,13 @@ public class CameraHandler :MonoBehaviour {
     void PanCamera(Vector3 newPanPosition) {
         // Determine how much to move the camera
         Vector3 offset = cam.ScreenToViewportPoint(lastPanPosition - newPanPosition);
-        Vector3 move = new Vector3(offset.x * PanSpeed, offset.y * PanSpeed);
+        Vector3 move = new Vector3(offset.x * (panSpeed + cam.orthographicSize), offset.y * (panSpeed + cam.orthographicSize));
 
         // Perform the movement
         transform.Translate(move, Space.World);
 
         // Ensure the camera remains within bounds.
         Vector3 pos = transform.position;
-        pos.x = Mathf.Clamp(transform.position.x, BoundsX[0], BoundsX[1]);
-        pos.y = Mathf.Clamp(transform.position.y, BoundsY[0], BoundsY[1]);
         pos.z = -10f;
         transform.position = pos;
 
@@ -92,6 +93,10 @@ public class CameraHandler :MonoBehaviour {
             return;
         }
 
-        cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - (offset * speed), ZoomBounds[0], ZoomBounds[1]);
+        cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - (offset * speed), zoomBounds[0], zoomBounds[1]);
     }
+    public Vector2 CameraScreenToUnit() {
+        return new Vector2(cam.orthographicSize * 2 * cam.aspect, cam.orthographicSize * 2);
+    }
+
 }
