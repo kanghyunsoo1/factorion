@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputManager :MonoBehaviour {
     public float maxTouchDistance;//터치로 인정되는 최대 움직인 거리
@@ -27,6 +28,7 @@ public class InputManager :MonoBehaviour {
 
                 case TouchPhase.Ended:
                     if (Vector2.Distance(startPos, touch.position) <= maxTouchDistance) {
+                        if(!EventSystem.current.IsPointerOverGameObject())
                         OnWorldTouch(cam.ScreenToWorldPoint(touch.position));
                     }
                     break;
@@ -38,7 +40,7 @@ public class InputManager :MonoBehaviour {
     public void OnWorldTouch(Vector2 position) {
         GameObject go = am.GetUser(position);
         if (go != null) {
-
+            
         }
     }
 }
