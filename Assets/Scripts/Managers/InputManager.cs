@@ -9,6 +9,7 @@ public class InputManager :MonoBehaviour {
     private Vector2 startPos;
     private Camera cam;
     private AreaManager am;
+    private bool isOverUI;
 
     private void Start() {
         am = GetComponent<AreaManager>();
@@ -27,11 +28,12 @@ public class InputManager :MonoBehaviour {
             switch (touch.phase) {
                 case TouchPhase.Began:
                     startPos = touch.position;
+                    isOverUI = EventSystem.current.IsPointerOverGameObject(touch.fingerId);
                     break;
 
                 case TouchPhase.Ended:
                     if (Vector2.Distance(startPos, touch.position) <= MaxTouchDistance) {
-                        if (!EventSystem.current.IsPointerOverGameObject())
+                        if (!isOverUI)
                             OnWorldTouch(cam.ScreenToWorldPoint(touch.position));
                     }
                     break;
@@ -44,6 +46,7 @@ public class InputManager :MonoBehaviour {
         GameObject go = am.GetUser(position);
         if (go != null) {
             guim.OnObjectTouch(go);
+            return;
         } else if (go == null) {
             for (int dx = -1; dx <= 1; dx++) {
                 for (int dy = -1; dy <= 1; dy++) {
