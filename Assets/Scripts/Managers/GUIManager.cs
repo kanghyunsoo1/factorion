@@ -9,16 +9,30 @@ public class GUIManager :MonoBehaviour {
     public GameObject Loading;
     public GameObject Spawning;
     public Text MapNameText;
-    DataManager dm;
+    public Image InfoShower;
+    public GameObject Select;
+
+    private DataManager dm;
+    private TextManager tm;
+    private Text infoNameText;
+    private Text infoDescriptionText;
     void Start() {
         dm = GetComponent<DataManager>();
+        tm = GetComponent<TextManager>();
         MapNameText.text = StaticDatas.mapName;
+        infoNameText = InfoShower.transform.Find("NameText").GetComponent<Text>();
+        infoDescriptionText = InfoShower.transform.Find("DescriptionText").GetComponent<Text>();
     }
 
     public void OnObjectTouch(GameObject go) {
-        if (go.GetComponent<Resource>() != null) {
-
+        var ih = go.GetComponent<InfoHolder>();
+        if (ih != null) {
+            infoNameText.text = tm.GetText(ih.NameKey);
+            infoDescriptionText.text = tm.GetText(ih.NameKey + "_");
+            Select.transform.position = go.transform.position;
         }
+
+        
     }
 
 

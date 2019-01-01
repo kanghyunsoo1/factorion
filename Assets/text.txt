@@ -5,12 +5,23 @@ Load#Load#불러오기
 Loading#Loading...#불러오는중...
 Spawning#Spawning Resources...#자원 생성중...
 Exit#Exit#나가기
+
+
+Raw#Raw#미 가공된
+
+
+
 Coal#Coal#석탄
 Iron#Iron#철
 Copper#Copper#구리
 Dudxo#Dudxo#두득소
 Gustn#Gustn#거스튼
-Raw#Raw#미 가공된
+Base#Base#기지
 
 
-
+Coal_#Coal Description#석탄 설명
+Iron_#Iron Description#철 설명
+Copper_#Copper Description#구리 설명
+Dudxo_#Dudxo Description#두득소 설명
+Gustn_#Gustn Description#거스튼 설명
+Base_#Base Des#기지 설명

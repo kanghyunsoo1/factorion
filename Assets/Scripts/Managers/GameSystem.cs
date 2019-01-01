@@ -6,6 +6,10 @@ public class GameSystem :MonoBehaviour {
     DataManager dm;
     ResourceManager rm;
     void Start() {
+        if (Application.isEditor) {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+        }
         dm = GetComponent<DataManager>();
         rm = GetComponent<ResourceManager>();
 
@@ -25,7 +29,6 @@ public class GameSystem :MonoBehaviour {
             dm.Load();
         }
         if (Input.GetKeyDown(KeyCode.E)) {
-            Debug.Log("Clean");
             dm.Clean();
         }
     }

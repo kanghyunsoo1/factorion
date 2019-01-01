@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InfoHolder : MonoBehaviour {
-    public string Key;
+public class InfoHolder :MonoBehaviour {
+    public string NameKey;
 }

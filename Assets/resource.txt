@@ -1,60 +1,60 @@
 {"v":[{
 	"resId":0,
-	"resName":"Coal",
+	"nameKey":"Coal",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":200,
 	"chance":0.002,
 	"minRange":4.0,
-	"r":1,
-	"g":1,
-	"b":1
+	"r":0.1,
+	"g":0.1,
+	"b":0.1
 },
 {
 	"resId":1,
-	"resName":"Iron",
+	"nameKey":"Iron",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":200,
 	"chance":0.002,
 	"minRange":4.0,
-	"r":1,
-	"g":1,
+	"r":0.7,
+	"g":0.7,
 	"b":1
 },
 {
 	"resId":2,
-	"resName":"Copper",
+	"nameKey":"Copper",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":200,
 	"chance":0.002,
 	"minRange":4.0,
-	"r":1,
-	"g":1,
-	"b":1
+	"r":0.8,
+	"g":0.8,
+	"b":0.3
 },
 {
 	"resId":3,
-	"resName":"Dudxo",
+	"nameKey":"Dudxo",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":50,
 	"chance":0.002,
 	"minRange":10.0,
-	"r":1,
+	"r":0.5,
 	"g":1,
-	"b":1
+	"b":0
 },
 {
 	"resId":4,
-	"resName":"Gustn",
+	"nameKey":"Gustn",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":50,
 	"chance":0.002,
 	"minRange":15.0,
-	"r":1,
-	"g":1,
+	"r":0.2,
+	"g":0.2,
 	"b":1
 }]}

@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class ResourceInfo {
     public int resId;
-    public string resName;
+    public string nameKey;
     public int minAmount;
     public int maxAmount;
     public int rangeFactor;

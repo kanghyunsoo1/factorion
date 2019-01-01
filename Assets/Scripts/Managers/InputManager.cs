@@ -30,8 +30,8 @@ public class InputManager :MonoBehaviour {
 
                 case TouchPhase.Ended:
                     if (Vector2.Distance(startPos, touch.position) <= MaxTouchDistance) {
-                        if(!EventSystem.current.IsPointerOverGameObject())
-                        OnWorldTouch(cam.ScreenToWorldPoint(touch.position));
+                        if (!EventSystem.current.IsPointerOverGameObject())
+                            OnWorldTouch(cam.ScreenToWorldPoint(touch.position));
                     }
                     break;
             }
@@ -43,6 +43,19 @@ public class InputManager :MonoBehaviour {
         GameObject go = am.GetUser(position);
         if (go != null) {
             guim.OnObjectTouch(go);
+        } else if (go == null) {
+            for (int dx = -1; dx <= 1; dx++) {
+                for (int dy = -1; dy <= 1; dy++) {
+                    if (dx == 0 && dy == 0)
+                        continue;
+                    var v = new Vector2(position.x + dx, position.y + dy);
+                    go = am.GetUser(v);
+                    if (go != null) {
+                        guim.OnObjectTouch(go);
+                        return;
+                    }
+                }
+            }
         }
     }
 }

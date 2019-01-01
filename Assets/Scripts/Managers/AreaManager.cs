@@ -29,6 +29,6 @@ public class AreaManager :MonoBehaviour {
     }
 
     public static Vector2Int GetAreaVectorFromVector(Vector2 vector) {
-        return new Vector2Int(Mathf.Clamp((int)vector.x, 0, StaticDatas.SIZE - 1) + StaticDatas.SIZE, Mathf.Clamp((int)vector.y, 0, StaticDatas.SIZE - 1) + StaticDatas.SIZE);
+        return new Vector2Int(Mathf.Clamp(Mathf.RoundToInt(vector.x), -StaticDatas.SIZE, StaticDatas.SIZE - 1) + StaticDatas.SIZE, Mathf.Clamp(Mathf.RoundToInt(vector.y), -StaticDatas.SIZE, StaticDatas.SIZE - 1) + StaticDatas.SIZE);
     }
 }
