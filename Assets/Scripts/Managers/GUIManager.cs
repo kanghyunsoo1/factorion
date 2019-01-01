@@ -27,12 +27,15 @@ public class GUIManager :MonoBehaviour {
     public void OnObjectTouch(GameObject go) {
         var ih = go.GetComponent<InfoHolder>();
         if (ih != null) {
+            InfoShower.gameObject.SetActive(true);
             infoNameText.text = tm.GetText(ih.NameKey);
             infoDescriptionText.text = tm.GetText(ih.NameKey + "_");
             Select.transform.position = go.transform.position;
         }
+    }
 
-        
+    public void InfoShowerOff() {
+        InfoShower.gameObject.SetActive(false);
     }
 
 

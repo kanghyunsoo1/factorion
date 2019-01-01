@@ -14,6 +14,7 @@ public class InputManager :MonoBehaviour {
         am = GetComponent<AreaManager>();
         guim = GetComponent<GUIManager>();
         cam = Camera.main;
+        OnWorldTouch(Vector2.zero);
     }
 
     void Update() {
@@ -57,5 +58,6 @@ public class InputManager :MonoBehaviour {
                 }
             }
         }
+        guim.InfoShowerOff();
     }
 }

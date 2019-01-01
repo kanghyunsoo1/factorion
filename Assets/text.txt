@@ -1,27 +1,30 @@
-GameName#Factorion#팩토리온
-Save#Save#저장하기
-Saving#Saving...#저장중...
-Load#Load#불러오기
-Loading#Loading...#불러오는중...
-Spawning#Spawning Resources...#자원 생성중...
-Exit#Exit#나가기
+@GUI
+GameName		#Factorion								#팩토리온
+Save			#Save									#저장하기
+Saving			#Saving...								#저장중...
+Load			#Load									#불러오기
+Loading			#Loading...								#불러오는중...
+Spawning		#Spawning Resources...					#자원 생성중...
+Exit			#Exit									#나가기
 
+@자원
+Coal			#Coal									#석탄
+Coal_			#Coal Description						#석탄 설명글
+Iron			#Iron									#철
+Iron_			#Iron Description						#철 설명글
+Copper			#Copper									#구리
+Copper_			#Copper Description						#구리 설명글
+Tin				#Tin									#주석
+Tin_			#Tin Description						#주석 설명글
+Lead			#Lead									#납
+Lead_			#Lead Description						#납 설명글
+Dudxo			#Dudxo									#두득소
+Dudxo_			#Dudxo Description						#두득소 설명글
 
-Raw#Raw#미 가공된
+@건물
+Base			#Base									#기지
+Base_			#Base Des								#기지 설명
 
-
-
-Coal#Coal#석탄
-Iron#Iron#철
-Copper#Copper#구리
-Dudxo#Dudxo#두득소
 Gustn#Gustn#거스튼
-Base#Base#기지
 
 
-Coal_#Coal Description#석탄 설명
-Iron_#Iron Description#철 설명
-Copper_#Copper Description#구리 설명
-Dudxo_#Dudxo Description#두득소 설명
-Gustn_#Gustn Description#거스튼 설명
-Base_#Base Des#기지 설명
