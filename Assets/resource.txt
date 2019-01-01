@@ -5,7 +5,10 @@
 	"maxAmount":5000,
 	"rangeFactor":200,
 	"chance":0.002,
-	"minRange":4.0
+	"minRange":4.0,
+	"r":1,
+	"g":1,
+	"b":1
 },
 {
 	"resId":1,
@@ -14,7 +17,10 @@
 	"maxAmount":5000,
 	"rangeFactor":200,
 	"chance":0.002,
-	"minRange":4.0
+	"minRange":4.0,
+	"r":1,
+	"g":1,
+	"b":1
 },
 {
 	"resId":2,
@@ -23,7 +29,10 @@
 	"maxAmount":5000,
 	"rangeFactor":200,
 	"chance":0.002,
-	"minRange":4.0
+	"minRange":4.0,
+	"r":1,
+	"g":1,
+	"b":1
 },
 {
 	"resId":3,
@@ -32,7 +41,10 @@
 	"maxAmount":5000,
 	"rangeFactor":50,
 	"chance":0.002,
-	"minRange":10.0
+	"minRange":10.0,
+	"r":1,
+	"g":1,
+	"b":1
 },
 {
 	"resId":4,
@@ -41,5 +53,8 @@
 	"maxAmount":5000,
 	"rangeFactor":50,
 	"chance":0.002,
-	"minRange":15.0
+	"minRange":15.0,
+	"r":1,
+	"g":1,
+	"b":1
 }]}

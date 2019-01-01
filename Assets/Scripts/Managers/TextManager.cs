@@ -29,6 +29,8 @@ public class TextManager : MonoBehaviour
         var lines = t.Split('\n');
         foreach (string str in lines)
         {
+            if (str.Trim().Equals(""))
+                continue;
             var cols = str.Split('#');
             dic.Add(cols[0].ToLower(), cols[index]);
         }

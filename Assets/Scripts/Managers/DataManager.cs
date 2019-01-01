@@ -25,7 +25,7 @@ public class DataManager :MonoBehaviour {
         foreach (SavableObject so in FindObjectsOfType<SavableObject>()) {
             so.BeforeSave();
             PlayerPrefs.SetString(mapName + "_" + i, so.ToJson());
-            PlayerPrefs.SetString("name_" + i, so.name.Replace("(Clone)", ""));
+            PlayerPrefs.SetString(mapName + "_name_" + i, so.name.Replace("(Clone)", ""));
             i = i + 1;
         }
         foreach (SaveAndLoader sal in FindObjectsOfType<SaveAndLoader>()) {
@@ -55,7 +55,7 @@ public class DataManager :MonoBehaviour {
         while (true) {
             try {
                 if (PlayerPrefs.HasKey(mapName + "_" + i)) {
-                    var name = PlayerPrefs.GetString("name_" + i);
+                    var name = PlayerPrefs.GetString(mapName + "_name_" + i);
                     var go = (GameObject)Instantiate(Resources.Load<GameObject>("Savables/" + name));
                     var savable = go.GetComponent<SavableObject>();
                     JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(mapName + "_" + i), savable);
@@ -76,11 +76,12 @@ public class DataManager :MonoBehaviour {
 
     public void Clean() {
 
+        PlayerPrefs.DeleteKey(mapName);
         int i = 0;
         while (true) {
-
             if (PlayerPrefs.HasKey(mapName + "_" + i)) {
                 PlayerPrefs.DeleteKey(mapName + "_" + i);
+                PlayerPrefs.DeleteKey(mapName + "_name_" + i);
             } else {
                 break;
             }
@@ -90,5 +91,6 @@ public class DataManager :MonoBehaviour {
         foreach (SaveAndLoader sal in FindObjectsOfType<SaveAndLoader>()) {
             sal.Clean();
         }
+        PlayerPrefs.Save();
     }
 }

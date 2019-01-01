@@ -25,6 +25,7 @@ public class GameSystem :MonoBehaviour {
             dm.Load();
         }
         if (Input.GetKeyDown(KeyCode.E)) {
+            Debug.Log("Clean");
             dm.Clean();
         }
     }

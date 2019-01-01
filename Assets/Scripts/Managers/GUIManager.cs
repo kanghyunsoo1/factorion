@@ -1,50 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GUIManager : MonoBehaviour
-{
-    public GameObject saving;
-    public GameObject loading;
-    public GameObject spawning;
+public class GUIManager :MonoBehaviour {
+    public GameObject Saving;
+    public GameObject Loading;
+    public GameObject Spawning;
+    public Text MapNameText;
     DataManager dm;
-    void Start()
-    {
+    void Start() {
         dm = GetComponent<DataManager>();
-
+        MapNameText.text = StaticDatas.mapName;
     }
 
-    public void OnSaveStart()
-    {
-        saving.SetActive(true);
+    public void OnObjectTouch(GameObject go) {
+        if (go.GetComponent<Resource>() != null) {
+
+        }
     }
-    public void OnSaveEnd()
-    {
-        saving.SetActive(false);
+
+
+    public void OnSaveStart() {
+        Saving.SetActive(true);
     }
-    public void OnLoadStart()
-    {
-        loading.SetActive(true);
+    public void OnSaveEnd() {
+        Saving.SetActive(false);
     }
-    public void OnLoadEnd()
-    {
-        loading.SetActive(false);
+    public void OnLoadStart() {
+        Loading.SetActive(true);
     }
-    public void OnSpawnStart()
-    {
-        spawning.SetActive(true);
+    public void OnLoadEnd() {
+        Loading.SetActive(false);
     }
-    public void OnSpawnEnd()
-    {
-        spawning.SetActive(false);
+    public void OnSpawnStart() {
+        Spawning.SetActive(true);
     }
-    public void OnSave()
-    {
+    public void OnSpawnEnd() {
+        Spawning.SetActive(false);
+    }
+    public void OnSave() {
         dm.Save();
     }
-    public void OnExit()
-    {
+    public void OnExit() {
         SceneManager.LoadScene("Main");
     }
 }
