@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TextSetter :MonoBehaviour {
-    public string key;
+    public string Head;
+    public string Key;
+    public string Tail;
     void Start() {
-        GetComponent<Text>().text = FindObjectOfType<TextManager>().GetText(key);
+        GetComponent<Text>().text = Head+FindObjectOfType<TextManager>().GetText(Key)+Tail;
         Destroy(this);
     }
 }
