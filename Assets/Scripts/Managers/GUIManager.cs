@@ -34,19 +34,20 @@ public class GUIManager :MonoBehaviour {
 
     public void OnObjectTouch(GameObject go) {
         InfoShowerOff();
-        var ih = go.GetComponent<InfoHolder>();
-        if (ih != null) {
-            InfoShower.SetActive(true);
-            infoNameText.text = ih.Name;
-            infoDescriptionText.text = ih.Description;
-            Select.transform.position = go.transform.position;
-            var res = go.GetComponent<Resource>();
-            if (res != null) {
-                ResourceShower.SetActive(true);
-                resourceNameText.text = tm.GetText(rm.GetResourceInfo(res.ResourceId).nameKey);
-                resourceAmountText.text = res.Amount + "";
-            }
+        var res = go.GetComponent<Resource>();
+        if (res != null) {
+            ResourceShower.SetActive(true);
+            resourceNameText.text = tm.GetText(rm.GetResourceInfo(res.ResourceId).nameKey);
+            resourceAmountText.text = res.Amount + "";
         }
+
+        InfoShower.SetActive(true);
+        var objName = go.name.Replace("(Clone)", "").ToLower();
+        infoNameText.text = tm.GetText("name_" + objName);
+        infoDescriptionText.text = tm.GetText("des_" + objName);
+        Select.transform.position = go.transform.position;
+
+
     }
 
     public void InfoShowerOff() {

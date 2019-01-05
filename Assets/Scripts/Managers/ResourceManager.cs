@@ -9,12 +9,10 @@ public class ResourceManager :MonoBehaviour {
     public class Wraper {
         public ResourceInfo[] v;
     }
-    public TextAsset ResourceInfoText;
     private ResourceInfo[] ResourceInfos;
     private GUIManager guim;
-
     void Start() {
-        ResourceInfos = JsonUtility.FromJson<Wraper>(ResourceInfoText.text).v;
+        ResourceInfos = JsonUtility.FromJson<Wraper>(Resources.Load<TextAsset>("resource").text).v;
         guim = GetComponent<GUIManager>();
     }
 
@@ -33,16 +31,13 @@ public class ResourceManager :MonoBehaviour {
                         continue;
                     int chance = (int)(ri.chance * 1000);
                     if (UnityEngine.Random.Range(0, 1000) <= chance) {
-                        var color = new Color(ri.r, ri.g, ri.b); ;
+
                         GameObject go = Instantiate(Resources.Load<GameObject>("Savables/Resource"));
-                        go.GetComponent<InfoHolder>().NameKey = ri.nameKey;
-                        go.GetComponent<MinimapEntity>().Color = color;
                         go.transform.position = new Vector3(i, j, 0);
                         go.transform.Rotate(0f, 0f, UnityEngine.Random.Range(0f, 360f));
                         var res = go.GetComponent<Resource>();
-                        res.resId = ri.resId;
-                        res.amount = (int)(ri.rangeFactor * range) + UnityEngine.Random.Range(ri.minAmount, ri.maxAmount + 1);
-                        go.GetComponent<SpriteRenderer>().color = color;
+                        res.ResourceId = ri.resId;
+                        res.Amount = (int)(ri.rangeFactor * range) + UnityEngine.Random.Range(ri.minAmount, ri.maxAmount + 1);
                         break;
                     }
                 }
