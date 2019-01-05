@@ -74,10 +74,19 @@ public class GUIManager :MonoBehaviour {
     public void OnSpawnEnd() {
         Spawning.SetActive(false);
     }
-    public void OnSave() {
-        dm.Save();
-    }
-    public void OnExit() {
-        SceneManager.LoadScene("Main");
+
+    public void OnButtonClick(string name) {
+        switch (name) {
+            case "Save":
+                dm.Save();
+                break;
+            case "Exit":
+                SceneManager.LoadScene("Main");
+                break;
+            case "Clear":
+                dm.Clean();
+                SceneManager.LoadScene("Main");
+                break;
+        }
     }
 }
