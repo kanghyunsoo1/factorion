@@ -4,8 +4,8 @@
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":200,
-	"chance":0.002,
-	"minRange":10.0,
+	"chance":0.001,
+	"minRange":5.0,
 	"r":0.1,
 	"g":0.1,
 	"b":0.1
@@ -16,10 +16,10 @@
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":200,
-	"chance":0.002,
-	"minRange":12.0,
+	"chance":0.001,
+	"minRange":5.0,
 	"r":0.7,
-	"g":0.7,
+	"g":0.5,
 	"b":1
 },
 {
@@ -28,8 +28,8 @@
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":200,
-	"chance":0.002,
-	"minRange":14.0,
+	"chance":0.001,
+	"minRange":5.0,
 	"r":0.8,
 	"g":0.8,
 	"b":0.3
@@ -39,22 +39,34 @@
 	"nameKey":"Tin",
 	"minAmount":1000,
 	"maxAmount":5000,
-	"rangeFactor":50,
-	"chance":0.002,
-	"minRange":15.0,
+	"rangeFactor":150,
+	"chance":0.001,
+	"minRange":10.0,
 	"r":0.5,
-	"g":1,
-	"b":0
+	"g":0.4,
+	"b":0.3
 },
 {
 	"resId":4,
-	"nameKey":"Dudxo",
+	"nameKey":"Lead",
 	"minAmount":1000,
 	"maxAmount":5000,
-	"rangeFactor":50,
-	"chance":0.002,
+	"rangeFactor":130,
+	"chance":0.001,
 	"minRange":20.0,
 	"r":0.2,
 	"g":0.2,
-	"b":1
+	"b":0.4
+},
+{
+	"resId":5,
+	"nameKey":"Dudxo",
+	"minAmount":500,
+	"maxAmount":2000,
+	"rangeFactor":50,
+	"chance":0.001,
+	"minRange":30.0,
+	"r":1,
+	"g":0.3,
+	"b":0.4
 }]}

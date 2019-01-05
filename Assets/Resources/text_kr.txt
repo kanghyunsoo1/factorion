@@ -1,0 +1,27 @@
+@GUI
+save				#저장하기
+saving				#저장중...
+load				#불러오기
+loading				#불러오는중...
+spawning			#자원 생성중...
+exit				#나가기
+
+@자원
+name_resource		#자원
+des_resource		#자원에 대한 설명
+raw					#미 가공된
+amount				#매장량
+coal				#석탄
+iron				#철
+copper				#구리
+tin					#주석
+lead				#납
+dudxo				#두득소
+
+@건물
+name_base			#기지
+des_base			#기지 설명
+
+gustn				#거스튼
+
+

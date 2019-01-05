@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Head: 
-  Key: Spawning
+  Key: spawning
   Tail: 
 --- !u!114 &265356894
 MonoBehaviour:
@@ -895,7 +895,6 @@ GameObject:
   - component: {fileID: 824445422}
   - component: {fileID: 824445424}
   - component: {fileID: 824445425}
-  - component: {fileID: 824445426}
   - component: {fileID: 824445427}
   m_Layer: 0
   m_Name: Base
@@ -987,19 +986,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Color: {r: 1, g: 0, b: 0, a: 1}
   Size: 10
---- !u!114 &824445426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 824445421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3db7b220dbd37134bbb162d7da783e37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: 
-  Description: 
 --- !u!114 &824445427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1790,7 +1776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Head: 
-  Key: Loading
+  Key: loading
   Tail: 
 --- !u!114 &1584008169
 MonoBehaviour:
@@ -2228,7 +2214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Head: 
-  Key: Saving
+  Key: saving
   Tail: 
 --- !u!114 &1810025104
 MonoBehaviour:
@@ -3001,7 +2987,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9caf9650737efe479968a8735c7d2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 4900000, guid: 7e9598a564246394ba4dff75d552f6a3, type: 3}
 --- !u!114 &2095153340
 MonoBehaviour:
   m_ObjectHideFlags: 0

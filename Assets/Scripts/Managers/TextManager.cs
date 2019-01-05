@@ -5,7 +5,6 @@ using System.IO;
 using UnityEngine;
 
 public class TextManager :MonoBehaviour {
-    public TextAsset text;
     Dictionary<string, string> dic;
 
     private void Awake() {
@@ -13,22 +12,22 @@ public class TextManager :MonoBehaviour {
     }
 
     public void LoadText(SystemLanguage e) {
-        int index = 1;
+        string tail = "_en";
         switch (e) {
             case SystemLanguage.Korean:
-                index = 2;
+                tail = "_kr";
                 break;
         }
 
         dic = new Dictionary<string, string>();
-        string t = text.text;
+        string t = Resources.Load<TextAsset>("text" + tail).text;
         t = t.Replace("\t", "");
         var lines = t.Split('\n');
         foreach (string str in lines) {
             if (str.Trim().Equals("") || str.Contains("@"))
                 continue;
             var cols = str.Split('#');
-            dic.Add(cols[0].ToLower(), cols[index]);
+            dic.Add(cols[0].ToLower(), cols[1]);
         }
     }
 

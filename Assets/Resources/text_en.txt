@@ -1,0 +1,32 @@
+@GUI
+GameName			#팩토리온
+Save				#저장하기
+Saving				#저장중...
+Load				#불러오기
+Loading				#불러오는중...
+Spawning			#자원 생성중...
+Exit				#나가기
+
+@자원
+Raw					#미 가공된
+Amount				#매장량
+oCoal				#석탄
+oCoalDesc			#석탄 설명글
+objIron				#철
+objIron_			#철 설명글
+Copper				#구리
+Copper_				#구리 설명글
+Tin					#주석
+Tin_				#주석 설명글
+Lead				#납
+Lead_				#납 설명글
+Dudxo				#두득소
+Dudxo_				#두득소 설명글
+
+@건물
+Base				#기지
+Base_				#기지 설명
+
+Gustn				#거스튼
+
+
