@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Grid
+    uniqueID: 1889699451
+    locked: 0
   - name: Select
     uniqueID: 3142600559
     locked: 0

@@ -12,8 +12,7 @@ public class SaveAndLoader :MonoBehaviour {
 
     public void Save() {
         string a = JsonUtility.ToJson(this);
-        Debug.Log(a);
-        PlayerPrefs.SetString(mapName + key,a);
+        PlayerPrefs.SetString(mapName + key, a);
     }
 
     public void Load() {

@@ -10,7 +10,6 @@ public class NewGridEffectManager :MonoBehaviour {
     private Camera cam;
     private float width = 18;
     private float height = 30;
-    private bool isAdd = false;
     void Start() {
         cam = Camera.main;
         StartCoroutine(Loop());
