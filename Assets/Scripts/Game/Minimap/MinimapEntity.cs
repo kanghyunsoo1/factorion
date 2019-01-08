@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MinimapEntity :MonoBehaviour {
-    public Color Color;
-    public float Size;
+    public Color color;
+    public float size;
 
     private void Start() {
         FindObjectOfType<MinimapManager>().Register(this);

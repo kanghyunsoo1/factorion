@@ -9,11 +9,11 @@ public class ResourceManager :MonoBehaviour {
     public class Wraper {
         public ResourceInfo[] v;
     }
-    private ResourceInfo[] ResourceInfos;
-    private GUIManager guim;
+    public ResourceInfo[] resourceInfos;
+    private GuiManager _guim;
     void Start() {
-        ResourceInfos = JsonUtility.FromJson<Wraper>(Resources.Load<TextAsset>("resource").text).v;
-        guim = GetComponent<GUIManager>();
+        resourceInfos = JsonUtility.FromJson<Wraper>(Resources.Load<TextAsset>("resource").text).v;
+        _guim = GetComponent<GuiManager>();
     }
 
     public void Spawn() {
@@ -21,11 +21,13 @@ public class ResourceManager :MonoBehaviour {
     }
 
     private IEnumerator _Spawn() {
-        guim.OnSpawnStart();
+        _guim.OnSpawnStart();
         yield return null;
         for (int i = -StaticDatas.SIZE; i < StaticDatas.SIZE; i++) {
             for (int j = -StaticDatas.SIZE; j < StaticDatas.SIZE; j++) {
-                foreach (ResourceInfo ri in ResourceInfos) {
+                int index = 0;
+                foreach (ResourceInfo ri in resourceInfos) {
+
                     float range = Vector2.Distance(new Vector2(i, j), Vector2.zero);
                     if (range < ri.minRange)
                         continue;
@@ -35,20 +37,18 @@ public class ResourceManager :MonoBehaviour {
                         GameObject go = Instantiate(Resources.Load<GameObject>("Savables/Resource"));
                         go.transform.position = new Vector3(i, j, 0);
                         go.transform.Rotate(0f, 0f, UnityEngine.Random.Range(0f, 360f));
-                        var res = go.GetComponent<Resource>();
-                        res.ResourceId = ri.resId;
-                        res.Amount = (int)(ri.rangeFactor * range) + UnityEngine.Random.Range(ri.minAmount, ri.maxAmount + 1);
+                        var res = go.GetComponent<SOResource>();
+                        res.resourceIndex = index;
+                        res.amount = (int)(ri.rangeFactor * range) + UnityEngine.Random.Range(ri.minAmount, ri.maxAmount + 1);
                         break;
                     }
+                    index++;
                 }
             }
         }
 
-        guim.OnSpawnEnd();
+        _guim.OnSpawnEnd();
     }
 
-    public ResourceInfo GetResourceInfo(int id) {
-        return ResourceInfos[id];
-    }
 
 }

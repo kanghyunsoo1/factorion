@@ -2,6 +2,5 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RobotManager :SaveAndLoader {
-    public int maxRobotCount;
+public class RobotManager :MonoBehaviour {
 }

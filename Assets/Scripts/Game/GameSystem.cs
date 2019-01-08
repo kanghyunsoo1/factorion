@@ -3,33 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameSystem :MonoBehaviour {
-    DataManager dm;
-    ResourceManager rm;
+    private DataManager _dm;
+    private ResourceManager _rm;
     void Start() {
         if (Application.isEditor) {
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();
         }
-        dm = GetComponent<DataManager>();
-        rm = GetComponent<ResourceManager>();
+        _dm = GetComponent<DataManager>();
+        _rm = GetComponent<ResourceManager>();
 
-        Debug.Log("First: " + dm.IsFirst());
-        if (dm.IsFirst()) {
-            rm.Spawn();
+        Debug.Log("First: " + _dm.IsFirst());
+        if (_dm.IsFirst()) {
+            _rm.Spawn();
         } else {
-            dm.Load();
+            _dm.Load();
         }
     }
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Q)) {
-            dm.Save();
+            _dm.Save();
         }
         if (Input.GetKeyDown(KeyCode.W)) {
-            dm.Load();
+            _dm.Load();
         }
         if (Input.GetKeyDown(KeyCode.E)) {
-            dm.Clean();
+            _dm.Clean();
         }
     }
 

@@ -3,28 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NewGrid :MonoBehaviour {
-    public float LifeTime;
-    private SpriteRenderer renderer;
-    private Color color;
-    private bool isUp = true;
+    public float lifeTime;
+    private SpriteRenderer _spriteRenderer;
+    private Color _color;
+    private bool _isUp = true;
     void Start() {
-        color = new Color(1f, 1f, 1f, 0f);
-        renderer = GetComponent<SpriteRenderer>();
-        renderer.color = color;
-        Destroy(gameObject, LifeTime);
+        _color = new Color(1f, 1f, 1f, 0f);
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.color = _color;
+        Destroy(gameObject, lifeTime);
     }
 
     void FixedUpdate() {
-        if (isUp) {
-            color.a += Time.deltaTime / LifeTime * 2;
-            if (color.a >= 1f) {
-                color.a = 1f;
-                isUp = false;
+        if (_isUp) {
+            _color.a += Time.deltaTime / lifeTime * 2;
+            if (_color.a >= 1f) {
+                _color.a = 1f;
+                _isUp = false;
             }
         } else {
-            color.a -= Time.deltaTime / LifeTime * 2;
+            _color.a -= Time.deltaTime / lifeTime * 2;
         }
 
-        renderer.color = color;
+        _spriteRenderer.color = _color;
     }
 }

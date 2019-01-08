@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 [Serializable]
 public class ResourceInfo {
-    public int resId;
     public string nameKey;
     public int minAmount;
     public int maxAmount;

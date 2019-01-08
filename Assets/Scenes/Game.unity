@@ -417,9 +417,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03cf103fabf98d499bf590ecf4df2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: 
-  Key: spawning
-  Tail: 
+  head: 
+  key: 
+  tail: 
 --- !u!114 &265356894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,8 +996,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01825f328996dc04a98893bdce0fb407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Color: {r: 1, g: 0, b: 0, a: 1}
-  Size: 10
+  color: {r: 1, g: 0, b: 0, a: 1}
+  size: 10
 --- !u!114 &824445427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1787,9 +1787,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03cf103fabf98d499bf590ecf4df2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: 
-  Key: loading
-  Tail: 
+  head: 
+  key: 
+  tail: 
 --- !u!114 &1584008169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2225,9 +2225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03cf103fabf98d499bf590ecf4df2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: 
-  Key: saving
-  Tail: 
+  head: 
+  key: 
+  tail: 
 --- !u!114 &1810025104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2939,6 +2939,7 @@ GameObject:
   - component: {fileID: 2095153344}
   - component: {fileID: 2095153345}
   - component: {fileID: 2095153347}
+  - component: {fileID: 2095153346}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2981,13 +2982,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9917f36dbadd8eb4380b4c1e49f255b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Saving: {fileID: 1977428377}
-  Loading: {fileID: 353368233}
-  Spawning: {fileID: 1874067939}
-  MapNameText: {fileID: 657795959}
-  InfoShower: {fileID: 1240693614}
-  ResourceShower: {fileID: 1907738231}
-  Select: {fileID: 1083136778}
+  saving: {fileID: 1977428377}
+  loading: {fileID: 353368233}
+  spawning: {fileID: 1874067939}
+  mapNameText: {fileID: 657795959}
+  infoShower: {fileID: 1240693614}
+  resourceShower: {fileID: 1907738231}
+  select: {fileID: 1083136778}
 --- !u!114 &2095153339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3021,6 +3022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3703623aca5641d4889b75e720b88be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceInfos: []
 --- !u!114 &2095153342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3032,7 +3034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0e5ee34ebb0c346a14a04a7cf4b9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxTouchDistance: 10
+  maxTouchDistance: 10
 --- !u!114 &2095153343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3055,9 +3057,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cdd1dd3432b43d4b88302e861b1b94a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dot: {fileID: 1542564366190596, guid: 28fd42a2db0e43d4db17ac4d7eb340a9, type: 2}
-  CameraRect: {fileID: 1387685833}
-  Minimap: {fileID: 406852405}
+  dot: {fileID: 1542564366190596, guid: 28fd42a2db0e43d4db17ac4d7eb340a9, type: 2}
+  cameraRect: {fileID: 1387685833}
+  minimap: {fileID: 406852405}
 --- !u!114 &2095153345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3069,6 +3071,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38694c667f3035f47a13c89f0d3100c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2095153346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2095153335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6d62299a2027345887e4e244301474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemInfos: []
 --- !u!114 &2095153347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3080,6 +3094,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ab330054ae27e40bcd03e2b835c64f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Grid: {fileID: 1709527928688662, guid: 53c6dcfaf23006e4aa5c496f242016c9, type: 2}
-  Delay: 0.03
-  LifeTime: 2
+  grid: {fileID: 1709527928688662, guid: 53c6dcfaf23006e4aa5c496f242016c9, type: 2}

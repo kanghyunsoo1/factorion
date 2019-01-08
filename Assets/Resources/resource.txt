@@ -1,6 +1,5 @@
 {"v":[{
-	"resId":0,
-	"nameKey":"Coal",
+	"nameKey":"coal",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":200,
@@ -11,8 +10,7 @@
 	"b":0.1
 },
 {
-	"resId":1,
-	"nameKey":"Iron",
+	"nameKey":"iron",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":200,
@@ -23,8 +21,7 @@
 	"b":1
 },
 {
-	"resId":2,
-	"nameKey":"Copper",
+	"nameKey":"copper",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":200,
@@ -35,8 +32,7 @@
 	"b":0.3
 },
 {
-	"resId":3,
-	"nameKey":"Tin",
+	"nameKey":"tin",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":150,
@@ -47,8 +43,7 @@
 	"b":0.3
 },
 {
-	"resId":4,
-	"nameKey":"Lead",
+	"nameKey":"lead",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":130,
@@ -59,8 +54,7 @@
 	"b":0.4
 },
 {
-	"resId":5,
-	"nameKey":"Dudxo",
+	"nameKey":"dudxo",
 	"minAmount":500,
 	"maxAmount":2000,
 	"rangeFactor":50,

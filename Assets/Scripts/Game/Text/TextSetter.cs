@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TextSetter :MonoBehaviour {
-    public string Head;
-    public string Key;
-    public string Tail;
+    public string head;
+    public string key;
+    public string tail;
     void Start() {
-        GetComponent<Text>().text = Head+FindObjectOfType<TextManager>().GetText(Key)+Tail;
+        GetComponent<Text>().text = head + FindObjectOfType<TextManager>().GetText(key) + tail;
         Destroy(this);
     }
 }

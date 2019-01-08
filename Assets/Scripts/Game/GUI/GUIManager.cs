@@ -4,88 +4,88 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GUIManager :MonoBehaviour {
-    public GameObject Saving;
-    public GameObject Loading;
-    public GameObject Spawning;
-    public Text MapNameText;
-    public GameObject InfoShower;
-    public GameObject ResourceShower;
-    public GameObject Select;
+public class GuiManager :MonoBehaviour {
+    public GameObject saving;
+    public GameObject loading;
+    public GameObject spawning;
+    public Text mapNameText;
+    public GameObject infoShower;
+    public GameObject resourceShower;
+    public GameObject select;
 
-    private DataManager dm;
-    private TextManager tm;
-    private ResourceManager rm;
-    private Text infoNameText;
-    private Text infoDescriptionText;
-    private Text resourceNameText;
-    private Text resourceAmountText;
+    private DataManager _dm;
+    private TextManager _tm;
+    private ResourceManager _rm;
+    private Text _infoNameText;
+    private Text _infoDescriptionText;
+    private Text _resourceNameText;
+    private Text _resourceAmountText;
 
     void Start() {
-        dm = GetComponent<DataManager>();
-        tm = GetComponent<TextManager>();
-        rm = GetComponent<ResourceManager>();
-        MapNameText.text = StaticDatas.mapName;
-        infoNameText = InfoShower.transform.Find("NameText").GetComponent<Text>();
-        infoDescriptionText = InfoShower.transform.Find("DescriptionText").GetComponent<Text>();
-        resourceNameText = ResourceShower.transform.Find("NameText").GetComponent<Text>();
-        resourceAmountText = ResourceShower.transform.Find("AmountText").GetComponent<Text>();
+        _dm = GetComponent<DataManager>();
+        _tm = GetComponent<TextManager>();
+        _rm = GetComponent<ResourceManager>();
+        mapNameText.text = StaticDatas.mapName;
+        _infoNameText = infoShower.transform.Find("NameText").GetComponent<Text>();
+        _infoDescriptionText = infoShower.transform.Find("DescriptionText").GetComponent<Text>();
+        _resourceNameText = resourceShower.transform.Find("NameText").GetComponent<Text>();
+        _resourceAmountText = resourceShower.transform.Find("AmountText").GetComponent<Text>();
     }
 
     public void OnObjectTouch(GameObject go) {
         InfoShowerOff();
-        var res = go.GetComponent<Resource>();
+        var res = go.GetComponent<SOResource>();
         if (res != null) {
-            ResourceShower.SetActive(true);
-            resourceNameText.text = tm.GetText(rm.GetResourceInfo(res.ResourceId).nameKey);
-            resourceAmountText.text = res.Amount + "";
+            resourceShower.SetActive(true);
+            _resourceNameText.text = _tm.GetText(_rm.resourceInfos[res.resourceIndex].nameKey);
+            _resourceAmountText.text = res.amount + "";
         }
 
-        InfoShower.SetActive(true);
+        infoShower.SetActive(true);
         var objName = go.name.Replace("(Clone)", "").ToLower();
-        infoNameText.text = tm.GetText("name_" + objName);
-        infoDescriptionText.text = tm.GetText("des_" + objName);
-        Select.transform.position = go.transform.position;
+        _infoNameText.text = _tm.GetText("name_" + objName);
+        _infoDescriptionText.text = _tm.GetText("des_" + objName);
+        select.transform.position = go.transform.position;
 
 
     }
 
     public void InfoShowerOff() {
-        InfoShower.SetActive(false);
-        ResourceShower.SetActive(false);
-        Select.transform.position = new Vector3(12354, 12354);
+        infoShower.SetActive(false);
+        resourceShower.SetActive(false);
+        select.transform.position = new Vector3(12354, 12354);
     }
 
 
     public void OnSaveStart() {
-        Saving.SetActive(true);
+        saving.SetActive(true);
     }
     public void OnSaveEnd() {
-        Saving.SetActive(false);
+        saving.SetActive(false);
     }
     public void OnLoadStart() {
-        Loading.SetActive(true);
+        loading.SetActive(true);
     }
     public void OnLoadEnd() {
-        Loading.SetActive(false);
+        loading.SetActive(false);
     }
     public void OnSpawnStart() {
-        Spawning.SetActive(true);
+        spawning.SetActive(true);
     }
     public void OnSpawnEnd() {
-        Spawning.SetActive(false);
+        spawning.SetActive(false);
     }
 
     public void OnButtonClick(string name) {
         switch (name) {
             case "Save":
-                dm.Save();
+                _dm.Save();
                 break;
             case "Exit":
                 SceneManager.LoadScene("Main");
                 break;
             case "Clear":
-                dm.Clean();
+                _dm.Clean();
                 SceneManager.LoadScene("Main");
                 break;
         }

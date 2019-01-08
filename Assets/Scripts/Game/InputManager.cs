@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InputManager :MonoBehaviour {
-    public float MaxTouchDistance;
-    private GUIManager guim;
-    private Vector2 startPos;
-    private Camera cam;
-    private AreaManager am;
-    private bool isOverUI;
+    public float maxTouchDistance;
+    private GuiManager _guim;
+    private Vector2 _startPos;
+    private Camera _camera;
+    private AreaManager _am;
+    private bool _isOverUI;
 
     private void Start() {
-        am = GetComponent<AreaManager>();
-        guim = GetComponent<GUIManager>();
-        cam = Camera.main;
+        _am = GetComponent<AreaManager>();
+        _guim = GetComponent<GuiManager>();
+        _camera = Camera.main;
         OnWorldTouch(Vector2.zero);
     }
 
@@ -27,14 +27,14 @@ public class InputManager :MonoBehaviour {
             Touch touch = Input.GetTouch(0);
             switch (touch.phase) {
                 case TouchPhase.Began:
-                    startPos = touch.position;
-                    isOverUI = EventSystem.current.IsPointerOverGameObject(touch.fingerId);
+                    _startPos = touch.position;
+                    _isOverUI = EventSystem.current.IsPointerOverGameObject(touch.fingerId);
                     break;
 
                 case TouchPhase.Ended:
-                    if (Vector2.Distance(startPos, touch.position) <= MaxTouchDistance) {
-                        if (!isOverUI)
-                            OnWorldTouch(cam.ScreenToWorldPoint(touch.position));
+                    if (Vector2.Distance(_startPos, touch.position) <= maxTouchDistance) {
+                        if (!_isOverUI)
+                            OnWorldTouch(_camera.ScreenToWorldPoint(touch.position));
                     }
                     break;
             }
@@ -43,9 +43,9 @@ public class InputManager :MonoBehaviour {
 
 
     public void OnWorldTouch(Vector2 position) {
-        GameObject go = am.GetUser(position);
+        GameObject go = _am.GetUser(position);
         if (go != null) {
-            guim.OnObjectTouch(go);
+            _guim.OnObjectTouch(go);
             return;
         } else if (go == null) {
             for (int dx = -1; dx <= 1; dx++) {
@@ -53,14 +53,14 @@ public class InputManager :MonoBehaviour {
                     if (dx == 0 && dy == 0)
                         continue;
                     var v = new Vector2(position.x + dx, position.y + dy);
-                    go = am.GetUser(v);
+                    go = _am.GetUser(v);
                     if (go != null) {
-                        guim.OnObjectTouch(go);
+                        _guim.OnObjectTouch(go);
                         return;
                     }
                 }
             }
         }
-        guim.InfoShowerOff();
+        _guim.InfoShowerOff();
     }
 }

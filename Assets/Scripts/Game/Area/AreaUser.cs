@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AreaUser :MonoBehaviour {
-    AreaManager am;
+    private AreaManager _am;
     void Start() {
-        am = FindObjectOfType<AreaManager>();
-        am.LockArea(gameObject);
+        _am = FindObjectOfType<AreaManager>();
+        _am.LockArea(gameObject);
     }
 
     private void OnDestroy() {
-        am.UnlockArea(gameObject);
+        _am.UnlockArea(gameObject);
     }
 }

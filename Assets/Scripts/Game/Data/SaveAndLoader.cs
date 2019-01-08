@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SaveAndLoader :MonoBehaviour {
-    private string mapName;
-    private string key;
+    private string _mapName;
+    private string _key;
     private void Start() {
-        mapName = StaticDatas.mapName;
-        key = ToString();
+        _mapName = StaticDatas.mapName;
+        _key = ToString();
     }
 
     public void Save() {
         string a = JsonUtility.ToJson(this);
-        PlayerPrefs.SetString(mapName + key, a);
+        PlayerPrefs.SetString(_mapName + _key, a);
     }
 
     public void Load() {
-        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(mapName + key), this);
+        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(_mapName + _key), this);
     }
 
     public void Clean() {
-        PlayerPrefs.DeleteKey(mapName + "_SaveAndLoader_" + key);
+        PlayerPrefs.DeleteKey(_mapName + "_SaveAndLoader_" + _key);
     }
 }

@@ -4,38 +4,39 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MinimapManager :MonoBehaviour {
-    public GameObject Dot;
-    public GameObject CameraRect;
-    public Image Minimap;
-    private Dictionary<MinimapEntity, GameObject> dics;
-    private Rect backRect;
-    private Camera cam;
-    private RectTransform cameraRectTransform;
+    public GameObject dot;
+    public GameObject cameraRect;
+    public Image minimap;
+    private Dictionary<MinimapEntity, GameObject> _dic;
+    private Rect _backRect;
+    private Camera _camera;
+    private RectTransform _cameraRectTransform;
+
     void Start() {
-        dics = new Dictionary<MinimapEntity, GameObject>();
-        backRect = Minimap.GetComponent<RectTransform>().rect;
-        cam = Camera.main;
-        cameraRectTransform = CameraRect.GetComponent<RectTransform>();
+        _dic = new Dictionary<MinimapEntity, GameObject>();
+        _backRect = minimap.GetComponent<RectTransform>().rect;
+        _camera = Camera.main;
+        _cameraRectTransform = cameraRect.GetComponent<RectTransform>();
         StartCoroutine(Refresh());
         StartCoroutine(RefreshCamera());
     }
 
     public void Register(MinimapEntity me) {
-        var g = Instantiate(Dot);
-        g.GetComponent<RectTransform>().sizeDelta = new Vector2(me.Size, me.Size);
-        g.GetComponent<Image>().color = me.Color;
-        g.transform.SetParent(Minimap.transform);
-        dics.Add(me, g);
+        var g = Instantiate(dot);
+        g.GetComponent<RectTransform>().sizeDelta = new Vector2(me.size, me.size);
+        g.GetComponent<Image>().color = me.color;
+        g.transform.SetParent(minimap.transform);
+        _dic.Add(me, g);
     }
 
     public void Unregister(MinimapEntity me) {
-        dics.Remove(me);
+        _dic.Remove(me);
     }
 
     IEnumerator Refresh() {
         while (true) {
-            foreach (MinimapEntity me in dics.Keys) {
-                var dot = dics[me];
+            foreach (MinimapEntity me in _dic.Keys) {
+                var dot = _dic[me];
                 dot.GetComponent<RectTransform>().localPosition = WorldToMinimapPoint(me.transform.position);
                 yield return null;
             }
@@ -45,8 +46,8 @@ public class MinimapManager :MonoBehaviour {
 
     IEnumerator RefreshCamera() {
         while (true) {
-            cameraRectTransform.sizeDelta = WorldToMinimapPoint(CameraScreenToUnit());
-            cameraRectTransform.localPosition = WorldToMinimapPoint(cam.transform.position);
+            _cameraRectTransform.sizeDelta = WorldToMinimapPoint(CameraScreenToUnit());
+            _cameraRectTransform.localPosition = WorldToMinimapPoint(_camera.transform.position);
 
             yield return new WaitForSeconds(0.1f);
         }
@@ -54,11 +55,11 @@ public class MinimapManager :MonoBehaviour {
 
     public Vector2 WorldToMinimapPoint(Vector2 vec) {
         vec /= (float)StaticDatas.SIZE;
-        vec *= backRect.width / 2;
+        vec *= _backRect.width / 2;
         return vec;
     }
 
     public Vector2 CameraScreenToUnit() {
-        return new Vector2(cam.orthographicSize * 2 * cam.aspect, cam.orthographicSize * 2);
+        return new Vector2(_camera.orthographicSize * 2 * _camera.aspect, _camera.orthographicSize * 2);
     }
 }

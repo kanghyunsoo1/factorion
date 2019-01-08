@@ -65,8 +65,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01825f328996dc04a98893bdce0fb407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Color: {r: 1, g: 1, b: 1, a: 1}
-  Size: 3
+  color: {r: 0, g: 0, b: 0, a: 0}
+  size: 3
 --- !u!114 &114864797952644778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -80,8 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
-  ResourceId: 0
-  Amount: 0
+  resourceIndex: 0
+  amount: 0
 --- !u!212 &212187509663050952
 SpriteRenderer:
   m_ObjectHideFlags: 1
