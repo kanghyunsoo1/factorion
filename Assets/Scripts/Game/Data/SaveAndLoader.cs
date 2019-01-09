@@ -12,11 +12,11 @@ public class SaveAndLoader :MonoBehaviour {
 
     public void Save() {
         string a = JsonUtility.ToJson(this);
-        PlayerPrefs.SetString(_mapName +"sal"+ _key, a);
+        PlayerPrefs.SetString(_mapName + "sal" + _key, a);
     }
 
     public void Load() {
-        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(_mapName +"sal"+ _key), this);
+        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(_mapName + "sal" + _key), this);
     }
 
     public void Clean() {

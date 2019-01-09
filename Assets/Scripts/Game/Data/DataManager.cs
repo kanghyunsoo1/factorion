@@ -71,6 +71,7 @@ public class DataManager :MonoBehaviour {
         foreach (SaveAndLoader sal in FindObjectsOfType<SaveAndLoader>()) {
             sal.Load();
         }
+        GetComponent<ValueManager>().RefreshValues();
         _guim.OnLoadEnd();
     }
 

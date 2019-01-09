@@ -20,7 +20,4 @@ public class SavableObject :MonoBehaviour {
     public void AfterLoad() {
         LoadTransform();
     }
-    public string ToJson() {
-        return JsonUtility.ToJson(this);
-    }
 }
