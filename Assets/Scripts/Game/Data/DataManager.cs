@@ -7,7 +7,7 @@ using UnityEngine;
 public class DataManager :MonoBehaviour {
     private GuiManager _guim;
     private string _mapName;
-    void Start() {
+    void Awake() {
         _guim = GetComponent<GuiManager>();
         _mapName = StaticDatas.mapName;
     }
@@ -24,8 +24,8 @@ public class DataManager :MonoBehaviour {
         PlayerPrefs.SetInt(_mapName, 12341234);
         foreach (SavableObject so in FindObjectsOfType<SavableObject>()) {
             so.BeforeSave();
-            PlayerPrefs.SetString(_mapName + "_" + i, so.ToJson());
-            PlayerPrefs.SetString(_mapName + "_name_" + i, so.name.Replace("(Clone)", ""));
+            PlayerPrefs.SetString(_mapName + i, JsonUtility.ToJson(so));
+            PlayerPrefs.SetString(_mapName + "name" + i, so.name.Replace("(Clone)", ""));
             i = i + 1;
         }
         foreach (SaveAndLoader sal in FindObjectsOfType<SaveAndLoader>()) {
@@ -54,11 +54,11 @@ public class DataManager :MonoBehaviour {
         int i = 0;
         while (true) {
             try {
-                if (PlayerPrefs.HasKey(_mapName + "_" + i)) {
-                    var name = PlayerPrefs.GetString(_mapName + "_name_" + i);
+                if (PlayerPrefs.HasKey(_mapName + i)) {
+                    var name = PlayerPrefs.GetString(_mapName + "name" + i);
                     var go = (GameObject)Instantiate(Resources.Load<GameObject>("Savables/" + name));
                     var savable = go.GetComponent<SavableObject>();
-                    JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(_mapName + "_" + i), savable);
+                    JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(_mapName + i), savable);
                     savable.AfterLoad();
                 } else {
                     break;
@@ -79,9 +79,9 @@ public class DataManager :MonoBehaviour {
         PlayerPrefs.DeleteKey(_mapName);
         int i = 0;
         while (true) {
-            if (PlayerPrefs.HasKey(_mapName + "_" + i)) {
-                PlayerPrefs.DeleteKey(_mapName + "_" + i);
-                PlayerPrefs.DeleteKey(_mapName + "_name_" + i);
+            if (PlayerPrefs.HasKey(_mapName + i)) {
+                PlayerPrefs.DeleteKey(_mapName + i);
+                PlayerPrefs.DeleteKey(_mapName + "name" + i);
             } else {
                 break;
             }
