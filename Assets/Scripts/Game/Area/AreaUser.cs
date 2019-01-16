@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class AreaUser :MonoBehaviour {
     }
 
     private void OnDestroy() {
-        _am.UnlockArea(gameObject);
+        try {
+            _am.UnlockArea(gameObject);
+        } catch (Exception) { };
     }
 }
