@@ -7,8 +7,8 @@ spawning			#자원 생성중...
 exit				#나가기
 
 @자원
-name_resource		#자원
-des_resource		#자원에 대한 설명
+name_BlockResource	#자원
+des_BlockResource	#자원에 대한 설명
 raw					#미 가공된
 amount				#매장량
 coal				#석탄
@@ -19,8 +19,10 @@ lead				#납
 dudxo				#두득소
 
 @건물
-name_base			#기지
-des_base			#기지 설명
+name_BlockBase		#기지
+des_BlockBase		#기지 설명
+name_miner			#채광기
+des_miner			#채광깃 설명
 
 gustn				#거스튼
 

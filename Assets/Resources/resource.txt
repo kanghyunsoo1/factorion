@@ -1,66 +1,48 @@
 {"v":[{
-	"nameKey":"coal",
+	"name":"coal",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":200,
 	"chance":0.001,
-	"minRange":5.0,
-	"r":0.1,
-	"g":0.1,
-	"b":0.1
+	"minRange":5.0
 },
 {
-	"nameKey":"iron",
+	"name":"iron",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":200,
 	"chance":0.001,
-	"minRange":5.0,
-	"r":0.7,
-	"g":0.5,
-	"b":1
+	"minRange":5.0
 },
 {
-	"nameKey":"copper",
+	"name":"copper",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":200,
 	"chance":0.001,
-	"minRange":5.0,
-	"r":0.8,
-	"g":0.8,
-	"b":0.3
+	"minRange":5.0
 },
 {
-	"nameKey":"tin",
+	"name":"tin",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":150,
 	"chance":0.001,
-	"minRange":10.0,
-	"r":0.5,
-	"g":0.4,
-	"b":0.3
+	"minRange":10.0
 },
 {
-	"nameKey":"lead",
+	"name":"lead",
 	"minAmount":1000,
 	"maxAmount":5000,
 	"rangeFactor":130,
 	"chance":0.001,
-	"minRange":20.0,
-	"r":0.2,
-	"g":0.2,
-	"b":0.4
+	"minRange":20.0
 },
 {
-	"nameKey":"dudxo",
+	"name":"dudxo",
 	"minAmount":500,
 	"maxAmount":2000,
 	"rangeFactor":50,
 	"chance":0.001,
-	"minRange":30.0,
-	"r":1,
-	"g":0.3,
-	"b":0.4
+	"minRange":30.0
 }]}
