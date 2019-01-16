@@ -8,6 +8,7 @@ public class Slot :MonoBehaviour {
     public int index;
 
     void Start() {
+        StaticDatas.wasMainLoad = true;
         transform.Find("Text").GetComponent<Text>().text = "Slot " + index + 1;
     }
 

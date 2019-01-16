@@ -1,36 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSystem :MonoBehaviour {
     private DataManager _dm;
     private ResourceManager _rm;
-    void Start() {
-        if (Application.isEditor) {
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.Save();
-        }
+    void Awake() {
         _dm = GetComponent<DataManager>();
         _rm = GetComponent<ResourceManager>();
-
-        Debug.Log("First: " + _dm.IsFirst());
-        if (_dm.IsFirst()) {
-            _rm.Spawn();
-        } else {
-            _dm.Load();
+        if (!StaticDatas.wasMainLoad) {
+            SceneManager.UnloadSceneAsync("Game");
+            SceneManager.LoadScene("Main");
         }
+
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            _dm.Save();
-        }
-        if (Input.GetKeyDown(KeyCode.W)) {
-            _dm.Load();
-        }
-        if (Input.GetKeyDown(KeyCode.E)) {
-            _dm.Clean();
-        }
+    private void Start() {
+        _rm.Spawn();
+        _dm.Load();
+
     }
 
 }
