@@ -11,8 +11,11 @@ public class ResourceManager :MonoBehaviour {
     }
     public ResourceInfo[] resourceInfos;
     private GuiManager _guim;
-    void Start() {
+    void Awake() {
         resourceInfos = JsonUtility.FromJson<Wraper>(Resources.Load<TextAsset>("resource").text).v;
+        foreach (var ri in resourceInfos) {
+            ri.sprite = Resources.Load<Sprite>("Sprites/block_" + ri.name);
+        }
         _guim = GetComponent<GuiManager>();
     }
 
@@ -27,19 +30,18 @@ public class ResourceManager :MonoBehaviour {
             for (int j = -StaticDatas.SIZE; j < StaticDatas.SIZE; j++) {
                 int index = 0;
                 foreach (ResourceInfo ri in resourceInfos) {
-
                     float range = Vector2.Distance(new Vector2(i, j), Vector2.zero);
                     if (range < ri.minRange)
                         continue;
                     int chance = (int)(ri.chance * 1000);
                     if (UnityEngine.Random.Range(0, 1000) <= chance) {
 
-                        GameObject go = Instantiate(Resources.Load<GameObject>("Savables/Resource"));
+                        GameObject go = Instantiate(Resources.Load<GameObject>("KhsObjects/BlockResource"));
                         go.transform.position = new Vector3(i, j, 0);
                         go.transform.Rotate(0f, 0f, UnityEngine.Random.Range(0f, 360f));
-                        var res = go.GetComponent<SOResource>();
-                        res.resourceIndex = index;
-                        res.amount = (int)(ri.rangeFactor * range) + UnityEngine.Random.Range(ri.minAmount, ri.maxAmount + 1);
+                        var resource = go.GetComponent<Resource>();
+                        resource.resourceIndex = index;
+                        resource.amount = (int)(ri.rangeFactor * range) + UnityEngine.Random.Range(ri.minAmount, ri.maxAmount + 1);
                         break;
                     }
                     index++;

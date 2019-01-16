@@ -5,7 +5,7 @@ using UnityEngine;
 public class AreaManager :MonoBehaviour {
     private GameObject[,] _area = new GameObject[StaticDatas.SIZE * 2, StaticDatas.SIZE * 2];
 
-    void Start() {
+    void Awake() {
         for (int i = 0; i < StaticDatas.SIZE * 2; i++) {
             for (int j = 0; j < StaticDatas.SIZE * 2; j++) {
                 _area[i, j] = null;

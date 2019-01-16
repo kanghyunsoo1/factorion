@@ -11,8 +11,11 @@ public class NewGridEffectManager :MonoBehaviour {
     private float _width = 18;
     private float _height = 30;
 
-    void Start() {
+    private void Awake() {
         _camera = Camera.main;
+    }
+
+    void Start() {
         StartCoroutine(Loop());
     }
 

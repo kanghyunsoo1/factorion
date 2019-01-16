@@ -21,7 +21,7 @@ public class GuiManager :MonoBehaviour {
     private Text _resourceNameText;
     private Text _resourceAmountText;
 
-    void Start() {
+    void Awake() {
         _dm = GetComponent<DataManager>();
         _tm = GetComponent<TextManager>();
         _rm = GetComponent<ResourceManager>();
@@ -34,11 +34,11 @@ public class GuiManager :MonoBehaviour {
 
     public void OnObjectTouch(GameObject go) {
         InfoShowerOff();
-        var res = go.GetComponent<SOResource>();
-        if (res != null) {
+        var resource = go.GetComponent<Resource>();
+        if (resource != null) {
             resourceShower.SetActive(true);
-            _resourceNameText.text = _tm.GetText(_rm.resourceInfos[res.resourceIndex].nameKey);
-            _resourceAmountText.text = res.amount + "";
+            _resourceNameText.text = _tm.GetText(_rm.resourceInfos[resource.resourceIndex].name);
+            _resourceAmountText.text = resource.amount + "";
         }
 
         infoShower.SetActive(true);
@@ -85,7 +85,7 @@ public class GuiManager :MonoBehaviour {
                 SceneManager.LoadScene("Main");
                 break;
             case "Clear":
-                _dm.Clean();
+                _dm.Delete();
                 SceneManager.LoadScene("Main");
                 break;
         }

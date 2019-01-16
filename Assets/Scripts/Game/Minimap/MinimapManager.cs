@@ -12,11 +12,14 @@ public class MinimapManager :MonoBehaviour {
     private Camera _camera;
     private RectTransform _cameraRectTransform;
 
-    void Start() {
+    private void Awake() {
         _dic = new Dictionary<MinimapEntity, GameObject>();
         _backRect = minimap.GetComponent<RectTransform>().rect;
         _camera = Camera.main;
         _cameraRectTransform = cameraRect.GetComponent<RectTransform>();
+    }
+
+    private void Start() {
         StartCoroutine(Refresh());
         StartCoroutine(RefreshCamera());
     }
@@ -35,7 +38,8 @@ public class MinimapManager :MonoBehaviour {
 
     IEnumerator Refresh() {
         while (true) {
-            foreach (MinimapEntity me in _dic.Keys) {
+            var keys = new List<MinimapEntity>(_dic.Keys);
+            foreach (MinimapEntity me in keys) {
                 var dot = _dic[me];
                 dot.GetComponent<RectTransform>().localPosition = WorldToMinimapPoint(me.transform.position);
                 yield return null;

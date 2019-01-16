@@ -11,10 +11,13 @@ public class InputManager :MonoBehaviour {
     private AreaManager _am;
     private bool _isOverUI;
 
-    private void Start() {
+    private void Awake() {
         _am = GetComponent<AreaManager>();
         _guim = GetComponent<GuiManager>();
         _camera = Camera.main;
+    }
+
+    private void Start() {
         OnWorldTouch(Vector2.zero);
     }
 
