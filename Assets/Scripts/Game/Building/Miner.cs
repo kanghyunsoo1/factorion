@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SOMiner :SOResource {
+public class Miner :KhsComponent {
     public int storedAmount;
     private ValueManager _vm;
-
-    new void Awake() {
-        base.Awake();
+    private Resource _resource;
+    void Awake() {
+        _resource = GetComponent<Resource>();
         _vm = FindObjectOfType<ValueManager>();
     }
 
-    new void Start() {
-        base.Start();
-        GetComponent<SpriteRenderer>().color = Color.white;
+    void Start() {
         StartCoroutine(Mine());
     }
 
@@ -24,9 +22,9 @@ public class SOMiner :SOResource {
             var c = _vm.GetValue("minerCapacity").Value;
             if (storedAmount < c) {
                 storedAmount += (int)a;
-                amount -= (int)a;
+                _resource.amount -= (int)a;
             }
-            if (amount <= 0) {
+            if (_resource.amount <= 0) {
                 StopAllCoroutines();
             }
         }

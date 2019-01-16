@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SORobotContainer :SavableObject {
+public class RobotContainer :MonoBehaviour {
     public int count;
     void Start() {
 
     }
 
     void Update() {
-        
+
     }
-    
+
 }
