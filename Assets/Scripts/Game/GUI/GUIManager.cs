@@ -9,51 +9,11 @@ public class GuiManager :MonoBehaviour {
     public GameObject loading;
     public GameObject spawning;
     public Text mapNameText;
-    public GameObject infoShower;
-    public GameObject resourceShower;
-    public GameObject select;
 
     private DataManager _dm;
-    private TextManager _tm;
-    private ResourceManager _rm;
-    private Text _infoNameText;
-    private Text _infoDescriptionText;
-    private Text _resourceNameText;
-    private Text _resourceAmountText;
-
     void Awake() {
         _dm = GetComponent<DataManager>();
-        _tm = GetComponent<TextManager>();
-        _rm = GetComponent<ResourceManager>();
         mapNameText.text = StaticDatas.mapName;
-        _infoNameText = infoShower.transform.Find("NameText").GetComponent<Text>();
-        _infoDescriptionText = infoShower.transform.Find("DescriptionText").GetComponent<Text>();
-        _resourceNameText = resourceShower.transform.Find("NameText").GetComponent<Text>();
-        _resourceAmountText = resourceShower.transform.Find("AmountText").GetComponent<Text>();
-    }
-
-    public void OnObjectTouch(GameObject go) {
-        InfoShowerOff();
-        var resource = go.GetComponent<Resource>();
-        if (resource != null) {
-            resourceShower.SetActive(true);
-            _resourceNameText.text = _tm.GetText(_rm.resourceInfos[resource.resourceIndex].name);
-            _resourceAmountText.text = resource.amount + "";
-        }
-
-        infoShower.SetActive(true);
-        var objName = go.name.Replace("(Clone)", "").ToLower();
-        _infoNameText.text = _tm.GetText("name_" + objName);
-        _infoDescriptionText.text = _tm.GetText("des_" + objName);
-        select.transform.position = go.transform.position;
-
-
-    }
-
-    public void InfoShowerOff() {
-        infoShower.SetActive(false);
-        resourceShower.SetActive(false);
-        select.transform.position = new Vector3(12354, 12354);
     }
 
 
@@ -84,10 +44,14 @@ public class GuiManager :MonoBehaviour {
             case "Exit":
                 SceneManager.LoadScene("Main");
                 break;
-            case "Clear":
+            case "Delete":
                 _dm.Delete();
                 SceneManager.LoadScene("Main");
                 break;
         }
+    }
+
+    public void RegisterBuildings(GameObject[] buildings) {
+
     }
 }
