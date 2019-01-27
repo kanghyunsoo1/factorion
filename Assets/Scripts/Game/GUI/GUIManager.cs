@@ -51,7 +51,11 @@ public class GuiManager :MonoBehaviour {
         }
     }
 
-    public void RegisterBuildings(GameObject[] buildings) {
+    public void OnBuildingButtonClick(BuildingInfo bi) {
 
+    }
+
+    public void RegisterBuildings(GameObject[] buildings) {
+        //TODO gui에 등록
     }
 }

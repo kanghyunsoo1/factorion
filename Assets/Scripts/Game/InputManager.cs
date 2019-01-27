@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 
 public class InputManager :MonoBehaviour {
     public float maxTouchDistance;
-    private GuiManager _guim;
+
+    private ShowerManager _sm;
     private Vector2 _startPos;
     private Camera _camera;
     private AreaManager _am;
@@ -13,7 +14,7 @@ public class InputManager :MonoBehaviour {
 
     private void Awake() {
         _am = GetComponent<AreaManager>();
-        _guim = GetComponent<GuiManager>();
+        _sm = GetComponent<ShowerManager>();
         _camera = Camera.main;
     }
 
@@ -48,7 +49,7 @@ public class InputManager :MonoBehaviour {
     public void OnWorldTouch(Vector2 position) {
         GameObject go = _am.GetUser(position);
         if (go != null) {
-            _guim.OnObjectTouch(go);
+            _sm.OnObjectTouch(go);
             return;
         } else if (go == null) {
             for (int dx = -1; dx <= 1; dx++) {
@@ -58,12 +59,12 @@ public class InputManager :MonoBehaviour {
                     var v = new Vector2(position.x + dx, position.y + dy);
                     go = _am.GetUser(v);
                     if (go != null) {
-                        _guim.OnObjectTouch(go);
+                        _sm.OnObjectTouch(go);
                         return;
                     }
                 }
             }
         }
-        _guim.InfoShowerOff();
+        _sm.InfoShowerOff();
     }
 }
