@@ -10,14 +10,15 @@ public class ValueManager :MonoBehaviour {
     public class Wraper {
         public UpgradableValue[] v;
     }
-    public List<UpgradableValue> values;
+    public UpgradableValue[] values;
     void Awake() {
-        values = new List<UpgradableValue>();
-        values.Add(new UpgradableValue() { name = "gustn", defaultValue = 100f });
-        values.Add(new UpgradableValue() { name = "maxRobotCount", defaultValue = 10f, deltaValue = 5f, maxUpgradeCount = 100, defaultPrice = 50, deltaPrice = 50 });
-        values.Add(new UpgradableValue() { name = "minerCapacity", defaultValue = 200f, deltaValue = 50f, maxUpgradeCount = 100, defaultPrice = 40, deltaPrice = 40 });
-        values.Add(new UpgradableValue() { name = "minerDelay", defaultValue = 1.1f, deltaValue = -0.01f, maxUpgradeCount = 100, defaultPrice = 30, deltaPrice = 30 });
-        values.Add(new UpgradableValue() { name = "minerAmount", defaultValue = 5f, deltaValue = 1f, maxUpgradeCount = 100, defaultPrice = 50, deltaPrice = 50 });
+        values = new UpgradableValue[] {
+            new UpgradableValue() { name = "gustn", defaultValue = 100f }
+            ,new UpgradableValue() { name = "maxRobotCount", defaultValue = 10f, deltaValue = 5f, maxUpgradeCount = 100, defaultPrice = 50, deltaPrice = 50 }
+            ,new UpgradableValue() { name = "minerCapacity", defaultValue = 200f, deltaValue = 50f, maxUpgradeCount = 100, defaultPrice = 40, deltaPrice = 40 }
+            ,new UpgradableValue() { name = "minerDelay", defaultValue = 1.1f, deltaValue = -0.01f, maxUpgradeCount = 100, defaultPrice = 30, deltaPrice = 30 }
+            ,new UpgradableValue() { name = "minerAmount", defaultValue = 5f, deltaValue = 1f, maxUpgradeCount = 100, defaultPrice = 50, deltaPrice = 50 }
+        };
         RefreshSprite();
 
     }
@@ -30,15 +31,15 @@ public class ValueManager :MonoBehaviour {
 
 
     public UpgradableValue GetValue(string name) {
-        return values.Find(x => x.name.Equals(name));
+        return Array.Find(values, x => x.name.Equals(name));
     }
 
     public UpgradableValue[] GetUpgradableValues() {
-        return values.FindAll(x => x.maxUpgradeCount > 0).ToArray();
+        return Array.FindAll(values, x => x.maxUpgradeCount > 0);
     }
 
     public UpgradableValue[] GetUnupgradableValues() {
-        return values.FindAll(x => x.maxUpgradeCount == 0).ToArray();
+        return Array.FindAll(values, x => x.maxUpgradeCount == 0);
     }
 
 
@@ -61,10 +62,8 @@ public class ValueManager :MonoBehaviour {
         if (!File.Exists(Application.persistentDataPath + "/" + name + "/values.khs"))
             return;
         var a = JsonUtility.FromJson<Wraper>(File.ReadAllText(path + "/values.khs"));
-        values.Clear();
-        values.AddRange(a.v);
+        values = a.v;
         RefreshSprite();
-
     }
 
     public void Delete(string name) {

@@ -12,7 +12,6 @@ public class UpgradableValue {
     public int maxUpgradeCount;
     public int defaultPrice;
     public int deltaPrice;
-    [NonSerialized]
     public Sprite sprite;
 
     public float Value {
