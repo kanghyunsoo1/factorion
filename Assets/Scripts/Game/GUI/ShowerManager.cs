@@ -36,8 +36,8 @@ public class ShowerManager :MonoBehaviour {
 
         infoShower.SetActive(true);
         var objName = go.name.Replace("(Clone)", "").ToLower();
-        _infoNameText.text = _tm.GetText("name_" + objName);
-        _infoDescriptionText.text = _tm.GetText("des_" + objName);
+        _infoNameText.text = _tm.GetText("name",objName);
+        _infoDescriptionText.text = _tm.GetText("des", objName);
         select.transform.position = go.transform.position;
 
 

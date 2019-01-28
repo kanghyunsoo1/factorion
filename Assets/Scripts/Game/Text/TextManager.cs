@@ -38,6 +38,13 @@ public class TextManager :MonoBehaviour {
             return "Unknown";
         }
     }
+    public string GetText(string head, string key) {
+        try {
+            return _dic[head.ToLower() + "_" + key.ToLower()];
+        } catch (Exception) {
+            return "Unknown";
+        }
+    }
 
     void Update() {
 
