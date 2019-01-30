@@ -5,18 +5,23 @@ using UnityEditor;
 using UnityEngine;
 
 public class ResourceManager :MonoBehaviour {
-    [Serializable]
-    public class Wraper {
-        public ResourceInfo[] v;
-    }
     public ResourceInfo[] resourceInfos;
     private GuiManager _guim;
     void Awake() {
-        resourceInfos = JsonUtility.FromJson<Wraper>(Resources.Load<TextAsset>("resource").text).v;
-        foreach (var ri in resourceInfos) {
-            ri.sprite = Resources.Load<Sprite>("Sprites/block_" + ri.name);
-        }
+        resourceInfos = new ResourceInfo[] {
+            new ResourceInfo{ name="coal", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.001f,minRange=5f }
+            ,new ResourceInfo{ name="iron", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.001f,minRange=5f }
+            ,new ResourceInfo{ name="copper", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.001f,minRange=5f }
+            ,new ResourceInfo{ name="tin", minAmount=1000, maxAmount=5000, rangeFactor=150,chance=0.001f,minRange=10f }
+            ,new ResourceInfo{ name="lead", minAmount=1000, maxAmount=5000, rangeFactor=130,chance=0.001f,minRange=20f }
+            ,new ResourceInfo{ name="dudxo", minAmount=500, maxAmount=2000, rangeFactor=50,chance=0.001f,minRange=30f }
+
+        };
         _guim = GetComponent<GuiManager>();
+    }
+
+    public ResourceInfo GetResourceInfo(string name) {
+        return Array.Find(resourceInfos, x => x.name.Equals(name));
     }
 
     public void Spawn() {
@@ -28,7 +33,6 @@ public class ResourceManager :MonoBehaviour {
         yield return null;
         for (int i = -StaticDatas.SIZE; i < StaticDatas.SIZE; i++) {
             for (int j = -StaticDatas.SIZE; j < StaticDatas.SIZE; j++) {
-                int index = 0;
                 foreach (ResourceInfo ri in resourceInfos) {
                     float range = Vector2.Distance(new Vector2(i, j), Vector2.zero);
                     if (range < ri.minRange)
@@ -40,11 +44,10 @@ public class ResourceManager :MonoBehaviour {
                         go.transform.position = new Vector3(i, j, 0);
                         go.transform.Rotate(0f, 0f, UnityEngine.Random.Range(0f, 360f));
                         var resource = go.GetComponent<Resource>();
-                        resource.resourceIndex = index;
+                        resource.name = ri.name;
                         resource.amount = (int)(ri.rangeFactor * range) + UnityEngine.Random.Range(ri.minAmount, ri.maxAmount + 1);
                         break;
                     }
-                    index++;
                 }
             }
         }

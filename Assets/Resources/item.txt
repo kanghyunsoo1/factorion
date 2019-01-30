@@ -1,6 +1,0 @@
-{"v":
-[{
-	"nameKey":"coal",
-	"price":1 
-	
-}]}

@@ -10,5 +10,4 @@ public class ResourceInfo {
     public int rangeFactor;
     public float chance;
     public float minRange;
-    public Sprite sprite;
 }

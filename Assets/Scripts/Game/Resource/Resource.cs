@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Resource :KhsComponent {
-    public int resourceIndex;
+    public new string name;
     public int amount;
 
 

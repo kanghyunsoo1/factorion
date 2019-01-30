@@ -11,33 +11,47 @@ public class ShowerManager :MonoBehaviour {
 
 
     private TextManager _tm;
-    private ResourceManager _rm;
+    private SpriteManager _sm;
     private Text _infoNameText;
     private Text _infoDescriptionText;
     private Text _resourceNameText;
     private Text _resourceAmountText;
+    private Image _resourceImage;
     void Awake() {
 
         _tm = GetComponent<TextManager>();
-        _rm = GetComponent<ResourceManager>();
+        _sm = GetComponent<SpriteManager>();
         _infoNameText = infoShower.transform.Find("NameText").GetComponent<Text>();
         _infoDescriptionText = infoShower.transform.Find("DescriptionText").GetComponent<Text>();
         _resourceNameText = resourceShower.transform.Find("NameText").GetComponent<Text>();
         _resourceAmountText = resourceShower.transform.Find("AmountText").GetComponent<Text>();
+        _resourceImage = resourceShower.transform.Find("Image").GetComponent<Image>();
     }
     public void OnObjectTouch(GameObject go) {
         InfoShowerOff();
         var resource = go.GetComponent<Resource>();
         if (resource != null) {
             resourceShower.SetActive(true);
-            _resourceNameText.text = _tm.GetText(_rm.resourceInfos[resource.resourceIndex].name);
+            _resourceNameText.text = _tm.GetText(resource.name);
             _resourceAmountText.text = resource.amount + "";
+            _resourceImage.sprite = _sm.GetSprite("item", resource.name);
         }
 
+
         infoShower.SetActive(true);
-        var objName = go.name.Replace("(Clone)", "").ToLower();
-        _infoNameText.text = _tm.GetText("name",objName);
-        _infoDescriptionText.text = _tm.GetText("des", objName);
+        var building = go.GetComponent<Building>();
+        var tName = "";
+        var tDes = "";
+        if (building != null) {
+            tName = _tm.GetText("name", building.name);
+            tDes = _tm.GetText("des", building.name);
+        } else {
+            var objName = go.name.Replace("(Clone)", "").ToLower();
+            tName = _tm.GetText("name", objName);
+            tDes = _tm.GetText("des", objName);
+        }
+        _infoNameText.text = tName;
+        _infoDescriptionText.text = tDes;
         select.transform.position = go.transform.position;
 
 

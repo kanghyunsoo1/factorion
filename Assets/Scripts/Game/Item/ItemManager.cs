@@ -4,28 +4,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemManager :MonoBehaviour {
-
-    [Serializable]
-    public class Wraper {
-        public ItemInfo[] v;
-    }
-
     public ItemInfo[] itemInfos;
 
     private void Awake() {
-        var tempInfos = JsonUtility.FromJson<Wraper>(Resources.Load<TextAsset>("item").text).v;
-        itemInfos = new ItemInfo[tempInfos.Length];
-        for (int i = 0; i < tempInfos.Length; i++) {
-            itemInfos[i] = tempInfos[i];
-            itemInfos[i].sprite = Resources.Load<Sprite>("Sprites/" + tempInfos[i].nameKey);
-        }
+        itemInfos = new ItemInfo[]{
+            new ItemInfo() { name = "coal" }
+            ,new ItemInfo() { name = "raw_iron" }
+            ,new ItemInfo() { name = "raw_copper" }
+            ,new ItemInfo() { name = "raw_tin" }
+            ,new ItemInfo() { name = "raw_lead" }
+            ,new ItemInfo() { name = "raw_dudxo",size = 10 }
+            ,new ItemInfo() { name = "iron" }
+            ,new ItemInfo() { name = "copper" }
+            ,new ItemInfo() { name = "tin" }
+            ,new ItemInfo() { name = "lead" }
+            ,new ItemInfo() { name = "dudxo" }
+        };
     }
 
     void Start() {
 
     }
 
-    void Update() {
 
+    public ItemInfo GetItemInfo(string name) {
+        return Array.Find(itemInfos, x => x.name.Equals(name));
     }
 }

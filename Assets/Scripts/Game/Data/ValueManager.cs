@@ -19,15 +19,9 @@ public class ValueManager :MonoBehaviour {
             ,new UpgradableValue() { name = "minerDelay", defaultValue = 1.1f, deltaValue = -0.01f, maxUpgradeCount = 100, defaultPrice = 30, deltaPrice = 30 }
             ,new UpgradableValue() { name = "minerAmount", defaultValue = 5f, deltaValue = 1f, maxUpgradeCount = 100, defaultPrice = 50, deltaPrice = 50 }
         };
-        RefreshSprite();
 
     }
 
-    public void RefreshSprite() {
-        foreach (var v in values) {
-            v.sprite = Resources.Load<Sprite>("Sprites/val_" + v.name);
-        }
-    }
 
 
     public UpgradableValue GetValue(string name) {
@@ -63,7 +57,6 @@ public class ValueManager :MonoBehaviour {
             return;
         var a = JsonUtility.FromJson<Wraper>(File.ReadAllText(path + "/values.khs"));
         values = a.v;
-        RefreshSprite();
     }
 
     public void Delete(string name) {
