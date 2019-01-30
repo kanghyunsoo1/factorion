@@ -37,12 +37,6 @@ public class TextManager :MonoBehaviour {
                 _dic.Add(head + cols[0].ToLower(), cols[1]);
             }
         }
-        foreach (var a in _dic.Keys) {
-            Debug.Log(a);
-        }
-        foreach (var a in _dic.Values) {
-            Debug.Log(a);
-        }
     }
 
     public string GetText(string key) {
