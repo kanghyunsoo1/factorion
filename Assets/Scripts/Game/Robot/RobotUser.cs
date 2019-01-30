@@ -6,7 +6,7 @@ public class RobotUser :MonoBehaviour {
 
     private RobotManager _rm;
 
-    private void Start() {
+    private void Awake() {
         _rm = FindObjectOfType<RobotManager>();
     }
 }
