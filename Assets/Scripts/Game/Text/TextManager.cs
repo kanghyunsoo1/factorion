@@ -23,11 +23,25 @@ public class TextManager :MonoBehaviour {
         string t = Resources.Load<TextAsset>("text" + tail).text;
         t = t.Replace("\t", "");
         var lines = t.Split('\n');
-        foreach (string str in lines) {
-            if (str.Trim().Equals("") || str.Contains("@"))
+        var head = "";
+        foreach (string line in lines) {
+            if (line.Trim().Equals(""))
                 continue;
-            var cols = str.Split('#');
-            _dic.Add(cols[0].ToLower(), cols[1]);
+            if (line.Contains("@")) {
+                head = line.Replace("@", "").Trim();
+
+                if (!head.Equals(""))
+                    head += "_";
+            } else {
+                var cols = line.Split('#');
+                _dic.Add(head + cols[0].ToLower(), cols[1]);
+            }
+        }
+        foreach (var a in _dic.Keys) {
+            Debug.Log(a);
+        }
+        foreach (var a in _dic.Values) {
+            Debug.Log(a);
         }
     }
 

@@ -1,14 +1,12 @@
-@GUI
+@
 save				#저장하기
 saving				#저장중...
 load				#불러오기
 loading				#불러오는중...
 spawning			#자원 생성중...
 exit				#나가기
+build				#건설
 
-@자원
-name_BlockResource	#자원
-des_BlockResource	#자원에 대한 설명
 raw					#미 가공된
 amount				#매장량
 coal				#석탄
@@ -17,13 +15,14 @@ copper				#구리
 tin					#주석
 lead				#납
 dudxo				#두득소
-
-@건물
-name_BlockBase		#기지
-des_BlockBase		#기지 설명
-name_miner			#채광기
-des_miner			#채광깃 설명
-
 gustn				#거스튼
 
+@name
+BlockBase			#기지
+BlockResource		#자원
+miner				#채광기
 
+@des
+BlockBase			#기지 설명
+BlockResource		#자원 설명
+miner				#채광기 설명
