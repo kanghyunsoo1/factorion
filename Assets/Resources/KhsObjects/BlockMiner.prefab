@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114007949250590768}
   - component: {fileID: 114036135434002804}
   - component: {fileID: 114089273867214306}
+  - component: {fileID: 114371417469160554}
   m_Layer: 0
   m_Name: BlockMiner
   m_TagString: Untagged
@@ -81,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72d4e0f39ac23447bb5ad0cc239c5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceIndex: 0
+  name: 
   amount: 0
 --- !u!114 &114216453858775834
 MonoBehaviour:
@@ -94,9 +95,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db629de56cfcc35479ce81a7d2ad7288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  khsId: 0
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
+--- !u!114 &114371417469160554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1511863630530004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b940c5fc84d2234a9a50ca0c8d98f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: miner
 --- !u!114 &114945437674903764
 MonoBehaviour:
   m_ObjectHideFlags: 1

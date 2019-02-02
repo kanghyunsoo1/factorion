@@ -9,6 +9,7 @@ public class GuiManager :MonoBehaviour {
     public GameObject loading;
     public GameObject spawning;
     public Text mapNameText;
+    public GameObject buildingButton;
 
     private DataManager _dm;
     void Awake() {
@@ -51,11 +52,4 @@ public class GuiManager :MonoBehaviour {
         }
     }
 
-    public void OnBuildingButtonClick(BuildingInfo bi) {
-
-    }
-
-    public void RegisterBuildings(GameObject[] buildings) {
-        //TODO gui에 등록
-    }
 }

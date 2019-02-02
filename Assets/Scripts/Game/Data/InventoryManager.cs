@@ -23,9 +23,10 @@ public class InventoryManager :MonoBehaviour {
 
     public void PushItem(string name, int count) {
         for (int i = 0; i < _slotList.Count; i++) {
-            if (_slotList[i].name.Equals(name))
+            if (_slotList[i].name.Equals(name)) {
                 _slotList[i].count += count;
-            return;
+                return;
+            }
         }
         _slotList.Add(new InventorySlot() { name = name, count = count });
     }
