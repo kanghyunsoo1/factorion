@@ -42,7 +42,6 @@ public class ResourceManager :MonoBehaviour {
 
                         GameObject go = Instantiate(Resources.Load<GameObject>("KhsObjects/BlockResource"));
                         go.transform.position = new Vector3(i, j, 0);
-                        go.transform.Rotate(0f, 0f, UnityEngine.Random.Range(0f, 360f));
                         var resource = go.GetComponent<Resource>();
                         resource.name = ri.name;
                         resource.amount = (int)(ri.rangeFactor * range) + UnityEngine.Random.Range(ri.minAmount, ri.maxAmount + 1);
