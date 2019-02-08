@@ -11,17 +11,19 @@ public class BuildGuiManager :MonoBehaviour {
     private BuildingManager _bm;
     private TextManager _tm;
     private SpriteManager _sm;
-    private ItemManager _im;
+    private AlertManager _alm;
     private InventoryManager _inm;
     private AreaManager _am;
+    private KhsManager _km;
     private BuildingInfo _select;
     private BuildingRequiredItemsHolder[] _requiredHolders;
     private GameObject _build;
     void Awake() {
+        _alm = GetComponent<AlertManager>();
         _tm = GetComponent<TextManager>();
         _sm = GetComponent<SpriteManager>();
         _am = GetComponent<AreaManager>();
-        _im = GetComponent<ItemManager>();
+        _km = GetComponent<KhsManager>();
         _bm = GetComponent<BuildingManager>();
         _inm = GetComponent<InventoryManager>();
         _buttons = FindObjectsOfType<BuildingButton>();
@@ -43,6 +45,7 @@ public class BuildGuiManager :MonoBehaviour {
 
     private void Start() {
         OnBuildingButtonClick("miner");
+        StartCoroutine(RefreshLoop());
     }
 
     public void OnBuildingButtonClick(string name) {
@@ -59,8 +62,11 @@ public class BuildGuiManager :MonoBehaviour {
         foreach (var a in _requiredHolders) {
             a.gameObject.SetActive(false);
         }
-        int requiredCount = _select.requiredItems.Length;
-        for (int i = 0; i < requiredCount; i++) {
+        RefreshRequires();
+    }
+
+    void RefreshRequires() {
+        for (int i = 0; i < _select.requiredItems.Length; i++) {
             _requiredHolders[i].gameObject.SetActive(true);
             var item = _select.requiredItems[i];
             _requiredHolders[i].SetItemInfo(_tm.GetText(item)
@@ -70,8 +76,31 @@ public class BuildGuiManager :MonoBehaviour {
         }
     }
 
-    public void OnBuildButtonClick() {
+    IEnumerator RefreshLoop() {
+        while (true) {
+            yield return new WaitForSeconds(1f);
+            if (_select != null)
+                RefreshRequires();
+        }
+    }
 
+    public void OnBuildButtonClick() {
+        for (int i = 0; i < _select.requiredCounts.Length; i++) {
+            if (_inm.GetItemCount(_select.requiredItems[i]) < _select.requiredCounts[i]) {
+                _alm.AddAlert("notEnoughItem", Color.red);
+                return;
+            }
+        }
+        if (_am.GetUser(center.transform.position) != null) {
+            _alm.AddAlert("alreadyExists", Color.red);
+            return;
+        }
+
+        for (int i = 0; i < _select.requiredCounts.Length; i++) {
+            _inm.Remove(_select.requiredItems[i], _select.requiredCounts[i]);
+        }
+        var go = _km.Instantiate(_select.name);
+        go.transform.position = center.transform.position;
     }
 
 }

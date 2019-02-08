@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class AreaUser :MonoBehaviour {
     private AreaManager _am;
-    void Start() {
+
+    private void Awake() {
         _am = FindObjectOfType<AreaManager>();
+    }
+    void Start() {
         _am.LockArea(gameObject);
     }
 

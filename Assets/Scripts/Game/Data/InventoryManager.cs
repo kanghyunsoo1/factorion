@@ -11,7 +11,10 @@ public class InventoryManager :MonoBehaviour {
     void Awake() {
         _slotList = new List<InventorySlot>();
     }
-
+    private void Start() {
+        Add("iron", 50);
+        Add("copper", 50);
+    }
     public InventorySlot[] GetSlots() {
         return _slotList.ToArray();
     }
