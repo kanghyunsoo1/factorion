@@ -13,7 +13,6 @@ public class ResourceManager :MonoBehaviour {
             ,new ResourceInfo{ name="iron", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.001f,minRange=5f }
             ,new ResourceInfo{ name="copper", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.001f,minRange=5f }
             ,new ResourceInfo{ name="tin", minAmount=1000, maxAmount=5000, rangeFactor=150,chance=0.001f,minRange=10f }
-            ,new ResourceInfo{ name="lead", minAmount=1000, maxAmount=5000, rangeFactor=130,chance=0.001f,minRange=20f }
             ,new ResourceInfo{ name="dudxo", minAmount=500, maxAmount=2000, rangeFactor=50,chance=0.001f,minRange=30f }
 
         };
@@ -50,9 +49,6 @@ public class ResourceManager :MonoBehaviour {
                 }
             }
         }
-
         _guim.OnSpawnEnd();
     }
-
-
 }
