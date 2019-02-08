@@ -25,7 +25,7 @@ public class InventoryManager :MonoBehaviour {
 
     }
 
-    public void PushItem(string name, int count) {
+    public void Add(string name, int count) {
         for (int i = 0; i < _slotList.Count; i++) {
             if (_slotList[i].name.Equals(name)) {
                 _slotList[i].count += count;
@@ -35,7 +35,7 @@ public class InventoryManager :MonoBehaviour {
         _slotList.Add(new InventorySlot() { name = name, count = count });
     }
 
-    public void PopItem(string name, int count) {
+    public void Remove(string name, int count) {
         var slot = _slotList.Find(x => x.name.Equals(name));
         if (slot == null)
             return;
