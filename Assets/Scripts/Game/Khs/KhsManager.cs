@@ -7,6 +7,12 @@ using UnityEngine;
 
 public class KhsManager :MonoBehaviour {
 
+    public GameObject Instantiate(string name) {
+        var r = Instantiate(Resources.Load<GameObject>("KhsObjects/" + name));
+        r.gameObject.name = name;
+        return r;
+    }
+
     public void Save(string name) {
         var path = Application.persistentDataPath + "/" + name;
         Directory.CreateDirectory(path);
@@ -47,8 +53,7 @@ public class KhsManager :MonoBehaviour {
         }
         for (int i = 0; i < lines.Length; i++) {
             var sharps = lines[i].Split('#');
-            var go = Instantiate(Resources.Load<GameObject>("KhsObjects/" + sharps[0]));
-            go.gameObject.name = sharps[0];
+            var go = Instantiate(sharps[0]);
             var khsObject = go.GetComponent<KhsObject>();
             JsonUtility.FromJsonOverwrite(sharps[2], khsObject);
             int componentsCount = int.Parse(sharps[1]);

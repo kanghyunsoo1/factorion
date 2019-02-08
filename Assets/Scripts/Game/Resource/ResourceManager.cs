@@ -7,6 +7,7 @@ using UnityEngine;
 public class ResourceManager :MonoBehaviour {
     public ResourceInfo[] resourceInfos;
     private GuiManager _guim;
+    private KhsManager _km;
     void Awake() {
         resourceInfos = new ResourceInfo[] {
             new ResourceInfo{ name="coal", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.001f,minRange=5f }
@@ -16,6 +17,7 @@ public class ResourceManager :MonoBehaviour {
             ,new ResourceInfo{ name="dudxo", minAmount=500, maxAmount=2000, rangeFactor=50,chance=0.001f,minRange=30f }
 
         };
+        _km = GetComponent<KhsManager>();
         _guim = GetComponent<GuiManager>();
     }
 
@@ -39,7 +41,7 @@ public class ResourceManager :MonoBehaviour {
                     int chance = (int)(ri.chance * 1000);
                     if (UnityEngine.Random.Range(0, 1000) <= chance) {
 
-                        GameObject go = Instantiate(Resources.Load<GameObject>("KhsObjects/BlockResource"));
+                        GameObject go = _km.Instantiate("resource");
                         go.transform.position = new Vector3(i, j, 0);
                         var resource = go.GetComponent<Resource>();
                         resource.name = ri.name;
