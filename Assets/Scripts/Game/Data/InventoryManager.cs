@@ -12,6 +12,10 @@ public class InventoryManager :MonoBehaviour {
         _slotList = new List<InventorySlot>();
     }
 
+    public InventorySlot[] GetSlots() {
+        return _slotList.ToArray();
+    }
+
     public int GetItemCount(string name) {
 
         var slot = _slotList.Find(x => x.name.Equals(name));
