@@ -7,8 +7,7 @@ spawning			#자원 생성중...
 exit				#나가기
 build				#건설
 
-raw					#미 가공된
-amount				#매장량
+
 coal				#석탄
 iron				#철
 copper				#구리
@@ -26,3 +25,6 @@ miner				#채광기
 BlockBase			#기지 설명
 BlockResource		#자원 설명
 miner				#채광기 설명
+
+@alert
+notEnoughItem		#아이템이 부족하여 건설할 수 없습니다

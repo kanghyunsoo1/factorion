@@ -1383,7 +1383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 187.85999, y: 66.60002}
+  m_AnchoredPosition: {x: 187.85999, y: 106.6}
   m_SizeDelta: {x: 252.44, y: 33.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &726008389
@@ -1582,7 +1582,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1004873225}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9995255
+  m_Size: 0.43055737
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2491,7 +2491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 187.85999, y: -53.39998}
+  m_AnchoredPosition: {x: 187.85999, y: 66.6}
   m_SizeDelta: {x: 252.44, y: 33.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1164898939
@@ -3725,7 +3725,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0000076293945, y: -0.000014192011}
+  m_AnchoredPosition: {x: 0.0000076293945, y: 5.385742}
   m_SizeDelta: {x: -0, y: 483.9}
   m_Pivot: {x: 0, y: 1}
 --- !u!1001 &1641915690
@@ -4738,7 +4738,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 187.85999, y: -13.399979}
+  m_AnchoredPosition: {x: 187.85999, y: -53.4}
   m_SizeDelta: {x: 252.44, y: 33.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1850584623
@@ -5047,7 +5047,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 187.85999, y: 106.60002}
+  m_AnchoredPosition: {x: 187.85999, y: -13.4}
   m_SizeDelta: {x: 252.44, y: 33.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1957882853
@@ -5830,6 +5830,7 @@ GameObject:
   - component: {fileID: 2095153343}
   - component: {fileID: 2095153342}
   - component: {fileID: 2095153345}
+  - component: {fileID: 2095153355}
   - component: {fileID: 2095153338}
   - component: {fileID: 2095153351}
   - component: {fileID: 2095153344}
@@ -5841,7 +5842,7 @@ GameObject:
   - component: {fileID: 2095153352}
   - component: {fileID: 2095153353}
   - component: {fileID: 2095153354}
-  - component: {fileID: 2095153355}
+  - component: {fileID: 2095153356}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6090,6 +6091,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a271ee27b8e984a91db3e2bff78172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2095153356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2095153335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574eb058d939f5a4694dd5cb623f7ad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alertBox: {fileID: 114368524414046040, guid: 423c0470d25667f488f53eb043c09398, type: 2}
 --- !u!1 &2095380176
 GameObject:
   m_ObjectHideFlags: 0
