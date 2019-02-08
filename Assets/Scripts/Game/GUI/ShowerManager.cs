@@ -39,17 +39,11 @@ public class ShowerManager :MonoBehaviour {
 
 
         infoShower.SetActive(true);
-        var building = go.GetComponent<Building>();
-        var tName = "";
-        var tDes = "";
-        if (building != null) {
-            tName = _tm.GetText("name", building.name);
-            tDes = _tm.GetText("des", building.name);
-        } else {
-            var objName = go.name.Replace("(Clone)", "").ToLower();
-            tName = _tm.GetText("name", objName);
-            tDes = _tm.GetText("des", objName);
-        }
+
+        var objName = go.name.Replace("(Clone)", "").ToLower();
+        var tName = _tm.GetText("name", objName);
+        var tDes = _tm.GetText("des", objName);
+
         _infoNameText.text = tName;
         _infoDescriptionText.text = tDes;
         select.transform.position = go.transform.position;

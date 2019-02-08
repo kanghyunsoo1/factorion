@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114790326651042120}
   - component: {fileID: 114741913119634236}
   m_Layer: 0
-  m_Name: BlockBase
+  m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
