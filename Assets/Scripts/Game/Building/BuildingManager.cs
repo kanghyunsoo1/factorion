@@ -12,6 +12,10 @@ public class BuildingManager :MonoBehaviour {
                 name ="miner"
             , requiredItems = new string[]{"iron","copper"}
             , requiredCounts = new int[]{ 10,5} }
+            ,new BuildingInfo(){
+                name ="assembler"
+            , requiredItems = new string[]{"iron","copper"}
+            , requiredCounts = new int[]{ 10,5} }
         };
     }
 

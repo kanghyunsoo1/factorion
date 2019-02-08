@@ -17,14 +17,17 @@ dudxo				#두득소
 gustn				#거스튼
 
 @name
-BlockBase			#기지
-BlockResource		#자원
+base				#기지
+resource			#자원
 miner				#채광기
+assembler			#조립 기계
 
 @des
-BlockBase			#기지 설명
-BlockResource		#자원 설명
+base				#기지 설명
+resource			#자원 설명
 miner				#채광기 설명
+assembler			#조립 기계 설명
 
 @alert
 notEnoughItem		#아이템이 부족하여 건설할 수 없습니다
+alreadyExists		#이미 뭔가 존재하는 자리입니다
