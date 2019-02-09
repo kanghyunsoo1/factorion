@@ -91,16 +91,33 @@ public class BuildGuiManager :MonoBehaviour {
                 return;
             }
         }
-        if (_am.GetUser(center.transform.position) != null) {
+        var user = _am.GetUser(center.transform.position);
+        if (_select.name.Equals("miner")) {
+            if (user == null) {
+                _alm.AddAlert("minerShould", Color.red);
+                return;
+            }
+            if (user.GetComponent<Resource>() == null || user.GetComponent<Miner>() != null) {
+                _alm.AddAlert("alreadyExists", Color.red);
+                return;
+            }
+        } else if (user != null) {
             _alm.AddAlert("alreadyExists", Color.red);
             return;
         }
 
         for (int i = 0; i < _select.requiredCounts.Length; i++) {
-            _inm.Remove(_select.requiredItems[i], _select.requiredCounts[i]);
+            _inm.RemoveItem(_select.requiredItems[i], _select.requiredCounts[i]);
         }
         var go = _km.Instantiate(_select.name);
         go.transform.position = center.transform.position;
+
+        if (_select.name.Equals("miner")) {
+            var res = user.GetComponent<Resource>();
+            go.GetComponent<Resource>().name = res.name;
+            go.GetComponent<Resource>().amount = res.amount;
+            Destroy(user.gameObject);
+        }
     }
 
 }

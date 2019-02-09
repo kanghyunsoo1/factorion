@@ -12,8 +12,8 @@ public class InventoryManager :MonoBehaviour {
         _slotList = new List<InventorySlot>();
     }
     private void Start() {
-        Add("iron", 50);
-        Add("copper", 50);
+        AddItem("iron", 50);
+        AddItem("copper", 50);
     }
     public InventorySlot[] GetSlots() {
         return _slotList.ToArray();
@@ -28,7 +28,7 @@ public class InventoryManager :MonoBehaviour {
 
     }
 
-    public void Add(string name, int count) {
+    public void AddItem(string name, int count) {
         for (int i = 0; i < _slotList.Count; i++) {
             if (_slotList[i].name.Equals(name)) {
                 _slotList[i].count += count;
@@ -38,7 +38,7 @@ public class InventoryManager :MonoBehaviour {
         _slotList.Add(new InventorySlot() { name = name, count = count });
     }
 
-    public void Remove(string name, int count) {
+    public void RemoveItem(string name, int count) {
         var slot = _slotList.Find(x => x.name.Equals(name));
         if (slot == null)
             return;

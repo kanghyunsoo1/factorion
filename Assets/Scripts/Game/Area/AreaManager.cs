@@ -20,7 +20,9 @@ public class AreaManager :MonoBehaviour {
 
     public void UnlockArea(GameObject go) {
         var vi = GetAreaVectorFromVector(go.transform.position);
-        _area[vi.x, vi.y] = null;
+        if (_area[vi.x, vi.y].Equals(go)) {
+            _area[vi.x, vi.y] = null;
+        }
     }
 
     public GameObject GetUser(Vector2 position) {
