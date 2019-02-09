@@ -119,5 +119,4 @@ public class BuildGuiManager :MonoBehaviour {
             Destroy(user.gameObject);
         }
     }
-
 }
