@@ -66,12 +66,12 @@ public class BuildGuiManager :MonoBehaviour {
     }
 
     void RefreshRequires() {
-        for (int i = 0; i < _select.requiredItems.Length; i++) {
+        for (int i = 0; i < _select.requiredSlots.Length; i++) {
             _requiredHolders[i].gameObject.SetActive(true);
-            var item = _select.requiredItems[i];
+            var item = _select.requiredSlots[i].name;
             _requiredHolders[i].SetItemInfo(_tm.GetText(item)
                 , _sm.GetSprite("item", item)
-                , _select.requiredCounts[i]
+                , _select.requiredSlots[i].count
                 , _inm.GetItemCount(item));
         }
     }
@@ -85,8 +85,8 @@ public class BuildGuiManager :MonoBehaviour {
     }
 
     public void OnBuildButtonClick() {
-        for (int i = 0; i < _select.requiredCounts.Length; i++) {
-            if (_inm.GetItemCount(_select.requiredItems[i]) < _select.requiredCounts[i]) {
+        foreach (var invs in _select.requiredSlots) {
+            if (_inm.GetItemCount(invs.name) < invs.count) {
                 _alm.AddAlert("notEnoughItem", Color.red);
                 return;
             }
@@ -106,8 +106,8 @@ public class BuildGuiManager :MonoBehaviour {
             return;
         }
 
-        for (int i = 0; i < _select.requiredCounts.Length; i++) {
-            _inm.RemoveItem(_select.requiredItems[i], _select.requiredCounts[i]);
+        foreach (var invs in _select.requiredSlots) {
+            _inm.RemoveItem(invs.name, invs.count);
         }
         var go = _km.Instantiate(_select.name);
         go.transform.position = center.transform.position;

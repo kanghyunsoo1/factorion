@@ -10,12 +10,19 @@ public class BuildingManager :MonoBehaviour {
         buildingInfos = new BuildingInfo[] {
             new BuildingInfo(){
                 name ="miner"
-            , requiredItems = new string[]{"iron","copper"}
-            , requiredCounts = new int[]{ 10,5} }
+            , requiredSlots = new InventorySlot[]{
+                new InventorySlot(){ name = "iron",count = 10 }
+                ,new InventorySlot(){ name = "copper",count = 10 }
+                }
+            }
             ,new BuildingInfo(){
                 name ="assembler"
-            , requiredItems = new string[]{"iron","copper"}
-            , requiredCounts = new int[]{ 10,5} }
+            , requiredSlots = new InventorySlot[]{
+                new InventorySlot(){ name = "iron",count = 10 }
+                ,new InventorySlot(){ name = "copper",count = 10 }
+                ,new InventorySlot(){ name = "tin",count = 10 }
+                }
+            }
         };
     }
 

@@ -6,6 +6,5 @@ using UnityEngine;
 [Serializable]
 public class BuildingInfo {
     public string name;
-    public string[] requiredItems;
-    public int[] requiredCounts;
+    public InventorySlot[] requiredSlots;
 }
