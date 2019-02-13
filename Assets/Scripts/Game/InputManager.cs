@@ -71,5 +71,6 @@ public class InputManager :MonoBehaviour {
             }
         }
         _sm.OffAll();
+        _sm.SelectClear();
     }
 }

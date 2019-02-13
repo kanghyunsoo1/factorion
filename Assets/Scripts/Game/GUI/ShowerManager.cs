@@ -98,6 +98,10 @@ public class ShowerManager :MonoBehaviour {
         select.transform.position = new Vector3(123564, 125354);
     }
 
+    public void SelectClear() {
+        _select = null;
+    }
+
     IEnumerator Refresh() {
         while (true) {
             yield return new WaitForSeconds(0.5f);
