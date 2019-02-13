@@ -8,7 +8,7 @@ public class NewGridEffectManager :MonoBehaviour {
     private readonly float _lifeTime = 2f;
 
     private Camera _camera;
-    private float _width = 18;
+    private float _width = 30;
     private float _height = 30;
 
     private void Awake() {

@@ -10,11 +10,11 @@ public class ResourceManager :MonoBehaviour {
     private KhsManager _km;
     void Awake() {
         resourceInfos = new ResourceInfo[] {
-            new ResourceInfo{ name="coal", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.001f,minRange=5f }
-            ,new ResourceInfo{ name="raw_iron", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.001f,minRange=5f }
-            ,new ResourceInfo{ name="raw_copper", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.001f,minRange=5f }
-            ,new ResourceInfo{ name="raw_tin", minAmount=1000, maxAmount=5000, rangeFactor=150,chance=0.001f,minRange=10f }
-            ,new ResourceInfo{ name="raw_dudxo", minAmount=500, maxAmount=2000, rangeFactor=50,chance=0.001f,minRange=30f }
+            new ResourceInfo{ name="coal", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.0005f,minRange=5f }
+            ,new ResourceInfo{ name="raw_iron", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.0005f,minRange=5f }
+            ,new ResourceInfo{ name="raw_copper", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.0005f,minRange=5f }
+            ,new ResourceInfo{ name="raw_tin", minAmount=1000, maxAmount=5000, rangeFactor=150,chance=0.0005f,minRange=10f }
+            ,new ResourceInfo{ name="raw_dudxo", minAmount=500, maxAmount=2000, rangeFactor=50,chance=0.0005f,minRange=30f }
 
         };
         _km = GetComponent<KhsManager>();
@@ -38,8 +38,8 @@ public class ResourceManager :MonoBehaviour {
                     float range = Vector2.Distance(new Vector2(i, j), Vector2.zero);
                     if (range < ri.minRange)
                         continue;
-                    int chance = (int)(ri.chance * 1000);
-                    if (UnityEngine.Random.Range(0, 1000) <= chance) {
+                    int chance = (int)(ri.chance * 100000);
+                    if (UnityEngine.Random.Range(0, 100000) <= chance) {
 
                         GameObject go = _km.Instantiate("resource");
                         go.transform.position = new Vector3(i, j, 0);

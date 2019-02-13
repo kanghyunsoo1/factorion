@@ -7,7 +7,7 @@ public class CameraHandler :MonoBehaviour {
     private static readonly float _zoomSpeedTouch = 0.05f;
 
     private static readonly float[] _bounds = new float[] { -StaticDatas.SIZE, StaticDatas.SIZE };
-    private static readonly float[] _zoomBounds = new float[] { 7f, 20f };
+    private static readonly float[] _zoomBounds = new float[] { 6f, 30f };
 
     private Camera _camera;
 
