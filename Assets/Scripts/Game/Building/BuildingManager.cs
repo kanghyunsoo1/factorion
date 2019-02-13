@@ -10,17 +10,17 @@ public class BuildingManager :MonoBehaviour {
         buildingInfos = new BuildingInfo[] {
             new BuildingInfo(){
                 name ="miner"
-            , requiredSlots = new InventorySlot[]{
-                new InventorySlot(){ name = "iron",count = 10 }
-                ,new InventorySlot(){ name = "copper",count = 10 }
+            , requiredSlots = new ItemStack[]{
+                new ItemStack(){ name = "iron",count = 10 }
+                ,new ItemStack(){ name = "copper",count = 10 }
                 }
             }
             ,new BuildingInfo(){
                 name ="assembler"
-            , requiredSlots = new InventorySlot[]{
-                new InventorySlot(){ name = "iron",count = 10 }
-                ,new InventorySlot(){ name = "copper",count = 10 }
-                ,new InventorySlot(){ name = "tin",count = 10 }
+            , requiredSlots = new ItemStack[]{
+                new ItemStack(){ name = "iron",count = 10 }
+                ,new ItemStack(){ name = "copper",count = 10 }
+                ,new ItemStack(){ name = "tin",count = 10 }
                 }
             }
         };

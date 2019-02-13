@@ -64,7 +64,7 @@ public class ShowerManager :MonoBehaviour {
 
         if (ih != null) {
             inventoryShower.SetActive(true);
-            var slots = ih.GetSlots();
+            var slots = ih.GetStacks();
             int max = slots.Length;
             if (max > 4) {
                 _slotButton.SetActive(true);

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class InventorySlot {
+public class ItemStack {
     public string name;
     public int count;
 }

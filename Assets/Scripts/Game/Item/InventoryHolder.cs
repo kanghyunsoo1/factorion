@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class InventoryHolder :KhsComponent {
     
-    public List<InventorySlot> _slotList;
+    public List<ItemStack> _slotList;
     void Awake() {
-        _slotList = new List<InventorySlot>();
+        _slotList = new List<ItemStack>();
     }
     
-    public InventorySlot[] GetSlots() {
+    public ItemStack[] GetStacks() {
         return _slotList.ToArray();
     }
 
@@ -30,7 +30,7 @@ public class InventoryHolder :KhsComponent {
                 return;
             }
         }
-        _slotList.Add(new InventorySlot() { name = name, count = count });
+        _slotList.Add(new ItemStack() { name = name, count = count });
     }
 
     public void RemoveItem(string name, int count) {

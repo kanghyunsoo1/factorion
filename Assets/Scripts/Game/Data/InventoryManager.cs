@@ -14,8 +14,8 @@ public class InventoryManager :MonoBehaviour {
         AddItem("iron", 50);
         AddItem("copper", 50);
     }
-    public InventorySlot[] GetSlots() {
-        return _baseIH.GetSlots();
+    public ItemStack[] GetStacks() {
+        return _baseIH.GetStacks();
     }
 
     public int GetItemCount(string name) {
