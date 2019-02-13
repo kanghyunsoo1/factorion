@@ -69,7 +69,7 @@ public class BuildGuiManager :MonoBehaviour {
         for (int i = 0; i < _select.requiredSlots.Length; i++) {
             _requiredHolders[i].gameObject.SetActive(true);
             var item = _select.requiredSlots[i].name;
-            _requiredHolders[i].SetItemInfo(_tm.GetText(item)
+            _requiredHolders[i].SetItemInfo(_tm.GetText("item", item)
                 , _sm.GetSprite("item", item)
                 , _select.requiredSlots[i].count
                 , _inm.GetItemCount(item));

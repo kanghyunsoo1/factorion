@@ -57,7 +57,7 @@ public class ShowerManager :MonoBehaviour {
         var ih = go.GetComponent<InventoryHolder>();
         if (resource != null) {
             resourceShower.SetActive(true);
-            _resourceNameText.text = _tm.GetText(resource.name);
+            _resourceNameText.text = _tm.GetText("item",resource.name);
             _resourceAmountText.text = resource.amount + "";
             _resourceImage.sprite = _sm.GetSprite("item", resource.name);
         }

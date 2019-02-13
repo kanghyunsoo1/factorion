@@ -6,8 +6,9 @@ loading				#불러오는중...
 spawning			#자원 생성중...
 exit				#나가기
 build				#건설
+gustn				#거스튼
 
-
+@item
 coal				#석탄
 iron				#철
 copper				#구리
@@ -15,6 +16,11 @@ tin					#주석
 lead				#납
 dudxo				#두득소
 gustn				#거스튼
+raw_iron			#미가공 철
+raw_copper			#미가공 구리
+raw_tin				#미가공 주석
+raw_lead			#미가공 납
+raw_dudxo			#미가공 두득소
 
 @name
 base				#기지
