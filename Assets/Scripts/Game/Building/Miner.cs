@@ -5,10 +5,10 @@ using UnityEngine;
 public class Miner :KhsComponent {
     private ValueManager _vm;
     private Resource _resource;
-    private InventoryHolder _holder;
+    private Inventory _inventory;
     void Awake() {
         _resource = GetComponent<Resource>();
-        _holder = GetComponent<InventoryHolder>();
+        _inventory = GetComponent<Inventory>();
         _vm = FindObjectOfType<ValueManager>();
     }
 
@@ -21,8 +21,8 @@ public class Miner :KhsComponent {
             yield return new WaitForSeconds(_vm.GetValue("minerDelay").Value);
             var a = _vm.GetValue("minerAmount").Value;
             var c = _vm.GetValue("minerCapacity").Value;
-            if (_holder.GetItemCount(_resource.name) < c) {
-                _holder.AddItem(_resource.name, (int)a);
+            if (_inventory.GetItemCount(_resource.name) < c) {
+                _inventory.AddItem(_resource.name, (int)a);
                 _resource.amount -= (int)a;
             }
             if (_resource.amount <= 0) {

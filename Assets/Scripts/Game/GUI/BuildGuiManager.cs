@@ -12,7 +12,7 @@ public class BuildGuiManager :MonoBehaviour {
     private TextManager _tm;
     private SpriteManager _sm;
     private AlertManager _alm;
-    private InventoryManager _inm;
+    private Inventory _inventory;
     private AreaManager _am;
     private KhsManager _km;
     private BuildingInfo _select;
@@ -25,7 +25,8 @@ public class BuildGuiManager :MonoBehaviour {
         _am = GetComponent<AreaManager>();
         _km = GetComponent<KhsManager>();
         _bm = GetComponent<BuildingManager>();
-        _inm = GetComponent<InventoryManager>();
+        _inventory = GetComponent<InventoryManager>().GetBaseInventory();
+        Debug.Log(_inventory == null);
         _buttons = FindObjectsOfType<BuildingButton>();
         _requiredHolders = FindObjectsOfType<BuildingRequiredItemsHolder>();
         _build = GameObject.Find("Canvas").transform.Find("Build").Find("Build").gameObject;
@@ -66,14 +67,16 @@ public class BuildGuiManager :MonoBehaviour {
     }
 
     void RefreshRequires() {
-        for (int i = 0; i < _select.needStacks.Length; i++) {
-            _requiredHolders[i].gameObject.SetActive(true);
-            var item = _select.needStacks[i].name;
-            _requiredHolders[i].SetItemInfo(_tm.GetText("item", item)
-                , _sm.GetSprite("item", item)
-                , _select.needStacks[i].count
-                , _inm.GetItemCount(item));
-        }
+        try {
+            for (int i = 0; i < _select.needStacks.Length; i++) {
+                _requiredHolders[i].gameObject.SetActive(true);
+                var item = _select.needStacks[i].name;
+                _requiredHolders[i].SetItemInfo(_tm.GetText("item", item)
+                    , _sm.GetSprite("item", item)
+                    , _select.needStacks[i].count
+                    , _inventory.GetItemCount(item));
+            }
+        } catch (Exception) { }
     }
 
     IEnumerator RefreshLoop() {
@@ -86,7 +89,7 @@ public class BuildGuiManager :MonoBehaviour {
 
     public void OnBuildButtonClick() {
         foreach (var invs in _select.needStacks) {
-            if (_inm.GetItemCount(invs.name) < invs.count) {
+            if (_inventory.GetItemCount(invs.name) < invs.count) {
                 _alm.AddAlert("notEnoughItem", Color.red);
                 return;
             }
@@ -107,7 +110,7 @@ public class BuildGuiManager :MonoBehaviour {
         }
 
         foreach (var invs in _select.needStacks) {
-            _inm.RemoveItem(invs.name, invs.count);
+            _inventory.RemoveItem(invs.name, invs.count);
         }
         var go = _km.Instantiate(_select.name);
         go.transform.position = center.transform.position;

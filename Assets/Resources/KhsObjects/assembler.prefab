@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114084771415224444}
   - component: {fileID: 114288657694816834}
   - component: {fileID: 95305963192892640}
+  - component: {fileID: 114421351369144012}
   m_Layer: 0
   m_Name: assembler
   m_TagString: Untagged
@@ -129,6 +130,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0.8679245, g: 0.8447896, b: 0.46262014, a: 1}
   size: 4
+--- !u!114 &114421351369144012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1171343875529358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdf5b147cd56cef4abf31394fd97aa46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackList: []
 --- !u!212 &212496057200690116
 SpriteRenderer:
   m_ObjectHideFlags: 1

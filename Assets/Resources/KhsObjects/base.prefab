@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114794607333146528}
   - component: {fileID: 114790326651042120}
   - component: {fileID: 114741913119634236}
-  - component: {fileID: 114351358505271782}
+  - component: {fileID: 114105298939129152}
   m_Layer: 0
   m_Name: base
   m_TagString: Untagged
@@ -45,7 +45,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114351358505271782
+--- !u!114 &114105298939129152
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdf5b147cd56cef4abf31394fd97aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slotList: []
+  _stackList: []
 --- !u!114 &114368190300826348
 MonoBehaviour:
   m_ObjectHideFlags: 1

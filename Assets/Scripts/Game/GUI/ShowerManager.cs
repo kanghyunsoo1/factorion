@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,9 +20,10 @@ public class ShowerManager :MonoBehaviour {
     private Text _resourceNameText;
     private Text _resourceAmountText;
     private Image _resourceImage;
-    private InventorySlotSetter[] _slots;
+    private ShowerInventorySlot[] _slots;
     private GameObject _slotButton;
     private GameObject _select;
+    private Inventory _inventory;
 
     void Awake() {
         _tm = GetComponent<TextManager>();
@@ -31,11 +33,11 @@ public class ShowerManager :MonoBehaviour {
         _resourceNameText = resourceShower.transform.Find("NameText").GetComponent<Text>();
         _resourceAmountText = resourceShower.transform.Find("AmountText").GetComponent<Text>();
         _resourceImage = resourceShower.transform.Find("Image").GetComponent<Image>();
-        _slots = new InventorySlotSetter[] {
-            Instantiate(inventorySlot).GetComponent<InventorySlotSetter>()
-            ,Instantiate(inventorySlot).GetComponent<InventorySlotSetter>()
-            ,Instantiate(inventorySlot).GetComponent<InventorySlotSetter>()
-            ,Instantiate(inventorySlot).GetComponent<InventorySlotSetter>()
+        _slots = new ShowerInventorySlot[] {
+            Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
+            ,Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
+            ,Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
+            ,Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
         };
         for (int i = 0; i < 4; i++) {
             _slots[i].transform.SetParent(inventoryShower.transform);
@@ -54,25 +56,25 @@ public class ShowerManager :MonoBehaviour {
         _select = go;
         OffAll();
         var resource = go.GetComponent<Resource>();
-        var ih = go.GetComponent<InventoryHolder>();
+        _inventory = go.GetComponent<Inventory>();
         if (resource != null) {
             resourceShower.SetActive(true);
-            _resourceNameText.text = _tm.GetText("item",resource.name);
+            _resourceNameText.text = _tm.GetText("item", resource.name);
             _resourceAmountText.text = resource.amount + "";
             _resourceImage.sprite = _sm.GetSprite("item", resource.name);
         }
 
-        if (ih != null) {
+        if (_inventory != null) {
             inventoryShower.SetActive(true);
-            var slots = ih.GetStacks();
-            int max = slots.Length;
+            var stacks = _inventory.GetStacks();
+            int max = stacks.Length;
             if (max > 4) {
                 _slotButton.SetActive(true);
                 max = 4;
             }
             for (int i = 0; i < max; i++) {
                 _slots[i].gameObject.SetActive(true);
-                _slots[i].SetItem(_sm.GetSprite("item", slots[i].name), slots[i].count);
+                _slots[i].SetItem(_sm.GetSprite("item", stacks[i].name), stacks[i].count);
             }
         }
 
@@ -91,9 +93,11 @@ public class ShowerManager :MonoBehaviour {
     public void OffAll() {
         infoShower.SetActive(false);
         inventoryShower.SetActive(false);
-        foreach (var i in _slots)
-            i.gameObject.SetActive(false);
-        _slotButton.SetActive(false);
+        try {
+            foreach (var i in _slots)
+                i.gameObject.SetActive(false);
+            _slotButton.SetActive(false);
+        } catch (Exception) { };
         resourceShower.SetActive(false);
         select.transform.position = new Vector3(123564, 125354);
     }
@@ -107,5 +111,9 @@ public class ShowerManager :MonoBehaviour {
             yield return new WaitForSeconds(0.5f);
             OnTouch(_select);
         }
+    }
+
+    public void OnOpenClick() {
+        FindObjectOfType<InventoryGuiManager>().Open(_inventory);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryHolder :KhsComponent {
+public class Inventory :KhsComponent {
     
     public List<ItemStack> _stackList;
     void Awake() {
