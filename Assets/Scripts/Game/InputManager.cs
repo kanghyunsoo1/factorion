@@ -19,6 +19,11 @@ public class InputManager :MonoBehaviour {
     }
 
     private void Start() {
+        StartCoroutine(Touch());
+    }
+
+    IEnumerator Touch() {
+        yield return null;
         OnWorldTouch(Vector2.zero);
     }
 
@@ -49,7 +54,7 @@ public class InputManager :MonoBehaviour {
     public void OnWorldTouch(Vector2 position) {
         GameObject go = _am.GetUser(position);
         if (go != null) {
-            _sm.OnObjectTouch(go);
+            _sm.OnTouch(go);
             return;
         } else if (go == null) {
             for (int dx = -1; dx <= 1; dx++) {
@@ -59,12 +64,12 @@ public class InputManager :MonoBehaviour {
                     var v = new Vector2(position.x + dx, position.y + dy);
                     go = _am.GetUser(v);
                     if (go != null) {
-                        _sm.OnObjectTouch(go);
+                        _sm.OnTouch(go);
                         return;
                     }
                 }
             }
         }
-        _sm.InfoShowerOff();
+        _sm.OffAll();
     }
 }

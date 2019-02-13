@@ -7,12 +7,14 @@ using UnityEngine;
 public class DataManager :MonoBehaviour {
     private GuiManager _guim;
     private KhsManager _km;
+    private ShowerManager _sm;
     private ValueManager _vm;
     private string _mapName;
     void Awake() {
         _guim = GetComponent<GuiManager>();
         _km = GetComponent<KhsManager>();
         _vm = GetComponent<ValueManager>();
+        _sm = GetComponent<ShowerManager>();
         _mapName = StaticDatas.mapName;
     }
 
@@ -37,6 +39,7 @@ public class DataManager :MonoBehaviour {
         yield return null;
         _km.Load(_mapName);
         _vm.Load(_mapName);
+        _sm.OffAll();
         _guim.OnLoadEnd();
     }
 
