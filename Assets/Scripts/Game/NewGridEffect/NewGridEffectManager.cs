@@ -16,7 +16,7 @@ public class NewGridEffectManager :MonoBehaviour {
     }
 
     void Start() {
-       // StartCoroutine(Loop());
+        // StartCoroutine(Loop());
     }
 
 
