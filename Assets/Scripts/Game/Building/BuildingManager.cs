@@ -10,14 +10,14 @@ public class BuildingManager :MonoBehaviour {
         buildingInfos = new BuildingInfo[] {
             new BuildingInfo(){
                 name ="miner"
-            , requiredSlots = new ItemStack[]{
+            , needStacks = new ItemStack[]{
                 new ItemStack(){ name = "iron",count = 10 }
                 ,new ItemStack(){ name = "copper",count = 10 }
                 }
             }
             ,new BuildingInfo(){
                 name ="assembler"
-            , requiredSlots = new ItemStack[]{
+            , needStacks = new ItemStack[]{
                 new ItemStack(){ name = "iron",count = 10 }
                 ,new ItemStack(){ name = "copper",count = 10 }
                 ,new ItemStack(){ name = "tin",count = 10 }

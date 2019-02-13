@@ -66,12 +66,12 @@ public class BuildGuiManager :MonoBehaviour {
     }
 
     void RefreshRequires() {
-        for (int i = 0; i < _select.requiredSlots.Length; i++) {
+        for (int i = 0; i < _select.needStacks.Length; i++) {
             _requiredHolders[i].gameObject.SetActive(true);
-            var item = _select.requiredSlots[i].name;
+            var item = _select.needStacks[i].name;
             _requiredHolders[i].SetItemInfo(_tm.GetText("item", item)
                 , _sm.GetSprite("item", item)
-                , _select.requiredSlots[i].count
+                , _select.needStacks[i].count
                 , _inm.GetItemCount(item));
         }
     }
@@ -85,7 +85,7 @@ public class BuildGuiManager :MonoBehaviour {
     }
 
     public void OnBuildButtonClick() {
-        foreach (var invs in _select.requiredSlots) {
+        foreach (var invs in _select.needStacks) {
             if (_inm.GetItemCount(invs.name) < invs.count) {
                 _alm.AddAlert("notEnoughItem", Color.red);
                 return;
@@ -106,7 +106,7 @@ public class BuildGuiManager :MonoBehaviour {
             return;
         }
 
-        foreach (var invs in _select.requiredSlots) {
+        foreach (var invs in _select.needStacks) {
             _inm.RemoveItem(invs.name, invs.count);
         }
         var go = _km.Instantiate(_select.name);
