@@ -36,3 +36,4 @@ assembler			#조립 기계 설명
 notEnoughItem		#아이템이 부족하여 건설할 수 없습니다
 alreadyExists		#이미 뭔가 존재하는 자리입니다
 minerShould			#채광기는 자원이 있어야 건설이 가능합니다
+build				#건설 완료

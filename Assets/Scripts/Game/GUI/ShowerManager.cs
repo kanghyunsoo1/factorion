@@ -93,11 +93,10 @@ public class ShowerManager :MonoBehaviour {
     public void OffAll() {
         infoShower.SetActive(false);
         inventoryShower.SetActive(false);
-        try {
-            foreach (var i in _slots)
-                i.gameObject.SetActive(false);
-            _slotButton.SetActive(false);
-        } catch (Exception) { };
+        foreach (var i in _slots)
+            i.gameObject.SetActive(false);
+        _slotButton.SetActive(false);
+
         resourceShower.SetActive(false);
         select.transform.position = new Vector3(123564, 125354);
     }

@@ -24,7 +24,7 @@ public class InputManager :MonoBehaviour {
 
     IEnumerator Touch() {
         yield return null;
-        OnWorldTouch(Vector2.zero);
+        OnWorldTouch(new Vector2(12312412, 1));
     }
 
     void Update() {

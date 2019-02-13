@@ -12,7 +12,6 @@ public class BuildGuiManager :MonoBehaviour {
     private TextManager _tm;
     private SpriteManager _sm;
     private AlertManager _alm;
-    private Inventory _inventory;
     private AreaManager _am;
     private KhsManager _km;
     private BuildingInfo _select;
@@ -25,8 +24,6 @@ public class BuildGuiManager :MonoBehaviour {
         _am = GetComponent<AreaManager>();
         _km = GetComponent<KhsManager>();
         _bm = GetComponent<BuildingManager>();
-        _inventory = GetComponent<InventoryManager>().GetBaseInventory();
-        Debug.Log(_inventory == null);
         _buttons = FindObjectsOfType<BuildingButton>();
         _requiredHolders = FindObjectsOfType<BuildingRequiredItemsHolder>();
         _build = GameObject.Find("Canvas").transform.Find("Build").Find("Build").gameObject;
@@ -67,16 +64,15 @@ public class BuildGuiManager :MonoBehaviour {
     }
 
     void RefreshRequires() {
-        try {
-            for (int i = 0; i < _select.needStacks.Length; i++) {
-                _requiredHolders[i].gameObject.SetActive(true);
-                var item = _select.needStacks[i].name;
-                _requiredHolders[i].SetItemInfo(_tm.GetText("item", item)
-                    , _sm.GetSprite("item", item)
-                    , _select.needStacks[i].count
-                    , _inventory.GetItemCount(item));
-            }
-        } catch (Exception) { }
+        var baseInventory = FindObjectOfType<Base>().GetComponent<Inventory>();
+        for (int i = 0; i < _select.needStacks.Length; i++) {
+            _requiredHolders[i].gameObject.SetActive(true);
+            var item = _select.needStacks[i].name;
+            _requiredHolders[i].SetItemInfo(_tm.GetText("item", item)
+                , _sm.GetSprite("item", item)
+                , _select.needStacks[i].count
+                , baseInventory.GetItemCount(item));
+        }
     }
 
     IEnumerator RefreshLoop() {
@@ -88,8 +84,10 @@ public class BuildGuiManager :MonoBehaviour {
     }
 
     public void OnBuildButtonClick() {
+
+        var baseInventory = FindObjectOfType<Base>().GetComponent<Inventory>();
         foreach (var invs in _select.needStacks) {
-            if (_inventory.GetItemCount(invs.name) < invs.count) {
+            if (baseInventory.GetItemCount(invs.name) < invs.count) {
                 _alm.AddAlert("notEnoughItem", Color.red);
                 return;
             }
@@ -110,7 +108,7 @@ public class BuildGuiManager :MonoBehaviour {
         }
 
         foreach (var invs in _select.needStacks) {
-            _inventory.RemoveItem(invs.name, invs.count);
+            baseInventory.RemoveItem(invs.name, invs.count);
         }
         var go = _km.Instantiate(_select.name);
         go.transform.position = center.transform.position;
@@ -121,5 +119,6 @@ public class BuildGuiManager :MonoBehaviour {
             go.GetComponent<Resource>().amount = res.amount;
             Destroy(user.gameObject);
         }
+        _alm.AddAlert("build", Color.black);
     }
 }

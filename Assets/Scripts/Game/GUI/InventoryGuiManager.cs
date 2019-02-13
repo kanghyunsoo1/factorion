@@ -11,12 +11,10 @@ public class InventoryGuiManager :MonoBehaviour {
     private Text _name, _count;
     private TextManager _tm;
     private ItemStack _selectStack;
-    private Inventory _baseInventory;
     private Inventory _selectInventory;
     private int _refreshCount;
 
     private void Awake() {
-        _baseInventory = GetComponent<InventoryManager>().GetBaseInventory();
         _tm = GetComponent<TextManager>();
         _name = inventoryObject.transform.Find("Name").GetComponent<Text>();
         _count = inventoryObject.transform.Find("Count").GetComponent<Text>();
@@ -34,7 +32,7 @@ public class InventoryGuiManager :MonoBehaviour {
     }
 
     public void OpenBase() {
-        Open(_baseInventory);
+        Open(FindObjectOfType<Base>().GetComponent<Inventory>());
     }
 
     public void Open(Inventory inventory) {

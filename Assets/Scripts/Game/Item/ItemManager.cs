@@ -21,7 +21,7 @@ public class ItemManager :MonoBehaviour {
             ,new ItemInfo() { name = "dudxo" }
         };
     }
-
+    
     void Start() {
 
     }

@@ -17,7 +17,10 @@ public class BuildingRequiredItemsHolder :MonoBehaviour {
     public void SetItemInfo(string name, Sprite sprite, int needCount, int haveCount) {
         _nameText.text = name;
         _image.sprite = sprite;
-        _countText.text = needCount + " (" + haveCount + ")";
+        if (needCount > haveCount)
+            _countText.text = needCount + " (<color='red'>" + haveCount + "</color>)";
+        else
+
+            _countText.text = needCount + " (<color='green'>" + haveCount + "</color>)";
     }
 }
-    
