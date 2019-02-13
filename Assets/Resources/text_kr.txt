@@ -13,14 +13,12 @@ coal				#석탄
 iron				#철
 copper				#구리
 tin					#주석
-lead				#납
 dudxo				#두득소
-gustn				#거스튼
-raw_iron			#미가공 철
-raw_copper			#미가공 구리
-raw_tin				#미가공 주석
-raw_lead			#미가공 납
-raw_dudxo			#미가공 두득소
+coal-bar			#석탄 막대기
+iron-bar			#철 막대기
+copper-bar			#구리 막대기
+tin-bar				#주석 막대기
+dudxo-bar			#두득소 막대기
 
 @name
 base				#기지

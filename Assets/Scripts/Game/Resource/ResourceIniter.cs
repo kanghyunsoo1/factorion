@@ -10,7 +10,7 @@ public class ResourceIniter :MonoBehaviour {
     }
 
     public void Start() {
-        GetComponent<SpriteRenderer>().sprite = FindObjectOfType<SpriteManager>().GetSprite("block", _resource.name.Replace("raw_", ""));
+        GetComponent<SpriteRenderer>().sprite = FindObjectOfType<SpriteManager>().GetSprite("block", _resource.name);
         Destroy(this);
     }
 }
