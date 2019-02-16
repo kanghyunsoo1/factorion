@@ -14,6 +14,7 @@ public class Miner :KhsComponent {
 
     void Start() {
         StartCoroutine(Mine());
+        transform.Find("resource").GetComponent<SpriteRenderer>().sprite = FindObjectOfType<SpriteManager>().GetSprite("block", _resource.name);
     }
 
     IEnumerator Mine() {
