@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class CameraHandler :MonoBehaviour {
-
-    private static readonly float _panSpeed = 4f;
     private static readonly float _zoomSpeedTouch = 0.05f;
 
     private static readonly float[] _bounds = new float[] { -StaticDatas.SIZE, StaticDatas.SIZE };
@@ -68,10 +66,11 @@ public class CameraHandler :MonoBehaviour {
     }
 
     void PanCamera(Vector3 newPanPosition) {
-        Vector3 offset = _camera.ScreenToViewportPoint(_lastPanPosition - newPanPosition);
-        Vector3 move = new Vector3(offset.x * (_panSpeed + _camera.orthographicSize), offset.y * (_panSpeed + _camera.orthographicSize));
+        Vector3 lastScreen = _camera.ScreenToWorldPoint(_lastPanPosition);
+        Vector3 newScreen = _camera.ScreenToWorldPoint(newPanPosition);
+        Vector3 offset = lastScreen - newScreen;
 
-        transform.Translate(move, Space.World);
+        transform.Translate(offset, Space.World);
 
         Vector3 pos = transform.position;
         pos.z = -10f;
