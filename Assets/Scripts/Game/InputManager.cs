@@ -11,9 +11,11 @@ public class InputManager :MonoBehaviour {
     private Camera _camera;
     private AreaManager _am;
     private bool _isOverUI;
+    private InventoryGuiManager _igm;
 
     private void Awake() {
         _am = GetComponent<AreaManager>();
+        _igm = GetComponent<InventoryGuiManager>();
         _sm = GetComponent<ShowerManager>();
         _camera = Camera.main;
     }
@@ -72,5 +74,6 @@ public class InputManager :MonoBehaviour {
         }
         _sm.OffAll();
         _sm.SelectClear();
+        _igm.Close();
     }
 }
