@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,9 +40,12 @@ public class MinimapManager :MonoBehaviour {
     IEnumerator Refresh() {
         while (true) {
             var keys = new List<MinimapEntity>(_dic.Keys);
-            foreach (MinimapEntity me in keys) {
-                var dot = _dic[me];
-                dot.GetComponent<RectTransform>().localPosition = WorldToMinimapPoint(me.transform.position);
+            foreach (MinimapEntity entity in keys) {
+                try {
+                    var dot = _dic[entity];
+                
+                dot.GetComponent<RectTransform>().localPosition = WorldToMinimapPoint(entity.transform.position);
+                } catch (Exception) { };
                 yield return null;
             }
             yield return new WaitForSeconds(0.3f);
