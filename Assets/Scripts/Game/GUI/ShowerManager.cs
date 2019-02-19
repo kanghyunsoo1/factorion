@@ -10,7 +10,8 @@ public class ShowerManager :MonoBehaviour {
     public GameObject resourceShower;
     public GameObject select;
     public GameObject inventoryShower;
-    public GameObject inventorySlot;
+    public GameObject robotShower;
+    public GameObject requestInventoryShower;
 
 
     private TextManager _tm;
@@ -19,11 +20,10 @@ public class ShowerManager :MonoBehaviour {
     private Text _infoDescriptionText;
     private Text _resourceNameText;
     private Text _resourceAmountText;
+    private Text _robotText;
     private Image _resourceImage;
-    private ShowerInventorySlot[] _slots;
-    private GameObject _slotButton;
-    private GameObject _select;
-    private Inventory _inventory;
+    private RobotContainer _robotContainer;
+    private Resource _resource;
 
     void Awake() {
         _tm = GetComponent<TextManager>();
@@ -33,51 +33,31 @@ public class ShowerManager :MonoBehaviour {
         _resourceNameText = resourceShower.transform.Find("NameText").GetComponent<Text>();
         _resourceAmountText = resourceShower.transform.Find("AmountText").GetComponent<Text>();
         _resourceImage = resourceShower.transform.Find("Image").GetComponent<Image>();
-        _slots = new ShowerInventorySlot[] {
-            Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
-            ,Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
-            ,Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
-            ,Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
-        };
-        for (int i = 0; i < 4; i++) {
-            _slots[i].transform.SetParent(inventoryShower.transform);
-            _slots[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(i * 50, 0);
-            _slots[i].gameObject.SetActive(false);
-        }
-        _slotButton = inventoryShower.transform.Find("Button").gameObject;
-    }
-    private void Start() {
-        StartCoroutine(Refresh());
+        _robotText = robotShower.transform.Find("AmountText").GetComponent<Text>();
+
     }
 
     public void OnTouch(GameObject go) {
         if (go == null)
             return;
-        _select = go;
         OffAll();
-        var resource = go.GetComponent<Resource>();
-        _inventory = go.GetComponent<Inventory>();
-        if (resource != null) {
-            resourceShower.SetActive(true);
-            _resourceNameText.text = _tm.GetText("item", resource.name);
-            _resourceAmountText.text = resource.amount + "";
-            _resourceImage.sprite = _sm.GetSprite("item", resource.name);
-        }
+        StartCoroutine(Refresh());
+        var inventory = go.GetComponent<Inventory>();
+        var requestInventory = go.GetComponent<RequestInventory>();
 
-        if (_inventory != null) {
+        _resource = go.GetComponent<Resource>();
+        _robotContainer = go.GetComponent<RobotContainer>();
+        RefreshResource();
+        RefreshRobot();
+        if (inventory != null) {
             inventoryShower.SetActive(true);
-            var stacks = _inventory.GetStacks();
-            int max = stacks.Length;
-            if (max > 4) {
-                _slotButton.SetActive(true);
-                max = 4;
-            }
-            for (int i = 0; i < max; i++) {
-                _slots[i].gameObject.SetActive(true);
-                _slots[i].SetItem(_sm.GetSprite("item", stacks[i].name), stacks[i].count);
-            }
+            inventoryShower.GetComponent<InventoryShower>().SetInventory(inventory, go.name, false);
         }
 
+        if (requestInventory != null) {
+            requestInventoryShower.SetActive(true);
+            requestInventoryShower.GetComponent<InventoryShower>().SetInventory(requestInventory, go.name, true);
+        }
         infoShower.SetActive(true);
 
         var objName = go.name.Replace("(Clone)", "").ToLower();
@@ -87,32 +67,46 @@ public class ShowerManager :MonoBehaviour {
         _infoNameText.text = tName;
         _infoDescriptionText.text = tDes;
         select.transform.position = go.transform.position;
+    }
 
+    void RefreshRobot() {
+
+        if (_robotContainer != null) {
+            robotShower.SetActive(true);
+            _robotText.text = _robotContainer.count + "";
+        }
+    }
+
+    void RefreshResource() {
+
+        if (_resource != null) {
+            resourceShower.SetActive(true);
+            _resourceNameText.text = _tm.GetText("item", _resource.name);
+            _resourceAmountText.text = _resource.amount + "";
+            _resourceImage.sprite = _sm.GetSprite("item", _resource.name);
+        }
     }
 
     public void OffAll() {
         infoShower.SetActive(false);
+        inventoryShower.GetComponent<InventoryShower>().Clear();
         inventoryShower.SetActive(false);
-        foreach (var i in _slots)
-            i.gameObject.SetActive(false);
-        _slotButton.SetActive(false);
 
         resourceShower.SetActive(false);
+        robotShower.SetActive(false);
+        requestInventoryShower.GetComponent<InventoryShower>().Clear();
+        requestInventoryShower.SetActive(false);
+
         select.transform.position = new Vector3(123564, 125354);
+        StopAllCoroutines();
     }
 
-    public void SelectClear() {
-        _select = null;
-    }
 
     IEnumerator Refresh() {
         while (true) {
-            yield return new WaitForSeconds(0.5f);
-            OnTouch(_select);
+            yield return new WaitForSeconds(0.3f);
+            RefreshRobot();
+            RefreshResource();
         }
-    }
-
-    public void OnOpenClick() {
-        FindObjectOfType<InventoryGuiManager>().Open(_inventory);
     }
 }

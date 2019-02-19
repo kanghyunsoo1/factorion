@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RobotContainer :KhsComponent {
-    public int count;
+public class RequestInventory :ItemContainer {
+    public int incomingRobotCount;
+
 }

@@ -15,11 +15,12 @@ public class ValueManager :MonoBehaviour {
         values = new UpgradableValue[] {
             new UpgradableValue() { name = "gustn", defaultValue = 100f }
             ,new UpgradableValue() { name = "maxRobotCount", defaultValue = 10f, deltaValue = 5f, maxUpgradeCount = 100, defaultPrice = 50, deltaPrice = 50 }
+            ,new UpgradableValue() { name = "robotSpeed", defaultValue = 1f, deltaValue = 0.25f, maxUpgradeCount = 40, defaultPrice = 50, deltaPrice = 50 }
+            ,new UpgradableValue() { name = "robotCapacity", defaultValue = 5f, deltaValue = 1f, maxUpgradeCount = 100, defaultPrice = 50, deltaPrice = 50 }
             ,new UpgradableValue() { name = "minerCapacity", defaultValue = 200f, deltaValue = 50f, maxUpgradeCount = 100, defaultPrice = 40, deltaPrice = 40 }
             ,new UpgradableValue() { name = "minerDelay", defaultValue = 1.1f, deltaValue = -0.01f, maxUpgradeCount = 100, defaultPrice = 30, deltaPrice = 30 }
             ,new UpgradableValue() { name = "minerAmount", defaultValue = 5f, deltaValue = 1f, maxUpgradeCount = 100, defaultPrice = 50, deltaPrice = 50 }
         };
-
     }
 
 

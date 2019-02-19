@@ -52,20 +52,27 @@ public class KhsManager :MonoBehaviour {
             Destroy(g.gameObject);
         }
         for (int i = 0; i < lines.Length; i++) {
-            var sharps = lines[i].Split('#');
-            var go = Instantiate(sharps[0]);
-            var khsObject = go.GetComponent<KhsObject>();
-            JsonUtility.FromJsonOverwrite(sharps[2], khsObject);
-            int componentsCount = int.Parse(sharps[1]);
-            if (componentsCount != 0)
-                for (int j = 0; j < componentsCount; j++) {
-                    i += 1;
-                    sharps = lines[i].Split('#');
-                    var component = go.GetComponent(Type.GetType(sharps[0]));
-                    JsonUtility.FromJsonOverwrite(sharps[1], component);
-                }
-            go.transform.position = khsObject.position;
-            go.transform.rotation = Quaternion.Euler(khsObject.rotation);
+            try {
+                var sharps = lines[i].Split('#');
+                var go = Instantiate(sharps[0]);
+                var khsObject = go.GetComponent<KhsObject>();
+                JsonUtility.FromJsonOverwrite(sharps[2], khsObject);
+                int componentsCount = int.Parse(sharps[1]);
+                if (componentsCount != 0)
+                    for (int j = 0; j < componentsCount; j++) {
+                        i += 1;
+                        sharps = lines[i].Split('#');
+                        try {
+                            var component = go.GetComponent(Type.GetType(sharps[0]));
+                            JsonUtility.FromJsonOverwrite(sharps[1], component);
+                        } catch (Exception e) { Debug.Log(e); }
+                    }
+                go.transform.position = khsObject.position;
+                go.transform.rotation = Quaternion.Euler(khsObject.rotation);
+
+            } catch (Exception e) {
+                Debug.Log(e);
+            }
         }
     }
 

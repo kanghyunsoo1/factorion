@@ -11,14 +11,14 @@ public class InventoryGuiManager :MonoBehaviour {
     private Text _name, _count;
     private TextManager _tm;
     private ItemStack _selectStack;
-    private Inventory _selectInventory;
+    private ItemContainer _selectInventory;
     private int _refreshCount;
+    private bool _isOpen = true;
 
     private void Awake() {
         _tm = GetComponent<TextManager>();
         _name = inventoryObject.transform.Find("Name").GetComponent<Text>();
         _count = inventoryObject.transform.Find("Count").GetComponent<Text>();
-        inventoryObject.SetActive(false);
         _slots = new InventorySlot[_x * _y];
         int i = 0;
         for (int y = 0; y < _y; y++)
@@ -29,24 +29,39 @@ public class InventoryGuiManager :MonoBehaviour {
                 _slots[i].gameObject.SetActive(false);
                 i++;
             }
+        Switch();
+    }
+
+    public void Switch() {
+        if (_isOpen) {
+            Close();
+        } else {
+            OpenBase();
+        }
     }
 
     public void OpenBase() {
-        Open(FindObjectOfType<Base>().GetComponent<Inventory>());
+        Open(FindObjectOfType<Base>().GetComponent<ItemContainer>(), "base", false);
     }
 
-    public void Open(Inventory inventory) {
+    public void Open(ItemContainer inventory, string owner, bool isRequest) {
+        Close();
         _selectInventory = inventory;
         inventoryObject.SetActive(true);
         SetInventoryAndSlots();
         if (_slots[0].isActiveAndEnabled) {
-            _slots[0].OnClick();
+            _slots[0].GetComponent<Button>().onClick.Invoke();
         }
+        _isOpen = true;
+        var inv = _tm.GetText("inventory");
+        if (isRequest)
+            inv = _tm.GetText("request-inventory");
+        inventoryObject.transform.Find("Text").GetComponent<Text>().text = string.Format("{0} -> {1}", _tm.GetText("name", owner), inv);
     }
 
     private void SetInventoryAndSlots() {
         var stacks = _selectInventory.GetStacks();
-        inventoryObject.GetComponent<RectTransform>().sizeDelta = new Vector2(_size * _x, stacks.Length / _x * _size + _size * 2);
+        inventoryObject.GetComponent<RectTransform>().sizeDelta = new Vector2(_size * _x, stacks.Length / _x * _size + _size + 50);
         for (int i = 0; i < stacks.Length; i++) {
             _slots[i].SetStack(stacks[i]);
             _slots[i].gameObject.SetActive(true);
@@ -54,11 +69,14 @@ public class InventoryGuiManager :MonoBehaviour {
     }
 
     public void Close() {
+        _name.text = "";
+        _count.text = "";
         foreach (var i in _slots)
             i.gameObject.SetActive(false);
         inventoryObject.SetActive(false);
         _selectInventory = null;
         _selectStack = null;
+        _isOpen = false;
     }
 
     public void OnSlotClick(ItemStack stack) {

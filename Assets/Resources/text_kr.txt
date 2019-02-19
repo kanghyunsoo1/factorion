@@ -7,6 +7,11 @@ spawning			#자원 생성중...
 exit				#나가기
 build				#건설
 gustn				#거스튼
+robot				#로봇
+robot-ready			#대기중
+inventory			#인벤토리
+resource			#자원
+request-inventory	#요청 인벤토리
 
 @item
 coal				#석탄

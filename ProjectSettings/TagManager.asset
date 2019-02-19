@@ -47,6 +47,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: robot
+    uniqueID: 1684756717
+    locked: 0
   - name: Center
     uniqueID: 3439495423
     locked: 0
