@@ -45,29 +45,29 @@ public class RobotManager :MonoBehaviour {
                     r.speed = newSpeed;
                 }
             }
-            
+
             foreach (var requestInventory in _requestInventories) {
                 foreach (var stack in requestInventory.GetStacks()) {
-                    var nearestInventory = KhsUtil.GetNearestObject<Inventory>(_inventories, requestInventory.transform.position, x => x.GetItemCount(stack.name) > 0);
+                    var inventoryOfRequestInventory = requestInventory.GetComponent<Inventory>();
+                    var nearestInventory = KhsUtil.GetNearestObjectExcept<Inventory>(_inventories, requestInventory.transform.position, x => x.GetItemCount(stack.name) > 0, inventoryOfRequestInventory);
                     if (nearestInventory == null)
                         continue;
 
                     var nearestContainer = KhsUtil.GetNearestObject<RobotContainer>(_containers, nearestInventory.transform.position, x => x.count > 0);
                     if (nearestContainer == null)
                         continue;
-                    var nearestRequestInventory = nearestInventory.GetComponent<RequestInventory>();
-                    if (nearestRequestInventory != null) {
-                        if (nearestRequestInventory.GetItemCount(stack.name) >= nearestInventory.GetItemCount(stack.name))
-                            continue;
+
+                    var requestInventoryOfnearestInventory = nearestInventory.GetComponent<RequestInventory>();
+                    if (requestInventoryOfnearestInventory != null && requestInventoryOfnearestInventory.GetItemCount(stack.name) >= nearestInventory.GetItemCount(stack.name)) {
+                        continue;
                     }
 
-                    int have = requestInventory.GetComponent<Inventory>().GetItemCount(stack.name);
+                    int itemCountOfInventoryOfRequestInventory = inventoryOfRequestInventory.GetItemCount(stack.name);
 
                     var robotCapacity = _vm.GetValue("robotCapacity").Value;
-                    int needRobotCount = (int)Math.Ceiling((float)(stack.count - have) / robotCapacity);
+                    int needRobotCount = (int)Math.Ceiling((float)(stack.count - itemCountOfInventoryOfRequestInventory) / robotCapacity);
                     needRobotCount -= requestInventory.incomingRobotCount;
                     needRobotCount = Math.Min(nearestContainer.count, needRobotCount);
-
 
                     for (int i = 0; i < needRobotCount; i++) {
                         requestInventory.incomingRobotCount += 1;

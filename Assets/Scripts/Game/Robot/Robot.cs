@@ -54,6 +54,11 @@ public class Robot :KhsComponent {
                             count = how
                         };
                         RefreshSprite();
+                        if (how == 0) {
+                            destination = containerPos;
+                            phase = RobotPhase.ToContainer;
+                            break;
+                        }
                         destination = requestInventoryPos;
                         phase = RobotPhase.ToRequestInventory;
                         break;
