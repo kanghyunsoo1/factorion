@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 public class DataManager :MonoBehaviour {
-    private GuiManager _guim;
+    private SpinnerManager _spm;
     private KhsManager _km;
     private ShowerManager _sm;
     private ValueManager _vm;
     private string _mapName;
     void Awake() {
-        _guim = GetComponent<GuiManager>();
+        _spm = GetComponent<SpinnerManager>();
         _km = GetComponent<KhsManager>();
         _vm = GetComponent<ValueManager>();
         _sm = GetComponent<ShowerManager>();
@@ -23,11 +23,11 @@ public class DataManager :MonoBehaviour {
     }
 
     private IEnumerator _Save() {
-        _guim.OnSaveStart();
+        _spm.SpinnerOn("save");
         yield return null;
         _km.Save(_mapName);
         _vm.Save(_mapName);
-        _guim.OnSaveEnd();
+        _spm.SpinnerOff();
     }
 
     public void Load() {
@@ -35,12 +35,12 @@ public class DataManager :MonoBehaviour {
     }
 
     private IEnumerator _Load() {
-        _guim.OnLoadStart();
+        _spm.SpinnerOn("load");
         yield return null;
         _km.Load(_mapName);
         _vm.Load(_mapName);
         _sm.OffAll();
-        _guim.OnLoadEnd();
+        _spm.SpinnerOff();
     }
 
     public void Delete() {

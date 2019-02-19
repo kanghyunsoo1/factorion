@@ -1,9 +1,6 @@
 @
 save				#저장하기
-saving				#저장중...
 load				#불러오기
-loading				#불러오는중...
-spawning			#자원 생성중...
 exit				#나가기
 build				#건설
 gustn				#거스튼
@@ -12,6 +9,12 @@ robot-ready			#대기중
 inventory			#인벤토리
 resource			#자원
 request-inventory	#요청 인벤토리
+
+
+@spinner
+save				#게임 데이터를 저장하는 중입니다...
+load				#게임 데이터를 불러오는 중입니다...
+spawn				#자원을 생성중입니다...
 
 @item
 coal				#석탄

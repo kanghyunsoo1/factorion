@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ResourceManager :MonoBehaviour {
     public ResourceInfo[] resourceInfos;
-    private GuiManager _guim;
+    private SpinnerManager _sm;
     private KhsManager _km;
     void Awake() {
         resourceInfos = new ResourceInfo[] {
@@ -18,7 +18,7 @@ public class ResourceManager :MonoBehaviour {
 
         };
         _km = GetComponent<KhsManager>();
-        _guim = GetComponent<GuiManager>();
+        _sm = GetComponent<SpinnerManager>();
     }
 
     public ResourceInfo GetResourceInfo(string name) {
@@ -30,7 +30,7 @@ public class ResourceManager :MonoBehaviour {
     }
 
     private IEnumerator _Spawn() {
-        _guim.OnSpawnStart();
+        _sm.SpinnerOn("spawn");
         yield return null;
         for (int i = -StaticDatas.SIZE; i < StaticDatas.SIZE; i++) {
             for (int j = -StaticDatas.SIZE; j < StaticDatas.SIZE; j++) {
@@ -51,6 +51,6 @@ public class ResourceManager :MonoBehaviour {
                 }
             }
         }
-        _guim.OnSpawnEnd();
+        _sm.SpinnerOff();
     }
 }
