@@ -19,4 +19,6 @@ public class KhsUtil {
     }
 
     public static T GetNearestObject<T>(T[] array, Vector2 pos) where T : MonoBehaviour => GetNearestObject<T>(array, pos, x => true);
+    public static T GetNearestObjectExcept<T>(T[] array, Vector2 pos, T willBeExcept) where T : MonoBehaviour => GetNearestObject<T>(array, pos, x => !x.Equals(willBeExcept));
+    public static T GetNearestObjectExcept<T>(T[] array, Vector2 pos, Predicate<T> match, T willBeExcept) where T : MonoBehaviour => GetNearestObject<T>(array, pos, (x => !x.Equals(willBeExcept) && match(x)));
 }
