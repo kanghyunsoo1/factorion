@@ -9,19 +9,17 @@ public class ItemManager :MonoBehaviour {
     private void Awake() {
         itemInfos = new ItemInfo[]{
             new ItemInfo() { name = "coal" }
-            ,new ItemInfo() { name = "raw_iron" }
-            ,new ItemInfo() { name = "raw_copper" }
-            ,new ItemInfo() { name = "raw_tin" }
-            ,new ItemInfo() { name = "raw_lead" }
-            ,new ItemInfo() { name = "raw_dudxo",size = 10 }
             ,new ItemInfo() { name = "iron" }
             ,new ItemInfo() { name = "copper" }
             ,new ItemInfo() { name = "tin" }
-            ,new ItemInfo() { name = "lead" }
             ,new ItemInfo() { name = "dudxo" }
+            ,new ItemInfo() { name = "iron-bar", recipe = new ItemRecipe(){ stack = new ItemStack(){name="iron",count =5} , type=ItemRecipe.Type.Burn } }
+            ,new ItemInfo() { name = "copper-bar",recipe = new ItemRecipe(){ stack = new ItemStack(){name="copper",count =5} , type=ItemRecipe.Type.Burn } }
+            ,new ItemInfo() { name = "tin-bar" ,recipe = new ItemRecipe(){ stack = new ItemStack(){name="tin",count =5} , type=ItemRecipe.Type.Burn } }
+            ,new ItemInfo() { name = "dudxo-bar", recipe = new ItemRecipe(){ stack = new ItemStack(){name="dudxo",count =5} , type=ItemRecipe.Type.Burn } }
         };
     }
-    
+
     void Start() {
 
     }

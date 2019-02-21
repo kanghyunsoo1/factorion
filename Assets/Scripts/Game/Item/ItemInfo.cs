@@ -5,6 +5,6 @@ using UnityEngine;
 [Serializable]
 public class ItemInfo {
     public string name;
-    public int size = 1;
+    public ItemRecipe recipe;
 
 }
