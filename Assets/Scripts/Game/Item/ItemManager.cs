@@ -20,10 +20,6 @@ public class ItemManager :MonoBehaviour {
         };
     }
 
-    void Start() {
-
-    }
-
 
     public ItemInfo GetItemInfo(string name) {
         return Array.Find(itemInfos, x => x.name.Equals(name));
