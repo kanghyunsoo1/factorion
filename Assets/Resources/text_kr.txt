@@ -1,13 +1,9 @@
 @
-save				#저장하기
-load				#불러오기
-exit				#나가기
+yes					#예
+no					#아니요
 build				#건설
-gustn				#거스튼
-robot				#로봇
 robot-ready			#대기중
 inventory			#인벤토리
-resource			#자원
 request-inventory	#요청 인벤토리
 
 
@@ -15,6 +11,18 @@ request-inventory	#요청 인벤토리
 save				#게임 데이터를 저장하는 중입니다...
 load				#게임 데이터를 불러오는 중입니다...
 spawn				#자원을 생성중입니다...
+
+@dialog
+exit				#게임을 종료할까요? 저장하지 않은 내용은 사라집니다.
+delete1				#저장된 게임을 삭제할까요?
+delete2				#정말로 삭제할까요? 복구할 수 없습니다.
+
+@alert
+notEnoughItem		#아이템이 부족하여 건설할 수 없습니다.
+alreadyExists		#이미 뭔가 존재하는 자리입니다.
+minerShould			#채광기는 자원 위에만 건설이 가능합니다.
+build				#건설 완료
+save				#게임 데이터를 저장했습니다.
 
 @item
 coal				#석탄
@@ -40,8 +48,3 @@ resource			#자원 설명
 miner				#채광기 설명
 assembler			#조립 기계 설명
 
-@alert
-notEnoughItem		#아이템이 부족하여 건설할 수 없습니다
-alreadyExists		#이미 뭔가 존재하는 자리입니다
-minerShould			#채광기는 자원이 있어야 건설이 가능합니다
-build				#건설 완료
