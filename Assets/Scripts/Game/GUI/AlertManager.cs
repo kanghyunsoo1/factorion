@@ -1,25 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AlertManager :MonoBehaviour {
     public AlertBox alertBox;
     private List<AlertBox> _list;
-    private TextManager _tm;
-    private AudioManager _am;
+    private TextManager _textManager;
+    private AudioManager _audioManager;
     void Awake() {
-        _am = GetComponent<AudioManager>();
-        _tm = GetComponent<TextManager>();
+        _audioManager = GetComponent<AudioManager>();
+        _textManager = GetComponent<TextManager>();
         _list = new List<AlertBox>();
     }
 
     public void AddAlert(string textWithoutAlertHead, Color color) {
-        AddAlertRaw(_tm.GetText("alert", textWithoutAlertHead), color);
+        AddAlertRaw(_textManager.GetText("alert", textWithoutAlertHead), color);
     }
 
     public void AddAlertRaw(string rawText, Color color) {
-        _am.Play("alert");
+        _audioManager.Play("alert");
         var a = Instantiate(alertBox).GetComponent<AlertBox>();
         a.transform.SetParent(FindObjectOfType<Canvas>().transform);
         var text = a.transform.Find("Text").GetComponent<Text>();

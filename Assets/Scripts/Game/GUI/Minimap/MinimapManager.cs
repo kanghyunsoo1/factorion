@@ -8,6 +8,7 @@ public class MinimapManager :MonoBehaviour {
     public GameObject dot;
     public GameObject cameraRect;
     public Image minimap;
+
     private Dictionary<MinimapEntity, GameObject> _dic;
     private Rect _backRect;
     private Camera _camera;
@@ -43,8 +44,8 @@ public class MinimapManager :MonoBehaviour {
             foreach (MinimapEntity entity in keys) {
                 try {
                     var dot = _dic[entity];
-                
-                dot.GetComponent<RectTransform>().localPosition = WorldToMinimapPoint(entity.transform.position);
+
+                    dot.GetComponent<RectTransform>().localPosition = WorldToMinimapPoint(entity.transform.position);
                 } catch (Exception) { };
                 yield return null;
             }

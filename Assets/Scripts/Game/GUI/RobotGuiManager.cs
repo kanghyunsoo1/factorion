@@ -1,24 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class RobotGuiManager :MonoBehaviour {
     public GameObject robotGuiObject;
-    private RobotManager _rm;
-    private ValueManager _vm;
+
+    private RobotManager _robotManager;
+    private ValueManager _valueManager;
     private Text _panelText;
 
     void Awake() {
         _panelText = robotGuiObject.transform.Find("Panel").Find("Text").GetComponent<Text>();
-        _vm = GetComponent<ValueManager>();
-        _rm = GetComponent<RobotManager>();
+        _valueManager = GetComponent<ValueManager>();
+        _robotManager = GetComponent<RobotManager>();
     }
 
     void FixedUpdate() {
-        int ready = _rm.GetReadyCount();
-        int active = _rm.GetActiveCount();
-        int max = (int)_vm.GetValue("maxRobotCount").Value;
+        int ready = _robotManager.GetReadyCount();
+        int active = _robotManager.GetActiveCount();
+        int max = (int)_valueManager.GetValue("maxRobotCount").Value;
         int all = ready + active;
         string cAll = "black";
         if (all >= max) {
@@ -28,5 +27,4 @@ public class RobotGuiManager :MonoBehaviour {
         }
         _panelText.text = string.Format("<color='{0}'>{1}</color> / {2}\n{3}", cAll, all, max, active);
     }
-
 }

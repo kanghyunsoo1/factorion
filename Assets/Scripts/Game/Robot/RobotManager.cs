@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RobotManager :MonoBehaviour {
     private readonly float _delay = 1f;
-    private KhsManager _km;
-    private ValueManager _vm;
-
+    private KhsManager _khsManager;
+    private ValueManager _valueManager;
     private Robot[] _robots;
     private RobotContainer[] _containers;
     private RequestInventory[] _requestInventories;
@@ -19,14 +17,12 @@ public class RobotManager :MonoBehaviour {
         _containers = new RobotContainer[0];
         _requestInventories = new RequestInventory[0];
         _inventories = new Inventory[0];
-
-        _km = GetComponent<KhsManager>();
-        _vm = GetComponent<ValueManager>();
-
+        _khsManager = GetComponent<KhsManager>();
+        _valueManager = GetComponent<ValueManager>();
     }
 
     private void Start() {
-        oldSpeed = _vm.GetValue("robotSpeed").Value;
+        oldSpeed = _valueManager.GetValue("robotSpeed").Value;
         StartCoroutine(Proc());
     }
 
@@ -38,7 +34,7 @@ public class RobotManager :MonoBehaviour {
             _requestInventories = FindObjectsOfType<RequestInventory>();
             _inventories = FindObjectsOfType<Inventory>();
 
-            var newSpeed = _vm.GetValue("robotSpeed").Value;
+            var newSpeed = _valueManager.GetValue("robotSpeed").Value;
             if (oldSpeed != newSpeed) {
                 oldSpeed = newSpeed;
                 foreach (var r in _robots) {
@@ -64,7 +60,7 @@ public class RobotManager :MonoBehaviour {
 
                     int itemCountOfInventoryOfRequestInventory = inventoryOfRequestInventory.GetItemCount(stack.name);
 
-                    var robotCapacity = _vm.GetValue("robotCapacity").Value;
+                    var robotCapacity = _valueManager.GetValue("robotCapacity").Value;
                     int needRobotCount = (int)Math.Ceiling((float)(stack.count - itemCountOfInventoryOfRequestInventory) / robotCapacity);
                     needRobotCount -= requestInventory.incomingRobotCount;
                     needRobotCount = Math.Min(nearestContainer.count, needRobotCount);
@@ -72,7 +68,7 @@ public class RobotManager :MonoBehaviour {
                     for (int i = 0; i < needRobotCount; i++) {
                         requestInventory.incomingRobotCount += 1;
                         nearestContainer.count -= 1;
-                        var robot = _km.Instantiate("robot").GetComponent<Robot>();
+                        var robot = _khsManager.Instantiate("robot").GetComponent<Robot>();
                         robot.transform.position = nearestContainer.transform.position;
                         robot.RefreshSprite();
                         robot.inventoryPos = nearestInventory.transform.position;
@@ -88,7 +84,6 @@ public class RobotManager :MonoBehaviour {
         }
     }
 
-
     public int GetReadyCount() {
         var r = 0;
         foreach (var i in _containers)
@@ -99,5 +94,4 @@ public class RobotManager :MonoBehaviour {
     public int GetActiveCount() {
         return _robots.Length;
     }
-
 }

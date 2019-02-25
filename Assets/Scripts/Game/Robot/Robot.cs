@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Robot :KhsComponent {
@@ -15,14 +13,14 @@ public class Robot :KhsComponent {
     public string willItem;
     public int willCount;
 
-    private SpriteRenderer _sr;
-    private AreaManager _am;
-    private SpriteManager _sm;
+    private SpriteRenderer _spriteRenderer;
+    private AreaManager _areaManager;
+    private SpriteManager _spriteManager;
 
     private void Awake() {
-        _am = FindObjectOfType<AreaManager>();
-        _sr = transform.Find("Sprite").GetComponent<SpriteRenderer>();
-        _sm = FindObjectOfType<SpriteManager>();
+        _areaManager = FindObjectOfType<AreaManager>();
+        _spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+        _spriteManager = FindObjectOfType<SpriteManager>();
     }
 
     private void Start() {
@@ -32,9 +30,9 @@ public class Robot :KhsComponent {
 
     public void RefreshSprite() {
         if (stack == null || stack.count == 0) {
-            _sr.sprite = null;
+            _spriteRenderer.sprite = null;
         } else {
-            _sr.sprite = _sm.GetSprite("item", stack.name);
+            _spriteRenderer.sprite = _spriteManager.GetSprite("item", stack.name);
         }
     }
 
@@ -47,7 +45,7 @@ public class Robot :KhsComponent {
             try {
                 switch (phase) {
                     case RobotPhase.ToInventory:
-                        var inventory = _am.GetUser(destination).GetComponent<Inventory>();
+                        var inventory = _areaManager.GetUser(destination).GetComponent<Inventory>();
                         int how = inventory.PullItem(willItem, willCount);
                         stack = new ItemStack {
                             name = willItem,
@@ -64,7 +62,7 @@ public class Robot :KhsComponent {
                         break;
 
                     case RobotPhase.ToRequestInventory:
-                        var requestInventory = _am.GetUser(destination).GetComponent<RequestInventory>();
+                        var requestInventory = _areaManager.GetUser(destination).GetComponent<RequestInventory>();
                         requestInventory.GetComponent<Inventory>().AddItem(stack.name, stack.count);
                         requestInventory.incomingRobotCount -= 1;
                         stack = null;
@@ -73,7 +71,7 @@ public class Robot :KhsComponent {
                         phase = RobotPhase.ToContainer;
                         break;
                     case RobotPhase.ToContainer:
-                        var container = _am.GetUser(destination).GetComponent<RobotContainer>();
+                        var container = _areaManager.GetUser(destination).GetComponent<RobotContainer>();
                         container.count++;
                         Destroy(gameObject);
                         break;
@@ -84,5 +82,4 @@ public class Robot :KhsComponent {
             }
         }
     }
-
 }

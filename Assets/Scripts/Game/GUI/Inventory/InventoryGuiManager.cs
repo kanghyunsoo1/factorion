@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 public class InventoryGuiManager :MonoBehaviour {
     public GameObject inventoryObject;
@@ -8,17 +6,17 @@ public class InventoryGuiManager :MonoBehaviour {
 
     private readonly int _x = 6, _y = 15, _size = 80;
     private InventorySlot[] _slots;
-    private Text _name, _count;
-    private TextManager _tm;
+    private Text _nameText, _countText;
+    private TextManager _textManager;
     private ItemStack _selectStack;
     private ItemContainer _selectInventory;
     private int _refreshCount;
     private bool _isOpen = true;
 
     private void Awake() {
-        _tm = GetComponent<TextManager>();
-        _name = inventoryObject.transform.Find("Name").GetComponent<Text>();
-        _count = inventoryObject.transform.Find("Count").GetComponent<Text>();
+        _textManager = GetComponent<TextManager>();
+        _nameText = inventoryObject.transform.Find("Name").GetComponent<Text>();
+        _countText = inventoryObject.transform.Find("Count").GetComponent<Text>();
         _slots = new InventorySlot[_x * _y];
         int i = 0;
         for (int y = 0; y < _y; y++)
@@ -53,10 +51,10 @@ public class InventoryGuiManager :MonoBehaviour {
             _slots[0].GetComponent<Button>().onClick.Invoke();
         }
         _isOpen = true;
-        var inv = _tm.GetText("inventory");
+        var inv = _textManager.GetText("inventory");
         if (isRequest)
-            inv = _tm.GetText("request-inventory");
-        inventoryObject.transform.Find("Text").GetComponent<Text>().text = string.Format("{0} -> {1}", _tm.GetText("name", owner), inv);
+            inv = _textManager.GetText("request-inventory");
+        inventoryObject.transform.Find("Text").GetComponent<Text>().text = string.Format("{0} -> {1}", _textManager.GetText("name", owner), inv);
     }
 
     private void SetInventoryAndSlots() {
@@ -69,8 +67,8 @@ public class InventoryGuiManager :MonoBehaviour {
     }
 
     public void Close() {
-        _name.text = "";
-        _count.text = "";
+        _nameText.text = "";
+        _countText.text = "";
         foreach (var i in _slots)
             i.gameObject.SetActive(false);
         inventoryObject.SetActive(false);
@@ -92,8 +90,7 @@ public class InventoryGuiManager :MonoBehaviour {
         }
         if (_selectStack == null)
             return;
-
-        _name.text = _tm.GetText("item", _selectStack.name);
-        _count.text = _selectStack.count + "";
+        _nameText.text = _textManager.GetText("item", _selectStack.name);
+        _countText.text = _selectStack.count + "";
     }
 }

@@ -1,18 +1,15 @@
-﻿using System;
-using System.IO;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections;
 using UnityEngine;
 public class DataManager :MonoBehaviour {
-    private SpinnerManager _spm;
-    private KhsManager _km;
-    private ShowerManager _sm;
+    private SpinnerManager _spinnerManager;
+    private KhsManager _khsManager;
+    private ShowerManager _showerManager;
     private string _mapName;
+
     void Awake() {
-        _spm = GetComponent<SpinnerManager>();
-        _km = GetComponent<KhsManager>();
-        _sm = GetComponent<ShowerManager>();
+        _spinnerManager = GetComponent<SpinnerManager>();
+        _khsManager = GetComponent<KhsManager>();
+        _showerManager = GetComponent<ShowerManager>();
         _mapName = StaticDatas.mapName;
     }
 
@@ -21,10 +18,10 @@ public class DataManager :MonoBehaviour {
     }
 
     private IEnumerator _Save() {
-        _spm.SpinnerOn("save");
+        _spinnerManager.SpinnerOn("save");
         yield return null;
-        _km.Save(_mapName);
-        _spm.SpinnerOff();
+        _khsManager.Save(_mapName);
+        _spinnerManager.SpinnerOff();
     }
 
     public void Load() {
@@ -32,14 +29,14 @@ public class DataManager :MonoBehaviour {
     }
 
     private IEnumerator _Load() {
-        _spm.SpinnerOn("load");
+        _spinnerManager.SpinnerOn("load");
         yield return null;
-        _km.Load(_mapName);
-        _sm.OffAll();
-        _spm.SpinnerOff();
+        _khsManager.Load(_mapName);
+        _showerManager.OffAll();
+        _spinnerManager.SpinnerOff();
     }
 
     public void Delete() {
-        _km.Delete(_mapName);
+        _khsManager.Delete(_mapName);
     }
 }

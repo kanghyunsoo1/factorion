@@ -4,7 +4,6 @@ using System.Text;
 using UnityEngine;
 
 public class KhsManager :MonoBehaviour {
-
     public readonly int offset = 5;
 
     public GameObject Instantiate(string name) {
@@ -17,7 +16,6 @@ public class KhsManager :MonoBehaviour {
         var path = Application.persistentDataPath + "/" + name;
         Directory.CreateDirectory(path);
         Debug.Log(path);
-        GetComponent<AlertManager>().AddAlertRaw(path, Color.black);
         var objects = FindObjectsOfType<KhsObject>();
         var sb = new StringBuilder();
         for (int i = 0; i < objects.Length; i++) {
@@ -46,7 +44,6 @@ public class KhsManager :MonoBehaviour {
             else
                 bytes[i] += (byte)offset;
         }
-
         File.WriteAllBytes(path + "/data.khs", bytes);
     }
 
@@ -92,10 +89,6 @@ public class KhsManager :MonoBehaviour {
 
             } catch (Exception e) {
                 Debug.Log(e);
-                GetComponent<AlertManager>().AddAlertRaw(e.ToString(), Color.black);
-                GetComponent<AlertManager>().AddAlertRaw(e.Message, Color.black);
-                GetComponent<AlertManager>().AddAlertRaw(e.StackTrace, Color.black);
-                return;
             }
         }
     }

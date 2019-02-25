@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogManager :MonoBehaviour {
-
     public delegate void VoidCallback();
     public delegate void ItemRecipeCallback(ItemRecipe recipe);
 
@@ -14,13 +11,13 @@ public class DialogManager :MonoBehaviour {
     private Text _yesOrNoText;
     private VoidCallback _yesCallback, _noCallback;
     private ItemRecipeCallback _recipeCallback;
-    private TextManager _tm;
+    private TextManager _textManager;
 
     private void Awake() {
         _dialogs = GameObject.Find("Canvas").transform.Find("Dialogs").transform;
         _yesOrNo = _dialogs.Find("YesOrNo");
         _yesOrNoText = _yesOrNo.Find("Text").GetComponent<Text>();
-        _tm = GetComponent<TextManager>();
+        _textManager = GetComponent<TextManager>();
     }
 
     private void Start() {
@@ -31,14 +28,13 @@ public class DialogManager :MonoBehaviour {
         _yesCallback = yesback;
         _noCallback = noback;
         _yesOrNo.gameObject.SetActive(true);
-        _yesOrNoText.text = _tm.GetText("dialog", msg);
+        _yesOrNoText.text = _textManager.GetText("dialog", msg);
     }
 
     public void ShowRecipeSelect(ItemRecipeCallback callback, ItemRecipe.Type filter) {
         //TODO 필터 적용해서 리스트 출력
     }
-
-
+    
     public void OnYesOrNo(bool yes) {
         CloseYesOrNo();
         try {

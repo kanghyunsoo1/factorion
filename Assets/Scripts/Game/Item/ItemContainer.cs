@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
-public class ItemContainer : KhsComponent {
-
+public class ItemContainer :KhsComponent {
     public List<ItemStack> _stackList;
-    
+
     void Awake() {
         _stackList = new List<ItemStack>();
     }
@@ -15,7 +12,6 @@ public class ItemContainer : KhsComponent {
     }
 
     public int GetItemCount(string name) {
-
         var stack = _stackList.Find(x => x.name.Equals(name));
         if (stack == null)
             return 0;

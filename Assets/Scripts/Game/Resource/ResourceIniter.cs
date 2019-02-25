@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ResourceIniter :MonoBehaviour {
-
     private Resource _resource;
     public void Awake() {
         _resource = GetComponent<Resource>();

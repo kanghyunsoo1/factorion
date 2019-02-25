@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class SceneUnloader :MonoBehaviour {
-
     void Start() {
         StaticDatas.wasMainLoad = true;
     }

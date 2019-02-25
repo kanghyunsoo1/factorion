@@ -1,19 +1,17 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryShower :MonoBehaviour {
-
     public GameObject inventorySlot;
 
     private ShowerInventorySlot[] _slots;
-    private SpriteManager _sm;
+    private SpriteManager _spriteManager;
     private ItemContainer _inventory;
     private string _owner;
     private bool _isRequset;
 
     void Awake() {
-        _sm = FindObjectOfType<SpriteManager>();
+        _spriteManager = FindObjectOfType<SpriteManager>();
         _slots = new ShowerInventorySlot[] {
             Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
             ,Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
@@ -26,7 +24,7 @@ public class InventoryShower :MonoBehaviour {
             _slots[i].gameObject.SetActive(false);
         }
     }
-    
+
     public void SetInventory(ItemContainer inv, string owner, bool isRequest) {
         _inventory = inv;
         _owner = owner;
@@ -54,7 +52,7 @@ public class InventoryShower :MonoBehaviour {
             }
             for (int i = 0; i < max; i++) {
                 _slots[i].gameObject.SetActive(true);
-                _slots[i].SetItem(_sm.GetSprite("item", stacks[i].name), stacks[i].count);
+                _slots[i].SetItem(_spriteManager.GetSprite("item", stacks[i].name), stacks[i].count);
             }
         }
     }

@@ -1,22 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameSystem :MonoBehaviour {
-    private DataManager _dm;
-    private ResourceManager _rm;
+    private DataManager _dataManager;
+    private ResourceManager _resourceManager;
+
     void Awake() {
-        _dm = GetComponent<DataManager>();
-        _rm = GetComponent<ResourceManager>();
+        _dataManager = GetComponent<DataManager>();
+        _resourceManager = GetComponent<ResourceManager>();
         if (!StaticDatas.wasMainLoad) {
             SceneManager.LoadScene("Main");
         }
     }
 
     private void Start() {
-        _rm.Spawn();
-        _dm.Load();
+        _resourceManager.Spawn();
+        _dataManager.Load();
     }
 
     private void FixedUpdate() {
@@ -31,5 +30,4 @@ public class GameSystem :MonoBehaviour {
             case 6: i.AddItem("tin-bar", 1); break;
         }
     }
-
 }

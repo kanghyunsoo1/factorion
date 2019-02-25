@@ -1,12 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NewGridEffectManager :MonoBehaviour {
     public GameObject grid;
+
     private readonly float _delay = 0.03f;
     private readonly float _lifeTime = 2f;
-
     private Camera _camera;
     private float _width = 30;
     private float _height = 30;
@@ -18,7 +17,6 @@ public class NewGridEffectManager :MonoBehaviour {
     void Start() {
         // StartCoroutine(Loop());
     }
-
 
     IEnumerator Loop() {
         while (true) {

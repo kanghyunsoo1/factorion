@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class ResourceManager :MonoBehaviour {
     public ResourceInfo[] resourceInfos;
-    private SpinnerManager _sm;
-    private KhsManager _km;
+
+    private SpinnerManager _spinnerManager;
+    private KhsManager _khsManager;
+
     void Awake() {
         resourceInfos = new ResourceInfo[] {
             new ResourceInfo{ name="coal", minAmount=1000, maxAmount=5000, rangeFactor=200,chance=0.0005f,minRange=5f }
@@ -17,8 +17,8 @@ public class ResourceManager :MonoBehaviour {
             ,new ResourceInfo{ name="dudxo", minAmount=500, maxAmount=2000, rangeFactor=50,chance=0.0005f,minRange=30f }
 
         };
-        _km = GetComponent<KhsManager>();
-        _sm = GetComponent<SpinnerManager>();
+        _khsManager = GetComponent<KhsManager>();
+        _spinnerManager = GetComponent<SpinnerManager>();
     }
 
     public ResourceInfo GetResourceInfo(string name) {
@@ -30,7 +30,7 @@ public class ResourceManager :MonoBehaviour {
     }
 
     private IEnumerator _Spawn() {
-        _sm.SpinnerOn("spawn");
+        _spinnerManager.SpinnerOn("spawn");
         yield return null;
         for (int i = -StaticDatas.SIZE; i < StaticDatas.SIZE; i++) {
             for (int j = -StaticDatas.SIZE; j < StaticDatas.SIZE; j++) {
@@ -41,7 +41,7 @@ public class ResourceManager :MonoBehaviour {
                     int chance = (int)(ri.chance * 100000);
                     if (UnityEngine.Random.Range(0, 100000) <= chance) {
 
-                        GameObject go = _km.Instantiate("resource");
+                        GameObject go = _khsManager.Instantiate("resource");
                         go.transform.position = new Vector3(i, j, 0);
                         var resource = go.GetComponent<Resource>();
                         resource.name = ri.name;
@@ -51,6 +51,6 @@ public class ResourceManager :MonoBehaviour {
                 }
             }
         }
-        _sm.SpinnerOff();
+        _spinnerManager.SpinnerOff();
     }
 }

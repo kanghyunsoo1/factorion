@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AreaManager :MonoBehaviour {
     private GameObject[,] _area = new GameObject[StaticDatas.SIZE * 2, StaticDatas.SIZE * 2];

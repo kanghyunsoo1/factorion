@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using UnityEngine;
 
 public class ValueManager :MonoBehaviour {
@@ -11,6 +7,7 @@ public class ValueManager :MonoBehaviour {
         public UpgradableValue[] v;
     }
     public UpgradableValue[] values;
+
     void Awake() {
         values = new UpgradableValue[] {
              InitValue("gustn",              100f    )
@@ -35,7 +32,6 @@ public class ValueManager :MonoBehaviour {
         uv.deltaPrice = deltaPrice;
         return uv;
     }
-
 
     public UpgradableValue GetValue(string name) {
         return Array.Find(values, x => x.name.Equals(name));

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemManager :MonoBehaviour {
@@ -19,7 +17,6 @@ public class ItemManager :MonoBehaviour {
             ,new ItemInfo() { name = "dudxo-bar", recipe = new ItemRecipe(){ stack = new ItemStack(){name="dudxo",count =5} , type=ItemRecipe.Type.Burn } }
         };
     }
-
 
     public ItemInfo GetItemInfo(string name) {
         return Array.Find(itemInfos, x => x.name.Equals(name));

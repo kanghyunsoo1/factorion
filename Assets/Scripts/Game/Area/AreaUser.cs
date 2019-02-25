@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AreaUser :MonoBehaviour {
-    private AreaManager _am;
+    private AreaManager _areaManager;
 
     private void Awake() {
-        _am = FindObjectOfType<AreaManager>();
+        _areaManager = FindObjectOfType<AreaManager>();
     }
     void Start() {
-        _am.LockArea(gameObject);
+        _areaManager.LockArea(gameObject);
     }
 
     private void OnDestroy() {
         try {
-            _am.UnlockArea(gameObject);
+            _areaManager.UnlockArea(gameObject);
         } catch (Exception) { };
     }
 }

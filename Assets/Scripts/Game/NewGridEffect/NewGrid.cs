@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class NewGrid :MonoBehaviour {
     public float lifeTime;
+
     private SpriteRenderer _spriteRenderer;
     private Color _color;
     private bool _isUp = true;
+
     void Start() {
         _color = new Color(1f, 1f, 1f, 0f);
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -24,7 +24,6 @@ public class NewGrid :MonoBehaviour {
         } else {
             _color.a -= Time.deltaTime / lifeTime * 2;
         }
-
         _spriteRenderer.color = _color;
     }
 }

@@ -1,22 +1,21 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InputManager :MonoBehaviour {
     public float maxTouchDistance;
 
-    private ShowerManager _sm;
+    private ShowerManager _showerManager;
     private Vector2 _startPos;
     private Camera _camera;
-    private AreaManager _am;
+    private AreaManager _areaManager;
     private bool _isOverUI;
-    private InventoryGuiManager _igm;
+    private InventoryGuiManager _inventoryGuiManager;
 
     private void Awake() {
-        _am = GetComponent<AreaManager>();
-        _igm = GetComponent<InventoryGuiManager>();
-        _sm = GetComponent<ShowerManager>();
+        _areaManager = GetComponent<AreaManager>();
+        _inventoryGuiManager = GetComponent<InventoryGuiManager>();
+        _showerManager = GetComponent<ShowerManager>();
         _camera = Camera.main;
     }
 
@@ -52,11 +51,10 @@ public class InputManager :MonoBehaviour {
         }
     }
 
-
     public void OnWorldTouch(Vector2 position) {
-        GameObject go = _am.GetUser(position);
+        GameObject go = _areaManager.GetUser(position);
         if (go != null) {
-            _sm.OnTouch(go);
+            _showerManager.OnTouch(go);
             return;
         } else if (go == null) {
             for (int dx = -1; dx <= 1; dx++) {
@@ -64,15 +62,15 @@ public class InputManager :MonoBehaviour {
                     if (dx == 0 && dy == 0)
                         continue;
                     var v = new Vector2(position.x + dx, position.y + dy);
-                    go = _am.GetUser(v);
+                    go = _areaManager.GetUser(v);
                     if (go != null) {
-                        _sm.OnTouch(go);
+                        _showerManager.OnTouch(go);
                         return;
                     }
                 }
             }
         }
-        _sm.OffAll();
-        _igm.Close();
+        _showerManager.OffAll();
+        _inventoryGuiManager.Close();
     }
 }

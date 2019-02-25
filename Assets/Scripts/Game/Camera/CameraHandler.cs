@@ -1,17 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class CameraHandler :MonoBehaviour {
     private static readonly float _zoomSpeedTouch = 0.05f;
-
     private static readonly float[] _bounds = new float[] { -StaticDatas.SIZE, StaticDatas.SIZE };
     private static readonly float[] _zoomBounds = new float[] { 6f, 30f };
-
     private Camera _camera;
-
     private Vector3 _lastPanPosition;
     private int _panFingerId;
-
     private bool _wasZoomingLastFrame;
     private Vector2[] _lastZoomPositions;
 
@@ -30,7 +25,6 @@ public class CameraHandler :MonoBehaviour {
 
     void HandleTouch() {
         switch (Input.touchCount) {
-
             case 1:
                 _wasZoomingLastFrame = false;
 
@@ -42,7 +36,6 @@ public class CameraHandler :MonoBehaviour {
                     PanCamera(touch.position);
                 }
                 break;
-
             case 2:
                 Vector2[] newPositions = new Vector2[] { Input.GetTouch(0).position, Input.GetTouch(1).position };
                 if (!_wasZoomingLastFrame) {
@@ -58,7 +51,6 @@ public class CameraHandler :MonoBehaviour {
                     _lastZoomPositions = newPositions;
                 }
                 break;
-
             default:
                 _wasZoomingLastFrame = false;
                 break;
@@ -69,13 +61,10 @@ public class CameraHandler :MonoBehaviour {
         Vector3 lastScreen = _camera.ScreenToWorldPoint(_lastPanPosition);
         Vector3 newScreen = _camera.ScreenToWorldPoint(newPanPosition);
         Vector3 offset = lastScreen - newScreen;
-
         transform.Translate(offset, Space.World);
-
         Vector3 pos = transform.position;
         pos.z = -10f;
         transform.position = pos;
-
         _lastPanPosition = newPanPosition;
     }
 
@@ -83,11 +72,9 @@ public class CameraHandler :MonoBehaviour {
         if (offset == 0) {
             return;
         }
-
         _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize - (offset * speed), _zoomBounds[0], _zoomBounds[1]);
     }
     public Vector2 CameraScreenToUnit() {
         return new Vector2(_camera.orthographicSize * 2 * _camera.aspect, _camera.orthographicSize * 2);
     }
-
 }
