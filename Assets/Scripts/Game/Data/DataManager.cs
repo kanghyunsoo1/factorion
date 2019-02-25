@@ -8,12 +8,10 @@ public class DataManager :MonoBehaviour {
     private SpinnerManager _spm;
     private KhsManager _km;
     private ShowerManager _sm;
-    private ValueManager _vm;
     private string _mapName;
     void Awake() {
         _spm = GetComponent<SpinnerManager>();
         _km = GetComponent<KhsManager>();
-        _vm = GetComponent<ValueManager>();
         _sm = GetComponent<ShowerManager>();
         _mapName = StaticDatas.mapName;
     }
@@ -26,7 +24,6 @@ public class DataManager :MonoBehaviour {
         _spm.SpinnerOn("save");
         yield return null;
         _km.Save(_mapName);
-        _vm.Save(_mapName);
         _spm.SpinnerOff();
     }
 
@@ -38,13 +35,11 @@ public class DataManager :MonoBehaviour {
         _spm.SpinnerOn("load");
         yield return null;
         _km.Load(_mapName);
-        _vm.Load(_mapName);
         _sm.OffAll();
         _spm.SpinnerOff();
     }
 
     public void Delete() {
         _km.Delete(_mapName);
-        _vm.Delete(_mapName);
     }
 }

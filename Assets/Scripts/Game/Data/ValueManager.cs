@@ -13,16 +13,28 @@ public class ValueManager :MonoBehaviour {
     public UpgradableValue[] values;
     void Awake() {
         values = new UpgradableValue[] {
-            new UpgradableValue() { name = "gustn", defaultValue = 100f }
-            ,new UpgradableValue() { name = "maxRobotCount", defaultValue = 10f, deltaValue = 5f, maxUpgradeCount = 100, defaultPrice = 50, deltaPrice = 50 }
-            ,new UpgradableValue() { name = "robotSpeed", defaultValue = 1f, deltaValue = 0.25f, maxUpgradeCount = 40, defaultPrice = 50, deltaPrice = 50 }
-            ,new UpgradableValue() { name = "robotCapacity", defaultValue = 5f, deltaValue = 1f, maxUpgradeCount = 100, defaultPrice = 50, deltaPrice = 50 }
-            ,new UpgradableValue() { name = "minerCapacity", defaultValue = 200f, deltaValue = 50f, maxUpgradeCount = 100, defaultPrice = 40, deltaPrice = 40 }
-            ,new UpgradableValue() { name = "minerDelay", defaultValue = 1.1f, deltaValue = -0.01f, maxUpgradeCount = 100, defaultPrice = 30, deltaPrice = 30 }
-            ,new UpgradableValue() { name = "minerAmount", defaultValue = 5f, deltaValue = 1f, maxUpgradeCount = 100, defaultPrice = 50, deltaPrice = 50 }
+             InitValue("gustn",              100f    )
+            ,InitValue("maxRobotCount",     10f,    5f,     100,    503,    50 )
+            ,InitValue("robotSpeed",        1f,     0.25f,  40,     50,     50 )
+            ,InitValue("robotCapacity",     5f,     1f,     100,    50,     50 )
+            ,InitValue("minerCapacity",     200f,   50f,    100,    40,     40 )
+            ,InitValue("minerDelay",        1.1f,   -0.01f, 100,    30,     30 )
+            ,InitValue("minerAmount",       5f,     1f,     100,    50,     50 )
         };
     }
 
+    private UpgradableValue InitValue(string name, float defaultValue, float deltaValue = 0f, int maxUpgradeCount = 0, int defaultPirce = 0, int deltaPrice = 0) {
+        var go = new GameObject("UpgradableValue_" + name);
+        go.AddComponent<KhsObject>();
+        var uv = go.AddComponent<UpgradableValue>();
+        uv.name = name;
+        uv.defaultValue = defaultValue;
+        uv.deltaValue = deltaValue;
+        uv.maxUpgradeCount = maxUpgradeCount;
+        uv.defaultPrice = defaultPirce;
+        uv.deltaPrice = deltaPrice;
+        return uv;
+    }
 
 
     public UpgradableValue GetValue(string name) {
@@ -36,33 +48,4 @@ public class ValueManager :MonoBehaviour {
     public UpgradableValue[] GetUnupgradableValues() {
         return Array.FindAll(values, x => x.maxUpgradeCount == 0);
     }
-
-
-    public void Save(string name) {
-        var path = Application.persistentDataPath + "/" + name;
-        Directory.CreateDirectory(path);
-        var sb = new StringBuilder();
-        sb.Append("{\"v\":[");
-        foreach (var v in values) {
-            sb.Append(JsonUtility.ToJson(v));
-            sb.Append(",");
-        }
-        sb.Remove(sb.Length - 1, 1);
-        sb.Append("]}");
-        File.WriteAllText(path + "/values.khs", sb.ToString());
-    }
-
-    public void Load(string name) {
-        var path = Application.persistentDataPath + "/" + name;
-        if (!File.Exists(Application.persistentDataPath + "/" + name + "/values.khs"))
-            return;
-        var a = JsonUtility.FromJson<Wraper>(File.ReadAllText(path + "/values.khs"));
-        values = a.v;
-    }
-
-    public void Delete(string name) {
-        var path = Application.persistentDataPath + "/" + name;
-        File.Delete(path + "/values.khs");
-    }
-
 }
