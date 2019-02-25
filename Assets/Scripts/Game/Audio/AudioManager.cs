@@ -11,15 +11,11 @@ public class AudioManager :MonoBehaviour {
         _audios = Resources.LoadAll<AudioClip>("Audios/");
     }
 
-    public void Play(string name, float pitch = 1f, float duration = -1f) {
+    public void Play(string name) {
         var audioSource = Instantiate(audioSourcePrefab);
         audioSource.clip = Array.Find(_audios, x => x.name.Equals(name));
-        audioSource.pitch = pitch;
         audioSource.Play();
-        if (duration == -1f)
-            Destroy(audioSource.gameObject, audioSource.clip.length);
-        else
-            Destroy(audioSource.gameObject, duration);
+        Destroy(audioSource.gameObject, audioSource.clip.length + 0.5f);
     }
 
     public void OnButtonClick() {
