@@ -8,7 +8,9 @@ public class ValueManager :MonoBehaviour {
     }
     public UpgradableValue[] values;
 
+    private RiceCakeManager _riceCakeManager;
     void Awake() {
+        _riceCakeManager = GetComponent<RiceCakeManager>();
         values = new UpgradableValue[] {
              InitValue("gustn",              100f    )
             ,InitValue("maxRobotCount",     10f,    5f,     100,    503,    50 )
@@ -21,9 +23,8 @@ public class ValueManager :MonoBehaviour {
     }
 
     private UpgradableValue InitValue(string name, float defaultValue, float deltaValue = 0f, int maxUpgradeCount = 0, int defaultPirce = 0, int deltaPrice = 0) {
-        var go = new GameObject("UpgradableValue_" + name);
-        go.AddComponent<RiceCakeObject>();
-        var uv = go.AddComponent<UpgradableValue>();
+        var go = _riceCakeManager.Instantiate("value");
+        var uv = go.GetComponent<UpgradableValue>();
         uv.name = name;
         uv.defaultValue = defaultValue;
         uv.deltaValue = deltaValue;
