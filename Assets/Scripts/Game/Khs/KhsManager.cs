@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class KhsManager :MonoBehaviour {
 
+    public readonly int offset = 5;
 
     public GameObject Instantiate(string name) {
         var r = Instantiate(Resources.Load<GameObject>("KhsObjects/" + name));
@@ -37,7 +38,16 @@ public class KhsManager :MonoBehaviour {
                 sb.Append('\n');
             }
         }
-        File.WriteAllBytes(path + "/data.khs", Encoding.UTF8.GetBytes( sb.ToString()));
+        var bytes = Encoding.UTF8.GetBytes(sb.ToString());
+        for (int i = 0; i < bytes.Length; i++) {
+            var cha = bytes[i] - Byte.MaxValue + offset;
+            if (cha >= Byte.MinValue)
+                bytes[i] = (byte)cha;
+            else
+                bytes[i] += (byte)offset;
+        }
+
+        File.WriteAllBytes(path + "/data.khs", bytes);
     }
 
     public void Load(string name) {
@@ -46,6 +56,13 @@ public class KhsManager :MonoBehaviour {
             return;
 
         var bytes = File.ReadAllBytes(path + "/data.khs");
+        for (int i = 0; i < bytes.Length; i++) {
+            var cha = bytes[i] - offset;
+            if (cha < 0)
+                bytes[i] = (byte)(Byte.MaxValue + cha);
+            else
+                bytes[i] -= (byte)offset;
+        }
         var lines = Encoding.UTF8.GetString(bytes).Split('\n');
         if (lines.Length < 3)
             return;
