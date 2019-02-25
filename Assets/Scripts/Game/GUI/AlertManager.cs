@@ -15,11 +15,15 @@ public class AlertManager :MonoBehaviour {
     }
 
     public void AddAlert(string textWithoutAlertHead, Color color) {
+        AddAlertRaw(_tm.GetText("alert", textWithoutAlertHead), color);
+    }
+
+    public void AddAlertRaw(string rawText, Color color) {
         _am.Play("alert");
         var a = Instantiate(alertBox).GetComponent<AlertBox>();
         a.transform.SetParent(FindObjectOfType<Canvas>().transform);
         var text = a.transform.Find("Text").GetComponent<Text>();
-        text.text = _tm.GetText("alert", textWithoutAlertHead);
+        text.text = rawText;
         text.color = color;
         _list.Insert(0, a);
         for (int i = 0; i < _list.Count; i++) {
