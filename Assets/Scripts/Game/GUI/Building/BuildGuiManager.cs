@@ -95,7 +95,8 @@ public class BuildGuiManager :MonoBehaviour {
     }
 
     public void OnBuildButtonClick() {
-
+        if (_select == null)
+            return;
         var baseInventory = FindObjectOfType<Base>().GetComponent<Inventory>();
         foreach (var invs in _select.needStacks) {
             if (baseInventory.GetItemCount(invs.name) < invs.count) {
