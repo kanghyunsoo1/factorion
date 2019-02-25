@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Robot :KhsComponent {
+public class Robot :RiceCakeComponent {
     public ItemStack stack;
     public Vector2 destination;
     public Vector2 inventoryPos;
@@ -78,7 +78,7 @@ public class Robot :KhsComponent {
                 }
             } catch (Exception) {
                 phase = RobotPhase.ToContainer;
-                destination = KhsUtil.GetNearestObject<RobotContainer>(FindObjectsOfType<RobotContainer>(), transform.position).transform.position;
+                destination = RiceCakeUtil.GetNearestObject<RobotContainer>(FindObjectsOfType<RobotContainer>(), transform.position).transform.position;
             }
         }
     }

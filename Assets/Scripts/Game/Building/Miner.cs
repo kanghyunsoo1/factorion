@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Miner :KhsComponent {
+public class Miner :RiceCakeComponent {
     private ValueManager _valueManager;
     private Resource _resource;
     private Inventory _inventory;

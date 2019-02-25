@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RobotManager :MonoBehaviour {
     private readonly float _delay = 1f;
-    private KhsManager _khsManager;
+    private RiceCakeManager _riceCakeManager;
     private ValueManager _valueManager;
     private Robot[] _robots;
     private RobotContainer[] _containers;
@@ -17,7 +17,7 @@ public class RobotManager :MonoBehaviour {
         _containers = new RobotContainer[0];
         _requestInventories = new RequestInventory[0];
         _inventories = new Inventory[0];
-        _khsManager = GetComponent<KhsManager>();
+        _riceCakeManager = GetComponent<RiceCakeManager>();
         _valueManager = GetComponent<ValueManager>();
     }
 
@@ -45,11 +45,11 @@ public class RobotManager :MonoBehaviour {
             foreach (var requestInventory in _requestInventories) {
                 foreach (var stack in requestInventory.GetStacks()) {
                     var inventoryOfRequestInventory = requestInventory.GetComponent<Inventory>();
-                    var nearestInventory = KhsUtil.GetNearestObjectExcept<Inventory>(_inventories, requestInventory.transform.position, x => x.GetItemCount(stack.name) > 0, inventoryOfRequestInventory);
+                    var nearestInventory = RiceCakeUtil.GetNearestObjectExcept<Inventory>(_inventories, requestInventory.transform.position, x => x.GetItemCount(stack.name) > 0, inventoryOfRequestInventory);
                     if (nearestInventory == null)
                         continue;
 
-                    var nearestContainer = KhsUtil.GetNearestObject<RobotContainer>(_containers, nearestInventory.transform.position, x => x.count > 0);
+                    var nearestContainer = RiceCakeUtil.GetNearestObject<RobotContainer>(_containers, nearestInventory.transform.position, x => x.count > 0);
                     if (nearestContainer == null)
                         continue;
 
@@ -68,7 +68,7 @@ public class RobotManager :MonoBehaviour {
                     for (int i = 0; i < needRobotCount; i++) {
                         requestInventory.incomingRobotCount += 1;
                         nearestContainer.count -= 1;
-                        var robot = _khsManager.Instantiate("robot").GetComponent<Robot>();
+                        var robot = _riceCakeManager.Instantiate("robot").GetComponent<Robot>();
                         robot.transform.position = nearestContainer.transform.position;
                         robot.RefreshSprite();
                         robot.inventoryPos = nearestInventory.transform.position;

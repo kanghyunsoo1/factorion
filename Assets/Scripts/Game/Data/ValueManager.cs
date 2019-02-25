@@ -22,7 +22,7 @@ public class ValueManager :MonoBehaviour {
 
     private UpgradableValue InitValue(string name, float defaultValue, float deltaValue = 0f, int maxUpgradeCount = 0, int defaultPirce = 0, int deltaPrice = 0) {
         var go = new GameObject("UpgradableValue_" + name);
-        go.AddComponent<KhsObject>();
+        go.AddComponent<RiceCakeGameObject>();
         var uv = go.AddComponent<UpgradableValue>();
         uv.name = name;
         uv.defaultValue = defaultValue;

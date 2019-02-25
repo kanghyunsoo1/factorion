@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-public class KhsManager :MonoBehaviour {
+public class RiceCakeManager :MonoBehaviour {
     public readonly int offset = 5;
 
     public GameObject Instantiate(string name) {
@@ -16,12 +16,12 @@ public class KhsManager :MonoBehaviour {
         var path = Application.persistentDataPath + "/" + name;
         Directory.CreateDirectory(path);
         Debug.Log(path);
-        var objects = FindObjectsOfType<KhsObject>();
+        var objects = FindObjectsOfType<RiceCakeGameObject>();
         var sb = new StringBuilder();
         for (int i = 0; i < objects.Length; i++) {
             objects[i].position = objects[i].transform.position;
             objects[i].rotation = objects[i].transform.eulerAngles;
-            var components = objects[i].GetComponents<KhsComponent>();
+            var components = objects[i].GetComponents<RiceCakeComponent>();
             sb.Append(objects[i].gameObject.name.Replace("(Clone)", ""));
             sb.Append("#");
             sb.Append(components.Length);
@@ -63,7 +63,7 @@ public class KhsManager :MonoBehaviour {
         var lines = Encoding.UTF8.GetString(bytes).Split('\n');
         if (lines.Length < 3)
             return;
-        foreach (var g in FindObjectsOfType<KhsObject>()) {
+        foreach (var g in FindObjectsOfType<RiceCakeGameObject>()) {
             Destroy(g.gameObject);
         }
         for (int i = 0; i < lines.Length; i++) {
@@ -72,7 +72,7 @@ public class KhsManager :MonoBehaviour {
                     continue;
                 var sharps = lines[i].Split('#');
                 var go = Instantiate(sharps[0]);
-                var khsObject = go.GetComponent<KhsObject>();
+                var khsObject = go.GetComponent<RiceCakeGameObject>();
                 JsonUtility.FromJsonOverwrite(sharps[2], khsObject);
                 int componentsCount = int.Parse(sharps[1]);
                 if (componentsCount != 0)

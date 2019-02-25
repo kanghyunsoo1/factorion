@@ -1,6 +1,6 @@
 ﻿using System;
 [Serializable]
-public class UpgradableValue :KhsComponent {
+public class UpgradableValue :RiceCakeComponent {
     public new string name;
     public float defaultValue;
     public float deltaValue;

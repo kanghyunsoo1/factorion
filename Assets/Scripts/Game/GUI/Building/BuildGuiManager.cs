@@ -13,7 +13,7 @@ public class BuildGuiManager :MonoBehaviour {
     private SpriteManager _spriteManager;
     private AlertManager _alertManager;
     private AreaManager _areaManager;
-    private KhsManager _khsManager;
+    private RiceCakeManager _riceCakeManager;
     private BuildingInfo _select;
     private BuildingRequiredItemsHolder[] _requiredHolders;
     private GameObject _build;
@@ -23,7 +23,7 @@ public class BuildGuiManager :MonoBehaviour {
         _textManager = GetComponent<TextManager>();
         _spriteManager = GetComponent<SpriteManager>();
         _areaManager = GetComponent<AreaManager>();
-        _khsManager = GetComponent<KhsManager>();
+        _riceCakeManager = GetComponent<RiceCakeManager>();
         _buildingMaster = GetComponent<BuildingManager>();
         _requiredHolders = FindObjectsOfType<BuildingRequiredItemsHolder>();
         _build = GameObject.Find("Canvas").transform.Find("Build").Find("Build").gameObject;
@@ -121,7 +121,7 @@ public class BuildGuiManager :MonoBehaviour {
         foreach (var invs in _select.needStacks) {
             baseInventory.PullItem(invs.name, invs.count);
         }
-        var go = _khsManager.Instantiate(_select.name);
+        var go = _riceCakeManager.Instantiate(_select.name);
         go.transform.position = center.transform.position;
 
         if (_select.name.Equals("miner")) {

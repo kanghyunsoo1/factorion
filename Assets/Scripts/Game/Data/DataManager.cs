@@ -2,13 +2,13 @@
 using UnityEngine;
 public class DataManager :MonoBehaviour {
     private SpinnerManager _spinnerManager;
-    private KhsManager _khsManager;
+    private RiceCakeManager _riceCakeManager;
     private ShowerManager _showerManager;
     private string _mapName;
 
     void Awake() {
         _spinnerManager = GetComponent<SpinnerManager>();
-        _khsManager = GetComponent<KhsManager>();
+        _riceCakeManager = GetComponent<RiceCakeManager>();
         _showerManager = GetComponent<ShowerManager>();
         _mapName = StaticDatas.mapName;
     }
@@ -20,7 +20,7 @@ public class DataManager :MonoBehaviour {
     private IEnumerator _Save() {
         _spinnerManager.SpinnerOn("save");
         yield return null;
-        _khsManager.Save(_mapName);
+        _riceCakeManager.Save(_mapName);
         _spinnerManager.SpinnerOff();
     }
 
@@ -31,12 +31,12 @@ public class DataManager :MonoBehaviour {
     private IEnumerator _Load() {
         _spinnerManager.SpinnerOn("load");
         yield return null;
-        _khsManager.Load(_mapName);
+        _riceCakeManager.Load(_mapName);
         _showerManager.OffAll();
         _spinnerManager.SpinnerOff();
     }
 
     public void Delete() {
-        _khsManager.Delete(_mapName);
+        _riceCakeManager.Delete(_mapName);
     }
 }

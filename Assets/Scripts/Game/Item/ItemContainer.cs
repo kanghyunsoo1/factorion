@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class ItemContainer :KhsComponent {
+public class ItemContainer :RiceCakeComponent {
     public List<ItemStack> _stackList;
 
     void Awake() {

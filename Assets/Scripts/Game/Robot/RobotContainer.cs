@@ -1,3 +1,3 @@
-﻿public class RobotContainer :KhsComponent {
+﻿public class RobotContainer :RiceCakeComponent {
     public int count;
 }

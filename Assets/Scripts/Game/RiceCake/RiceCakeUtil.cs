@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class KhsUtil {
+public class RiceCakeUtil {
     public static T GetNearestObject<T>(T[] array, Vector2 pos, Predicate<T> match) where T : MonoBehaviour {
         float minDistance = 100f;
         T result = null;

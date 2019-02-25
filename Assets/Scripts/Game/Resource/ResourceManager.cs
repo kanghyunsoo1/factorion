@@ -6,7 +6,7 @@ public class ResourceManager :MonoBehaviour {
     public ResourceInfo[] resourceInfos;
 
     private SpinnerManager _spinnerManager;
-    private KhsManager _khsManager;
+    private RiceCakeManager _riceCakeManager;
 
     void Awake() {
         resourceInfos = new ResourceInfo[] {
@@ -17,7 +17,7 @@ public class ResourceManager :MonoBehaviour {
             ,new ResourceInfo{ name="dudxo", minAmount=500, maxAmount=2000, rangeFactor=50,chance=0.0005f,minRange=30f }
 
         };
-        _khsManager = GetComponent<KhsManager>();
+        _riceCakeManager = GetComponent<RiceCakeManager>();
         _spinnerManager = GetComponent<SpinnerManager>();
     }
 
@@ -41,7 +41,7 @@ public class ResourceManager :MonoBehaviour {
                     int chance = (int)(ri.chance * 100000);
                     if (UnityEngine.Random.Range(0, 100000) <= chance) {
 
-                        GameObject go = _khsManager.Instantiate("resource");
+                        GameObject go = _riceCakeManager.Instantiate("resource");
                         go.transform.position = new Vector3(i, j, 0);
                         var resource = go.GetComponent<Resource>();
                         resource.name = ri.name;
