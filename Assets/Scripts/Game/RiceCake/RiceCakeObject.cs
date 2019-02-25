@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class RiceCakeGameObject :MonoBehaviour {
+public class RiceCakeObject :MonoBehaviour {
     public Vector3 position;
     public Vector3 rotation;
 }

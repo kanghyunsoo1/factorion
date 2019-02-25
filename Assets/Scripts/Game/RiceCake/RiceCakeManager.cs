@@ -7,7 +7,7 @@ public class RiceCakeManager :MonoBehaviour {
     public readonly int offset = 5;
 
     public GameObject Instantiate(string name) {
-        var r = Instantiate(Resources.Load<GameObject>("KhsObjects/" + name));
+        var r = Instantiate(Resources.Load<GameObject>("RiceCakeObjects/" + name));
         r.gameObject.name = name;
         return r;
     }
@@ -16,7 +16,7 @@ public class RiceCakeManager :MonoBehaviour {
         var path = Application.persistentDataPath + "/" + name;
         Directory.CreateDirectory(path);
         Debug.Log(path);
-        var objects = FindObjectsOfType<RiceCakeGameObject>();
+        var objects = FindObjectsOfType<RiceCakeObject>();
         var sb = new StringBuilder();
         for (int i = 0; i < objects.Length; i++) {
             objects[i].position = objects[i].transform.position;
@@ -63,7 +63,7 @@ public class RiceCakeManager :MonoBehaviour {
         var lines = Encoding.UTF8.GetString(bytes).Split('\n');
         if (lines.Length < 3)
             return;
-        foreach (var g in FindObjectsOfType<RiceCakeGameObject>()) {
+        foreach (var g in FindObjectsOfType<RiceCakeObject>()) {
             Destroy(g.gameObject);
         }
         for (int i = 0; i < lines.Length; i++) {
@@ -72,8 +72,8 @@ public class RiceCakeManager :MonoBehaviour {
                     continue;
                 var sharps = lines[i].Split('#');
                 var go = Instantiate(sharps[0]);
-                var khsObject = go.GetComponent<RiceCakeGameObject>();
-                JsonUtility.FromJsonOverwrite(sharps[2], khsObject);
+                var riceCakeObject = go.GetComponent<RiceCakeObject>();
+                JsonUtility.FromJsonOverwrite(sharps[2], riceCakeObject);
                 int componentsCount = int.Parse(sharps[1]);
                 if (componentsCount != 0)
                     for (int j = 0; j < componentsCount; j++) {
@@ -84,8 +84,8 @@ public class RiceCakeManager :MonoBehaviour {
                             JsonUtility.FromJsonOverwrite(sharps[1], component);
                         } catch (Exception e) { Debug.Log(e); }
                     }
-                go.transform.position = khsObject.position;
-                go.transform.rotation = Quaternion.Euler(khsObject.rotation);
+                go.transform.position = riceCakeObject.position;
+                go.transform.rotation = Quaternion.Euler(riceCakeObject.rotation);
 
             } catch (Exception e) {
                 Debug.Log(e);
