@@ -10,15 +10,18 @@ public class GuiManager :MonoBehaviour {
     private DataManager _dm;
     private DialogManager _dim;
     private AlertManager _am;
+    private AudioManager _aum;
 
     void Awake() {
         _dm = GetComponent<DataManager>();
         _dim = GetComponent<DialogManager>();
         _am = GetComponent<AlertManager>();
+        _aum = GetComponent<AudioManager>();
         mapNameText.text = StaticDatas.mapName;
     }
 
     public void OnButtonClick(string name) {
+        _aum.Play("click");
         switch (name) {
             case "Save":
                 _dm.Save();

@@ -7,12 +7,15 @@ public class AlertManager :MonoBehaviour {
     public AlertBox alertBox;
     private List<AlertBox> _list;
     private TextManager _tm;
+    private AudioManager _am;
     void Awake() {
+        _am = GetComponent<AudioManager>();
         _tm = GetComponent<TextManager>();
         _list = new List<AlertBox>();
     }
 
     public void AddAlert(string textWithoutAlertHead, Color color) {
+        _am.Play("alert");
         var a = Instantiate(alertBox).GetComponent<AlertBox>();
         a.transform.SetParent(FindObjectOfType<Canvas>().transform);
         var text = a.transform.Find("Text").GetComponent<Text>();
