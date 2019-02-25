@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
 
 public class KhsManager :MonoBehaviour {
+
 
     public GameObject Instantiate(string name) {
         var r = Instantiate(Resources.Load<GameObject>("KhsObjects/" + name));
@@ -17,6 +16,7 @@ public class KhsManager :MonoBehaviour {
         var path = Application.persistentDataPath + "/" + name;
         Directory.CreateDirectory(path);
         Debug.Log(path);
+        GetComponent<AlertManager>().AddAlertRaw(path, Color.black);
         var objects = FindObjectsOfType<KhsObject>();
         var sb = new StringBuilder();
         for (int i = 0; i < objects.Length; i++) {
@@ -27,17 +27,17 @@ public class KhsManager :MonoBehaviour {
             sb.Append("#");
             sb.Append(components.Length);
             sb.Append("#");
-            sb.AppendLine(JsonUtility.ToJson(objects[i]));
+            sb.Append(JsonUtility.ToJson(objects[i]));
+            sb.Append('\n');
             for (int j = 0; j < components.Length; j++) {
                 var type = components[j].GetType();
                 sb.Append(type.ToString());
                 sb.Append("#");
-                sb.AppendLine(JsonUtility.ToJson(components[j]));
+                sb.Append(JsonUtility.ToJson(components[j]));
+                sb.Append('\n');
             }
-            sb.Remove(sb.Length - 1, 1);
         }
-        sb.Remove(sb.Length - 1, 1);
-        File.WriteAllText(path + "/data.khs", sb.ToString());
+        File.WriteAllBytes(path + "/data.khs", Encoding.UTF8.GetBytes( sb.ToString()));
     }
 
     public void Load(string name) {
@@ -45,7 +45,8 @@ public class KhsManager :MonoBehaviour {
         if (!IsDataExists(name))
             return;
 
-        var lines = File.ReadAllLines(path + "/data.khs");
+        var bytes = File.ReadAllBytes(path + "/data.khs");
+        var lines = Encoding.UTF8.GetString(bytes).Split('\n');
         if (lines.Length < 3)
             return;
         foreach (var g in FindObjectsOfType<KhsObject>()) {
@@ -53,6 +54,8 @@ public class KhsManager :MonoBehaviour {
         }
         for (int i = 0; i < lines.Length; i++) {
             try {
+                if (lines[i].Trim().Equals(""))
+                    continue;
                 var sharps = lines[i].Split('#');
                 var go = Instantiate(sharps[0]);
                 var khsObject = go.GetComponent<KhsObject>();
@@ -72,6 +75,10 @@ public class KhsManager :MonoBehaviour {
 
             } catch (Exception e) {
                 Debug.Log(e);
+                GetComponent<AlertManager>().AddAlertRaw(e.ToString(), Color.black);
+                GetComponent<AlertManager>().AddAlertRaw(e.Message, Color.black);
+                GetComponent<AlertManager>().AddAlertRaw(e.StackTrace, Color.black);
+                return;
             }
         }
     }
