@@ -1,7 +1,8 @@
-@
+@gui
 yes					#예
 no					#아니요
 build				#건설
+robot				#로봇
 robot-ready			#대기중
 inventory			#인벤토리
 request-inventory	#요청 인벤토리
