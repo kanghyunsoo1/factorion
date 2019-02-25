@@ -4,10 +4,12 @@ using System.Text;
 using UnityEngine;
 
 public class RiceCakeManager :MonoBehaviour {
-    public readonly int offset = 5;
+    private readonly int offset = 5;
+    private readonly string fileName = "data.rcm";
+    private readonly string directoryName = "RiceCakePrefabs";
 
     public GameObject Instantiate(string name) {
-        var r = Instantiate(Resources.Load<GameObject>("RiceCakeObjects/" + name));
+        var r = Instantiate(Resources.Load<GameObject>(directoryName + "/" + name));
         r.gameObject.name = name;
         return r;
     }
@@ -44,7 +46,7 @@ public class RiceCakeManager :MonoBehaviour {
             else
                 bytes[i] += (byte)offset;
         }
-        File.WriteAllBytes(path + "/data.khs", bytes);
+        File.WriteAllBytes(path + "/" + fileName, bytes);
     }
 
     public void Load(string name) {
@@ -52,7 +54,7 @@ public class RiceCakeManager :MonoBehaviour {
         if (!IsDataExists(name))
             return;
 
-        var bytes = File.ReadAllBytes(path + "/data.khs");
+        var bytes = File.ReadAllBytes(path + "/" + fileName);
         for (int i = 0; i < bytes.Length; i++) {
             var cha = bytes[i] - offset;
             if (cha < 0)
@@ -94,11 +96,11 @@ public class RiceCakeManager :MonoBehaviour {
     }
 
     public bool IsDataExists(string name) {
-        return File.Exists(Application.persistentDataPath + "/" + name + "/data.khs");
+        return File.Exists(Application.persistentDataPath + "/" + name + "/" + fileName);
     }
 
     public void Delete(string name) {
         var path = Application.persistentDataPath + "/" + name;
-        File.Delete(path + "/data.khs");
+        File.Delete(path + "/" + fileName);
     }
 }
