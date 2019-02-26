@@ -51,7 +51,7 @@ public class InventoryGuiManager :MonoBehaviour {
             _slots[0].GetComponent<Button>().onClick.Invoke();
         }
         _isOpen = true;
-        var inv = _textManager.GetText("inventory");
+        var inv = _textManager.GetText("gui","inventory");
         if (isRequest)
             inv = _textManager.GetText("request-inventory");
         inventoryObject.transform.Find("Text").GetComponent<Text>().text = string.Format("{0} -> {1}", _textManager.GetText("name", owner), inv);
