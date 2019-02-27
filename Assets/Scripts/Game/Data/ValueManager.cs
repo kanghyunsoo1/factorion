@@ -12,7 +12,7 @@ public class ValueManager :MonoBehaviour {
     void Awake() {
         _riceCakeManager = GetComponent<RiceCakeManager>();
         values = new UpgradableValue[] {
-             InitValue("gustn",              100f    )
+             InitValue("gustn",             100f)
             ,InitValue("maxRobotCount",     10f,    5f,     100,    503,    50 )
             ,InitValue("robotSpeed",        1f,     0.25f,  40,     50,     50 )
             ,InitValue("robotCapacity",     5f,     1f,     100,    50,     50 )
