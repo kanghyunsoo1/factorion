@@ -12,17 +12,17 @@ public class ValueManager :MonoBehaviour {
     void Awake() {
         _riceCakeManager = GetComponent<RiceCakeManager>();
         values = new UpgradableValue[] {
-             InitValue("gustn",             100f)
-            ,InitValue("maxRobotCount",     10f,    5f,     100,    503,    50 )
-            ,InitValue("robotSpeed",        1f,     0.25f,  40,     50,     50 )
-            ,InitValue("robotCapacity",     5f,     1f,     100,    50,     50 )
-            ,InitValue("minerCapacity",     200f,   50f,    100,    40,     40 )
-            ,InitValue("minerDelay",        1.1f,   -0.01f, 100,    30,     30 )
-            ,InitValue("minerAmount",       5f,     1f,     100,    50,     50 )
+             Init("gustn",             100f)
+            ,Init("maxRobotCount",     10f,    5f,     100,    503,    50 )
+            ,Init("robotSpeed",        1f,     0.25f,  40,     50,     50 )
+            ,Init("robotCapacity",     5f,     1f,     100,    50,     50 )
+            ,Init("minerCapacity",     200f,   50f,    100,    40,     40 )
+            ,Init("minerDelay",        1.1f,   -0.01f, 100,    30,     30 )
+            ,Init("minerAmount",       5f,     1f,     100,    50,     50 )
         };
     }
 
-    private UpgradableValue InitValue(string name, float defaultValue, float deltaValue = 0f, int maxUpgradeCount = 0, int defaultPirce = 0, int deltaPrice = 0) {
+    private UpgradableValue Init(string name, float defaultValue, float deltaValue = 0f, int maxUpgradeCount = 0, int defaultPirce = 0, int deltaPrice = 0) {
         var go = _riceCakeManager.Instantiate("value");
         var uv = go.GetComponent<UpgradableValue>();
         uv.name = name;
