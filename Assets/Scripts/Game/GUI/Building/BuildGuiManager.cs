@@ -80,7 +80,7 @@ public class BuildGuiManager :MonoBehaviour {
             var item = _selectBuildingInfo.requireBundles[i].name;
             _requiredHolders[i].SetItemInfo(_textManager.GetText("item", item)
                 , _spriteManager.GetSprite("item", item)
-                , _selectBuildingInfo.needStacks[i].count
+                , _selectBuildingInfo.requireBundles[i].count
                 , baseInventory.GetItemCount(item));
         }
     }
@@ -97,8 +97,8 @@ public class BuildGuiManager :MonoBehaviour {
         if (_selectBuildingInfo == null)
             return;
         var baseInventory = FindObjectOfType<Base>().GetComponent<Inventory>();
-        foreach (var invs in _selectBuildingInfo.needStacks) {
-            if (baseInventory.GetItemCount(invs.name) < invs.count) {
+        foreach (var bundle in _selectBuildingInfo.requireBundles) {
+            if (baseInventory.GetItemCount(bundle.name) < bundle.count) {
                 _alertManager.AddAlert("notEnoughItem", Color.red);
                 return;
             }
@@ -109,27 +109,16 @@ public class BuildGuiManager :MonoBehaviour {
                 _alertManager.AddAlert("minerShould", Color.red);
                 return;
             }
-            if (user.GetComponent<Resource>() == null || user.GetComponent<Miner>() != null) {
-                _alertManager.AddAlert("alreadyExists", Color.red);
-                return;
-            }
         } else if (user != null) {
             _alertManager.AddAlert("alreadyExists", Color.red);
             return;
         }
 
-        foreach (var invs in _selectBuildingInfo.needStacks) {
-            baseInventory.PullItem(invs.name, invs.count);
+        foreach (var bundle in _selectBuildingInfo.requireBundles) {
+            baseInventory.PullItem(bundle.name, bundle.count);
         }
         var go = _riceCakeManager.Instantiate(_selectBuildingInfo.name);
         go.transform.position = center.transform.position;
-
-        if (_selectBuildingInfo.name.Equals("miner")) {
-            var res = user.GetComponent<Resource>();
-            go.GetComponent<Resource>().name = res.name;
-            go.GetComponent<Resource>().amount = res.amount;
-            Destroy(user.gameObject);
-        }
         _alertManager.AddAlert("build", Color.black);
     }
 }

@@ -6,9 +6,8 @@ public class InventoryShower :MonoBehaviour {
 
     private ShowerInventorySlot[] _slots;
     private SpriteManager _spriteManager;
-    private ItemContainer _inventory;
+    private Inventory _inventory;
     private string _owner;
-    private bool _isRequset;
 
     void Awake() {
         _spriteManager = FindObjectOfType<SpriteManager>();
@@ -20,15 +19,14 @@ public class InventoryShower :MonoBehaviour {
         };
         for (int i = 0; i < 4; i++) {
             _slots[i].transform.SetParent(transform);
-            _slots[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(i * 50, 0);
+            _slots[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(i * 70, 0);
             _slots[i].gameObject.SetActive(false);
         }
     }
 
-    public void SetInventory(ItemContainer inv, string owner, bool isRequest) {
+    public void SetInventory(Inventory inv, string owner) {
         _inventory = inv;
         _owner = owner;
-        _isRequset = isRequest;
         StartCoroutine(Loop());
     }
 
@@ -58,6 +56,6 @@ public class InventoryShower :MonoBehaviour {
     }
 
     public void OnOpenClick() {
-        FindObjectOfType<InventoryGuiManager>().Open(_inventory, _owner, _isRequset);
+        FindObjectOfType<InventoryGuiManager>().Switch(_inventory, _owner);
     }
 }

@@ -9,11 +9,15 @@ public class InventoryGuiManager :MonoBehaviour {
     private Text _nameText, _countText;
     private TextManager _textManager;
     private ItemBundle _selectBundle;
-    private ItemContainer _selectInventory;
+    private Inventory _selectInventory;
     private int _refreshCount;
     private bool _isOpen = true;
+    private bool _isGoingBack = true;
+    private Vector3 _savedCameraPosition;
+    private Camera _camera;
 
     private void Awake() {
+        _camera = Camera.main;
         _textManager = GetComponent<TextManager>();
         _nameText = inventoryObject.transform.Find("Name").GetComponent<Text>();
         _countText = inventoryObject.transform.Find("Count").GetComponent<Text>();
@@ -27,10 +31,10 @@ public class InventoryGuiManager :MonoBehaviour {
                 _slots[i].gameObject.SetActive(false);
                 i++;
             }
-        Switch();
+        Close();
     }
 
-    public void Switch() {
+    public void SwitchBase() {
         if (_isOpen) {
             Close();
         } else {
@@ -38,22 +42,30 @@ public class InventoryGuiManager :MonoBehaviour {
         }
     }
 
-    public void OpenBase() {
-        Open(FindObjectOfType<Base>().GetComponent<ItemContainer>(), "base", false);
+    public void Switch(Inventory inventory, string owner) {
+        if (_isOpen) {
+            Close();
+        } else {
+            Open(inventory, owner);
+        }
     }
 
-    public void Open(ItemContainer inventory, string owner, bool isRequest) {
+    public void OpenBase() {
+        Open(FindObjectOfType<Base>().GetComponent<Inventory>(), "base");
+    }
+
+    public void Open(Inventory inventory, string owner) {
         Close();
+        _savedCameraPosition = _camera.transform.position;
+        _isGoingBack = false;
+        _isOpen = true;
         _selectInventory = inventory;
         inventoryObject.SetActive(true);
         SetInventoryAndSlots();
         if (_slots[0].isActiveAndEnabled) {
             _slots[0].GetComponent<Button>().onClick.Invoke();
         }
-        _isOpen = true;
         var inv = _textManager.GetText("gui", "inventory");
-        if (isRequest)
-            inv = _textManager.GetText("request-inventory");
         inventoryObject.transform.Find("Text").GetComponent<Text>().text = string.Format("{0} -> {1}", _textManager.GetText("name", owner), inv);
     }
 
@@ -75,6 +87,7 @@ public class InventoryGuiManager :MonoBehaviour {
         _selectInventory = null;
         _selectBundle = null;
         _isOpen = false;
+        _isGoingBack = true;
     }
 
     public void OnSlotClick(ItemBundle bundle) {
@@ -92,5 +105,20 @@ public class InventoryGuiManager :MonoBehaviour {
             return;
         _nameText.text = _textManager.GetText("item", _selectBundle.name);
         _countText.text = _selectBundle.count + "";
+    }
+
+    public void Update() {
+        var target = _camera.transform.position;
+        if (_isOpen) {
+            target = _selectInventory.transform.position;
+        } else {
+            if (_isGoingBack) {
+                target = _savedCameraPosition;
+            }
+        }
+        target.z = -10;
+        _camera.transform.position = Vector3.Lerp(_camera.transform.position, target, 0.5f);
+        if (Vector2.Distance(_camera.transform.position, _savedCameraPosition) < 1f)
+            _isGoingBack = false;
     }
 }
