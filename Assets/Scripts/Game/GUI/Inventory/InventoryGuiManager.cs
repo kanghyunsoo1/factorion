@@ -117,8 +117,8 @@ public class InventoryGuiManager :MonoBehaviour {
             }
         }
         target.z = -10;
-        _camera.transform.position = Vector3.Lerp(_camera.transform.position, target, 0.5f);
-        if (Vector2.Distance(_camera.transform.position, _savedCameraPosition) < 1f)
+        _camera.transform.position = Vector3.Lerp(_camera.transform.position, target, 0.2f);
+        if (Vector2.Distance(_camera.transform.position, _savedCameraPosition) < 0.1f)
             _isGoingBack = false;
     }
 }
