@@ -3,18 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class GameSystem :MonoBehaviour {
     private DataManager _dataManager;
-    private ResourceManager _resourceManager;
+    private SpawnManager _spawnManager;
 
     void Awake() {
         _dataManager = GetComponent<DataManager>();
-        _resourceManager = GetComponent<ResourceManager>();
+        _spawnManager = GetComponent<SpawnManager>();
         if (!StaticDatas.wasMainLoad) {
             SceneManager.LoadScene("Main");
         }
     }
 
     private void Start() {
-        _resourceManager.Spawn();
+        _spawnManager.Spawn();
         _dataManager.Load();
     }
 
