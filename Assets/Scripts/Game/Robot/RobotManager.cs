@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class RobotManager :MonoBehaviour {
+public class RobotManager :MonoBehaviour {/*
     private readonly float _delay = 1f;
     private RiceCakeManager _riceCakeManager;
     private ValueManager _valueManager;
@@ -93,5 +93,5 @@ public class RobotManager :MonoBehaviour {
 
     public int GetActiveCount() {
         return _robots.Length;
-    }
+    }*/
 }
