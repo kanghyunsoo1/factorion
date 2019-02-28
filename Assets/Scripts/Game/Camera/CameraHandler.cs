@@ -3,7 +3,7 @@
 public class CameraHandler :MonoBehaviour {
     private static readonly float _zoomSpeedTouch = 0.05f;
     private static readonly float[] _bounds = new float[] { -StaticDatas.SIZE, StaticDatas.SIZE };
-    private static readonly float[] _zoomBounds = new float[] { 6f, 30f };
+    private static readonly float[] _zoomBounds = new float[] { 6f, 50f };
     private Camera _camera;
     private Vector3 _lastPanPosition;
     private int _panFingerId;
