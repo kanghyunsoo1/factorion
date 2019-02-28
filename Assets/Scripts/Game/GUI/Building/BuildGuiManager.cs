@@ -14,7 +14,7 @@ public class BuildGuiManager :MonoBehaviour {
     private AlertManager _alertManager;
     private AreaManager _areaManager;
     private RiceCakeManager _riceCakeManager;
-    private BuildingInfo _select;
+    private BuildingInfo _selectBuildingInfo;
     private BuildingRequiredItemsHolder[] _requiredHolders;
     private GameObject _build;
 
@@ -63,7 +63,7 @@ public class BuildGuiManager :MonoBehaviour {
             else
                 bb.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
         }
-        _select = _buildingMaster.GetBuildingInfo(name);
+        _selectBuildingInfo = _buildingMaster.GetBuildingInfo(name);
         FindObjectOfType<BuildingNameHolder>().SetText(_textManager.GetText("name", name));
         FindObjectOfType<BuildingDesHolder>().SetText(_textManager.GetText("des", name));
         center.sprite = _spriteManager.GetSprite("block", name);
@@ -75,12 +75,12 @@ public class BuildGuiManager :MonoBehaviour {
 
     void RefreshRequires() {
         var baseInventory = FindObjectOfType<Base>().GetComponent<Inventory>();
-        for (int i = 0; i < _select.needStacks.Length; i++) {
+        for (int i = 0; i < _selectBuildingInfo.requireBundles.Length; i++) {
             _requiredHolders[i].gameObject.SetActive(true);
-            var item = _select.needStacks[i].name;
+            var item = _selectBuildingInfo.requireBundles[i].name;
             _requiredHolders[i].SetItemInfo(_textManager.GetText("item", item)
                 , _spriteManager.GetSprite("item", item)
-                , _select.needStacks[i].count
+                , _selectBuildingInfo.needStacks[i].count
                 , baseInventory.GetItemCount(item));
         }
     }
@@ -88,23 +88,23 @@ public class BuildGuiManager :MonoBehaviour {
     IEnumerator RefreshLoop() {
         while (true) {
             yield return new WaitForSeconds(1f);
-            if (_select != null)
+            if (_selectBuildingInfo != null)
                 RefreshRequires();
         }
     }
 
     public void OnBuildButtonClick() {
-        if (_select == null)
+        if (_selectBuildingInfo == null)
             return;
         var baseInventory = FindObjectOfType<Base>().GetComponent<Inventory>();
-        foreach (var invs in _select.needStacks) {
+        foreach (var invs in _selectBuildingInfo.needStacks) {
             if (baseInventory.GetItemCount(invs.name) < invs.count) {
                 _alertManager.AddAlert("notEnoughItem", Color.red);
                 return;
             }
         }
         var user = _areaManager.GetUser(center.transform.position);
-        if (_select.name.Equals("miner")) {
+        if (_selectBuildingInfo.name.Equals("miner")) {
             if (user == null) {
                 _alertManager.AddAlert("minerShould", Color.red);
                 return;
@@ -118,13 +118,13 @@ public class BuildGuiManager :MonoBehaviour {
             return;
         }
 
-        foreach (var invs in _select.needStacks) {
+        foreach (var invs in _selectBuildingInfo.needStacks) {
             baseInventory.PullItem(invs.name, invs.count);
         }
-        var go = _riceCakeManager.Instantiate(_select.name);
+        var go = _riceCakeManager.Instantiate(_selectBuildingInfo.name);
         go.transform.position = center.transform.position;
 
-        if (_select.name.Equals("miner")) {
+        if (_selectBuildingInfo.name.Equals("miner")) {
             var res = user.GetComponent<Resource>();
             go.GetComponent<Resource>().name = res.name;
             go.GetComponent<Resource>().amount = res.amount;

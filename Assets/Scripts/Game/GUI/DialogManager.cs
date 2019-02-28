@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 public class DialogManager :MonoBehaviour {
     public delegate void VoidCallback();
-    public delegate void ItemRecipeCallback(ItemRecipe recipe);
+    public delegate void StringCallback(string result);
 
     private Transform _dialogs;
     private Transform _yesOrNo;
     private Text _yesOrNoText;
     private VoidCallback _yesCallback, _noCallback;
-    private ItemRecipeCallback _recipeCallback;
+    private StringCallback _itemCallback;
     private TextManager _textManager;
 
     private void Awake() {
@@ -31,10 +31,10 @@ public class DialogManager :MonoBehaviour {
         _yesOrNoText.text = _textManager.GetText("dialog", msg);
     }
 
-    public void ShowRecipeSelect(ItemRecipeCallback callback, ItemRecipe.Type filter) {
+    public void ShowRecipeSelect(StringCallback callback, string[] items) {
         //TODO 필터 적용해서 리스트 출력
     }
-    
+
     public void OnYesOrNo(bool yes) {
         CloseYesOrNo();
         try {

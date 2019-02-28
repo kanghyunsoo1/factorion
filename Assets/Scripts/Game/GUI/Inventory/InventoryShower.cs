@@ -45,14 +45,14 @@ public class InventoryShower :MonoBehaviour {
             if (_inventory == null)
                 continue;
 
-            var stacks = _inventory.GetStacks();
-            int max = stacks.Length;
+            var items = _inventory.GetBundles();
+            int max = items.Length;
             if (max > 4) {
                 max = 4;
             }
             for (int i = 0; i < max; i++) {
                 _slots[i].gameObject.SetActive(true);
-                _slots[i].SetItem(_spriteManager.GetSprite("item", stacks[i].name), stacks[i].count);
+                _slots[i].SetItem(_spriteManager.GetSprite("item", items[i].name), items[i].count);
             }
         }
     }

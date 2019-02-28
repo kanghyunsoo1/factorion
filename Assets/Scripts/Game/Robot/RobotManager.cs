@@ -43,9 +43,9 @@ public class RobotManager :MonoBehaviour {
             }
 
             foreach (var requestInventory in _requestInventories) {
-                foreach (var stack in requestInventory.GetStacks()) {
+                foreach (var item in requestInventory.GetBundles()) {
                     var inventoryOfRequestInventory = requestInventory.GetComponent<Inventory>();
-                    var nearestInventory = RiceCakeUtil.GetNearestObjectExcept<Inventory>(_inventories, requestInventory.transform.position, x => x.GetItemCount(stack.name) > 0, inventoryOfRequestInventory);
+                    var nearestInventory = RiceCakeUtil.GetNearestObjectExcept<Inventory>(_inventories, requestInventory.transform.position, x => x.GetItemCount(item.name) > 0, inventoryOfRequestInventory);
                     if (nearestInventory == null)
                         continue;
 
@@ -54,14 +54,14 @@ public class RobotManager :MonoBehaviour {
                         continue;
 
                     var requestInventoryOfnearestInventory = nearestInventory.GetComponent<RequestInventory>();
-                    if (requestInventoryOfnearestInventory != null && requestInventoryOfnearestInventory.GetItemCount(stack.name) >= nearestInventory.GetItemCount(stack.name)) {
+                    if (requestInventoryOfnearestInventory != null && requestInventoryOfnearestInventory.GetItemCount(item.name) >= nearestInventory.GetItemCount(item.name)) {
                         continue;
                     }
 
-                    int itemCountOfInventoryOfRequestInventory = inventoryOfRequestInventory.GetItemCount(stack.name);
+                    int itemCountOfInventoryOfRequestInventory = inventoryOfRequestInventory.GetItemCount(item.name);
 
                     var robotCapacity = _valueManager.GetValue("robotCapacity").Value;
-                    int needRobotCount = (int)Math.Ceiling((float)(stack.count - itemCountOfInventoryOfRequestInventory) / robotCapacity);
+                    int needRobotCount = (int)Math.Ceiling((float)(item.count - itemCountOfInventoryOfRequestInventory) / robotCapacity);
                     needRobotCount -= requestInventory.incomingRobotCount;
                     needRobotCount = Math.Min(nearestContainer.count, needRobotCount);
 
@@ -75,7 +75,7 @@ public class RobotManager :MonoBehaviour {
                         robot.requestInventoryPos = requestInventory.transform.position;
                         robot.containerPos = nearestContainer.transform.position;
                         robot.speed = newSpeed;
-                        robot.willItem = stack.name;
+                        robot.willItem = item.name;
                         robot.willCount = (int)robotCapacity;
                         yield return new WaitForSeconds(0.1f);
                     }

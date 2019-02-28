@@ -8,7 +8,7 @@ public class InventoryGuiManager :MonoBehaviour {
     private InventorySlot[] _slots;
     private Text _nameText, _countText;
     private TextManager _textManager;
-    private ItemStack _selectStack;
+    private ItemBundle _selectBundle;
     private ItemContainer _selectInventory;
     private int _refreshCount;
     private bool _isOpen = true;
@@ -51,17 +51,17 @@ public class InventoryGuiManager :MonoBehaviour {
             _slots[0].GetComponent<Button>().onClick.Invoke();
         }
         _isOpen = true;
-        var inv = _textManager.GetText("gui","inventory");
+        var inv = _textManager.GetText("gui", "inventory");
         if (isRequest)
             inv = _textManager.GetText("request-inventory");
         inventoryObject.transform.Find("Text").GetComponent<Text>().text = string.Format("{0} -> {1}", _textManager.GetText("name", owner), inv);
     }
 
     private void SetInventoryAndSlots() {
-        var stacks = _selectInventory.GetStacks();
-        inventoryObject.GetComponent<RectTransform>().sizeDelta = new Vector2(_size * _x, stacks.Length / _x * _size + _size + 50);
-        for (int i = 0; i < stacks.Length; i++) {
-            _slots[i].SetStack(stacks[i]);
+        var items = _selectInventory.GetBundles();
+        inventoryObject.GetComponent<RectTransform>().sizeDelta = new Vector2(_size * _x, items.Length / _x * _size + _size + 50);
+        for (int i = 0; i < items.Length; i++) {
+            _slots[i].SetBundle(items[i]);
             _slots[i].gameObject.SetActive(true);
         }
     }
@@ -73,12 +73,12 @@ public class InventoryGuiManager :MonoBehaviour {
             i.gameObject.SetActive(false);
         inventoryObject.SetActive(false);
         _selectInventory = null;
-        _selectStack = null;
+        _selectBundle = null;
         _isOpen = false;
     }
 
-    public void OnSlotClick(ItemStack stack) {
-        _selectStack = stack;
+    public void OnSlotClick(ItemBundle bundle) {
+        _selectBundle = bundle;
     }
 
     public void FixedUpdate() {
@@ -88,9 +88,9 @@ public class InventoryGuiManager :MonoBehaviour {
             SetInventoryAndSlots();
             _refreshCount = 0;
         }
-        if (_selectStack == null)
+        if (_selectBundle == null)
             return;
-        _nameText.text = _textManager.GetText("item", _selectStack.name);
-        _countText.text = _selectStack.count + "";
+        _nameText.text = _textManager.GetText("item", _selectBundle.name);
+        _countText.text = _selectBundle.count + "";
     }
 }

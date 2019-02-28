@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InventorySlot :MonoBehaviour {
     private Image _image;
     private Text _text;
-    private ItemStack _stack;
+    private ItemBundle _bundle;
 
     void Awake() {
         _image = transform.Find("Image").GetComponent<Image>();
@@ -14,15 +14,15 @@ public class InventorySlot :MonoBehaviour {
     }
 
     public void OnClick() {
-        FindObjectOfType<InventoryGuiManager>().OnSlotClick(_stack);
+        FindObjectOfType<InventoryGuiManager>().OnSlotClick(_bundle);
     }
 
-    public void SetStack(ItemStack stack) {
-        _stack = stack;
-        _image.sprite = FindObjectOfType<SpriteManager>().GetSprite("item", stack.name);
+    public void SetBundle(ItemBundle bundle) {
+        _bundle = bundle;
+        _image.sprite = FindObjectOfType<SpriteManager>().GetSprite("item", bundle.name);
     }
 
     private void FixedUpdate() {
-        _text.text = _stack.count + "";
+        _text.text = _bundle.count + "";
     }
 }

@@ -6,16 +6,25 @@ public class ItemManager :MonoBehaviour {
 
     private void Awake() {
         itemInfos = new ItemInfo[]{
-            new ItemInfo() { name = "coal" }
-            ,new ItemInfo() { name = "iron" }
-            ,new ItemInfo() { name = "copper" }
-            ,new ItemInfo() { name = "tin" }
-            ,new ItemInfo() { name = "dudxo" }
-            ,new ItemInfo() { name = "iron-bar", recipe = new ItemRecipe(){ stack = new ItemStack(){name="iron",count =5} , type=ItemRecipe.Type.Burn } }
-            ,new ItemInfo() { name = "copper-bar",recipe = new ItemRecipe(){ stack = new ItemStack(){name="copper",count =5} , type=ItemRecipe.Type.Burn } }
-            ,new ItemInfo() { name = "tin-bar" ,recipe = new ItemRecipe(){ stack = new ItemStack(){name="tin",count =5} , type=ItemRecipe.Type.Burn } }
-            ,new ItemInfo() { name = "dudxo-bar", recipe = new ItemRecipe(){ stack = new ItemStack(){name="dudxo",count =5} , type=ItemRecipe.Type.Burn } }
+             Init("raw-coal")
+            ,Init("raw-iron")
+            ,Init("raw-copper")
+            ,Init("rice")
+            ,Init("water")
+            ,Init("raw-dudxo")
+            ,Init("rice-flour", "rice:1", 10)
+            ,Init("clean-water","water:1",10)
+            ,Init("iron","raw-iron:1",10)
+            ,Init("copper","raw-copper:1",10)
+            ,Init("coal","raw-coal:1, iron:1, copper:1",100)
+            ,Init("dudxo-flour","raw-dudxo:1",100)
         };
+    }
+
+    private ItemInfo Init(string name, string needs = null, int energy = 0) {
+        if (needs == null)
+            return new ItemInfo(name);
+        return new ItemInfo(name, needs, energy);
     }
 
     public ItemInfo GetItemInfo(string name) {

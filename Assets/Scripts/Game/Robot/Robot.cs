@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class Robot :RiceCakeComponent {
-    public ItemStack stack;
+    public ItemBundle bundle;
     public Vector2 destination;
     public Vector2 inventoryPos;
     public Vector2 requestInventoryPos;
@@ -29,10 +29,10 @@ public class Robot :RiceCakeComponent {
     }
 
     public void RefreshSprite() {
-        if (stack == null || stack.count == 0) {
+        if (bundle == null || bundle.count == 0) {
             _spriteRenderer.sprite = null;
         } else {
-            _spriteRenderer.sprite = _spriteManager.GetSprite("item", stack.name);
+            _spriteRenderer.sprite = _spriteManager.GetSprite("item", bundle.name);
         }
     }
 
@@ -47,10 +47,7 @@ public class Robot :RiceCakeComponent {
                     case RobotPhase.ToInventory:
                         var inventory = _areaManager.GetUser(destination).GetComponent<Inventory>();
                         int how = inventory.PullItem(willItem, willCount);
-                        stack = new ItemStack {
-                            name = willItem,
-                            count = how
-                        };
+                        bundle = new ItemBundle(willItem,how);
                         RefreshSprite();
                         if (how == 0) {
                             destination = containerPos;
@@ -63,9 +60,9 @@ public class Robot :RiceCakeComponent {
 
                     case RobotPhase.ToRequestInventory:
                         var requestInventory = _areaManager.GetUser(destination).GetComponent<RequestInventory>();
-                        requestInventory.GetComponent<Inventory>().AddItem(stack.name, stack.count);
+                        requestInventory.GetComponent<Inventory>().AddItem(bundle.name, bundle.count);
                         requestInventory.incomingRobotCount -= 1;
-                        stack = null;
+                        bundle = null;
                         RefreshSprite();
                         destination = containerPos;
                         phase = RobotPhase.ToContainer;
