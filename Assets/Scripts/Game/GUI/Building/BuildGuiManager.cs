@@ -8,7 +8,7 @@ public class BuildGuiManager :MonoBehaviour {
     public GameObject buildingButtonPrefab;
 
     private BuildingButton[] _buttons;
-    private BuildingManager _buildingMaster;
+    private BuildingManager _buildingManager;
     private TextManager _textManager;
     private SpriteManager _spriteManager;
     private AlertManager _alertManager;
@@ -24,19 +24,20 @@ public class BuildGuiManager :MonoBehaviour {
         _spriteManager = GetComponent<SpriteManager>();
         _areaManager = GetComponent<AreaManager>();
         _riceCakeManager = GetComponent<RiceCakeManager>();
-        _buildingMaster = GetComponent<BuildingManager>();
+        _buildingManager = GetComponent<BuildingManager>();
         _requiredHolders = FindObjectsOfType<BuildingRequiredItemsHolder>();
         _build = GameObject.Find("Canvas").transform.Find("Build").Find("Build").gameObject;
     }
 
     private void Start() {
 
-        _buttons = new BuildingButton[_buildingMaster.buildingInfos.Length];
-        for (int i = 0; i < _buildingMaster.buildingInfos.Length; i++) {
+        _buttons = new BuildingButton[_buildingManager.buildingInfos.Length];
+        content.GetComponent<RectTransform>().sizeDelta = new Vector2(0, _buildingManager.buildingInfos.Length * 100);
+        for (int i = 0; i < _buildingManager.buildingInfos.Length; i++) {
             var go = (GameObject)Instantiate(buildingButtonPrefab);
             go.transform.SetParent(content.transform);
             _buttons[i] = go.GetComponent<BuildingButton>();
-            _buttons[i].buildingName = _buildingMaster.buildingInfos[i].name;
+            _buttons[i].buildingName = _buildingManager.buildingInfos[i].name;
             go.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, i * -100);
         }
         StartCoroutine(RefreshLoop());
@@ -63,7 +64,7 @@ public class BuildGuiManager :MonoBehaviour {
             else
                 bb.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
         }
-        _selectBuildingInfo = _buildingMaster.GetBuildingInfo(name);
+        _selectBuildingInfo = _buildingManager.GetBuildingInfo(name);
         FindObjectOfType<BuildingNameHolder>().SetText(_textManager.GetText("name", name));
         FindObjectOfType<BuildingDesHolder>().SetText(_textManager.GetText("des", name));
         center.sprite = _spriteManager.GetSprite("block", name);
