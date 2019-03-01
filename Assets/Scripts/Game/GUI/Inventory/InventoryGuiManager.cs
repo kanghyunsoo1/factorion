@@ -79,6 +79,8 @@ public class InventoryGuiManager :MonoBehaviour {
     }
 
     public void Close() {
+        if (!_isOpen)
+            return;
         _nameText.text = "";
         _countText.text = "";
         foreach (var i in _slots)
