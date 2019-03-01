@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212539959988354244}
   - component: {fileID: 114861721036603386}
   - component: {fileID: 114745642669591080}
-  - component: {fileID: 114075047646706950}
+  - component: {fileID: 114056727874735474}
   m_Layer: 0
   m_Name: water
   m_TagString: Untagged
@@ -43,7 +43,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114075047646706950
+--- !u!114 &114056727874735474
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51,10 +51,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1757065757395782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e5643b9904c6c84b9cfe7165e7f5f7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 90ac024c6738c004685218b233453ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bundleList: []
+  name: dirty-water
 --- !u!114 &114745642669591080
 MonoBehaviour:
   m_ObjectHideFlags: 1

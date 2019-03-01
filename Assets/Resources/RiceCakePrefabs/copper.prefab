@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212786154443305976}
   - component: {fileID: 114591482431139164}
   - component: {fileID: 114854526051810758}
-  - component: {fileID: 114029476408134900}
+  - component: {fileID: 114886452916083322}
   m_Layer: 0
   m_Name: copper
   m_TagString: Untagged
@@ -43,18 +43,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114029476408134900
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1491844014472646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e5643b9904c6c84b9cfe7165e7f5f7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bundleList: []
 --- !u!114 &114591482431139164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -79,6 +67,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928482b7420603747807b54b97e36e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114886452916083322
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1491844014472646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ac024c6738c004685218b233453ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: raw-copper
 --- !u!212 &212786154443305976
 SpriteRenderer:
   m_ObjectHideFlags: 1
