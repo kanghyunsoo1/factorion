@@ -11,7 +11,7 @@ request-inventory	#요청 인벤토리
 @spinner
 save				#게임 데이터를 저장하는 중입니다...
 load				#게임 데이터를 불러오는 중입니다...
-spawn				#자원을 생성중입니다...
+spawn				#맵 생성중입니다...
 
 @dialog
 exit				#게임을 종료할까요? 저장하지 않은 내용은 사라집니다.
@@ -26,26 +26,41 @@ build				#건설 완료
 save				#게임 데이터를 저장했습니다.
 
 @item
-coal				#석탄
-iron				#철
-copper				#구리
-tin					#주석
-dudxo				#두득소
-coal-bar			#석탄 막대기
+raw-coal			#미가공 석탄
+processed-coal		#가공된 석탄
+
+raw-iron			#미가공 철
 iron-bar			#철 막대기
+
+raw-copper			#미가공 구리
 copper-bar			#구리 막대기
-tin-bar				#주석 막대기
-dudxo-bar			#두득소 막대기
+
+raw-stone			#미가공 돌
+brick				#벽돌
+
+dirty-water			#더러운 물
+clean-water			#깨끗한 물
+
+raw-rice			#벼
+rice				#쌀
+rice-flour			#쌀 가루
 
 @name
-base				#기지
-resource			#자원
+warehouse			#창고
+inserter			#투입기
+belt				#컨테이너 벨트
 miner				#채광기
-assembler			#조립 기계
+millstone			#맷돌
+furance				#화로
+purifier			#정수기
+generator			#발전기
 
 @des
-base				#기지 설명
-resource			#자원 설명
-miner				#채광기 설명
-assembler			#조립 기계 설명
-
+warehouse			#아이템들을 저장합니다.
+inserter			#투입기입니다.
+belt				#아이템을 지정한 방향으로 운송합니다.
+miner				#광물을 채광합니다.
+millstone			#아이템을 가루로 만듭니다.
+furance				#아이템을 굽습니다.
+purifier			#아이템을 정화시킵니다.
+generator			#에너지를 생산합니다.

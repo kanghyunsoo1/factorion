@@ -6,12 +6,13 @@ public class BuildingManager :MonoBehaviour {
 
     private void Awake() {
         buildingInfos = new BuildingInfo[] {
-             Init("belt","iron:10")
-             ,Init("miner","iron:30")
-            ,Init("mill","iron:30, copper:20")
+            Init("inserter","iron:10")
+            ,Init("belt","iron:5")
+            ,Init("miner","iron:30")
+            ,Init("millstone","iron:30, copper:20")
             ,Init("furance","iron:10")
-            ,Init("water-factory","iron:10,copper:10")
-            ,Init("power-station","iron:10,copper:10")
+            ,Init("purifier","iron:10,copper:10")
+            ,Init("generator","iron:10,copper:10")
         };
     }
 

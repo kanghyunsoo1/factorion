@@ -19,7 +19,7 @@ public class GameSystem :MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        var i = FindObjectOfType<Base>().GetComponent<Inventory>();
+        var i = FindObjectOfType<Warehouse>().GetComponent<Inventory>();
         switch (Random.Range(0, 100)) {
             case 0: i.AddItem("iron", 1); break;
             case 1: i.AddItem("iron-bar", 1); break;

@@ -75,7 +75,7 @@ public class BuildGuiManager :MonoBehaviour {
     }
 
     void RefreshRequires() {
-        var baseInventory = FindObjectOfType<Base>().GetComponent<Inventory>();
+        var baseInventory = FindObjectOfType<Warehouse>().GetComponent<Inventory>();
         for (int i = 0; i < _selectBuildingInfo.requireBundles.Length; i++) {
             _requiredHolders[i].gameObject.SetActive(true);
             var item = _selectBuildingInfo.requireBundles[i].name;
@@ -97,7 +97,7 @@ public class BuildGuiManager :MonoBehaviour {
     public void OnBuildButtonClick() {
         if (_selectBuildingInfo == null)
             return;
-        var baseInventory = FindObjectOfType<Base>().GetComponent<Inventory>();
+        var baseInventory = FindObjectOfType<Warehouse>().GetComponent<Inventory>();
         foreach (var bundle in _selectBuildingInfo.requireBundles) {
             if (baseInventory.GetItemCount(bundle.name) < bundle.count) {
                 _alertManager.AddAlert("notEnoughItem", Color.red);

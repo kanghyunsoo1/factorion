@@ -7,16 +7,23 @@ public class ItemManager :MonoBehaviour {
     private void Awake() {
         itemInfos = new ItemInfo[]{
              Init("raw-coal")
-            ,Init("raw-iron")
-            ,Init("raw-copper")
-            ,Init("raw-rice")
-            ,Init("dirty-water")
-            ,Init("raw-dudxo")
-            ,Init("rice", "raw-rice:1,clean-water:1", 10,3f)
-            ,Init("clean-water","dirty-water:1",10,3f)
-            ,Init("iron-bar","raw-iron:1",10,3f)
-            ,Init("copper-bar","raw-copper:1",10,3f)
             ,Init("processed-coal","raw-coal:1, iron:10, copper:10",100,20f)
+
+            ,Init("raw-iron")
+            ,Init("iron-bar","raw-iron:1",10,3f)
+
+            ,Init("raw-copper")
+            ,Init("copper-bar","raw-copper:1",10,3f)
+
+            ,Init("raw-stone")
+            ,Init("brick","raw-stone:1",10,1f)
+
+
+            ,Init("dirty-water")
+            ,Init("clean-water","dirty-water:1",10,3f)
+
+            ,Init("raw-rice")
+            ,Init("rice", "raw-rice:1,clean-water:1", 10,3f)
             ,Init("rice-flour","rice:1,clean-water:1",10,1f)
         };
     }
