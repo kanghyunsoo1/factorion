@@ -1,3 +1,5 @@
-﻿public class Resource :RiceCakeComponent {
+﻿using UnityEngine;
+
+public class Resource :MonoBehaviour {
     public new string name;
 }

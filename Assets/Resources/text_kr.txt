@@ -2,11 +2,9 @@
 yes					#예
 no					#아니요
 build				#건설
-robot				#로봇
-robot-ready			#대기중
 inventory			#인벤토리
-request-inventory	#요청 인벤토리
-
+inventory-exists	#인벤토리 존재
+resource			#자원
 
 @spinner
 save				#게임 데이터를 저장하는 중입니다...
@@ -60,6 +58,7 @@ copper				#구리
 iron				#철
 stone				#돌
 water				#물
+rice				#벼
 
 @des
 warehouse			#아이템들을 저장합니다.
