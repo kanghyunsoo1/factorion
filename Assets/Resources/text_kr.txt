@@ -55,6 +55,12 @@ furance				#화로
 purifier			#정수기
 generator			#발전기
 
+coal				#석탄
+copper				#구리
+iron				#철
+stone				#돌
+water				#물
+
 @des
 warehouse			#아이템들을 저장합니다.
 inserter			#투입기입니다.

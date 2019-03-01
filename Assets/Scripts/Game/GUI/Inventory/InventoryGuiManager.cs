@@ -51,7 +51,7 @@ public class InventoryGuiManager :MonoBehaviour {
     }
 
     public void OpenBase() {
-        Open(FindObjectOfType<Warehouse>().GetComponent<Inventory>(), "base");
+        Open(FindObjectOfType<Warehouse>().GetComponent<Inventory>(), "warehouse");
     }
 
     public void Open(Inventory inventory, string owner) {

@@ -13,12 +13,12 @@ public class SpawnManager :MonoBehaviour {
         _spinnerManager = GetComponent<SpinnerManager>();
 
         spawnableInfos = new SpawnableInfo[]{
-             new SpawnableInfo(){ name="rice",chance=0.001f, minRange = 5f }
-            ,new SpawnableInfo(){ name="water",chance=0.001f, minRange = 5f }
-            ,new SpawnableInfo(){ name="coal",chance=0.001f, minRange = 5f }
-            ,new SpawnableInfo(){ name="iron",chance=0.001f, minRange = 5f }
-            ,new SpawnableInfo(){ name="copper",chance=0.001f, minRange = 5f }
-            ,new SpawnableInfo(){ name="dudxo",chance=0.001f, minRange = 20f }
+             new SpawnableInfo(){ name="rice",chance=0.001f, minRange = 4f }
+            ,new SpawnableInfo(){ name="water",chance=0.001f, minRange = 4f }
+            ,new SpawnableInfo(){ name="coal",chance=0.002f, minRange = 2f }
+            ,new SpawnableInfo(){ name="iron",chance=0.001f, minRange = 2f }
+            ,new SpawnableInfo(){ name="copper",chance=0.001f, minRange = 2f }
+            ,new SpawnableInfo(){ name="stone",chance=0.002f, minRange = 3f }
         };
     }
 
