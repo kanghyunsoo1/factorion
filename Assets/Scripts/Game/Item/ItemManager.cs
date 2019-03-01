@@ -9,22 +9,22 @@ public class ItemManager :MonoBehaviour {
              Init("raw-coal")
             ,Init("raw-iron")
             ,Init("raw-copper")
-            ,Init("rice")
-            ,Init("water")
+            ,Init("raw-rice")
+            ,Init("dirty-water")
             ,Init("raw-dudxo")
-            ,Init("rice-flour", "rice:1", 10)
-            ,Init("clean-water","water:1",10)
-            ,Init("iron","raw-iron:1",10)
-            ,Init("copper","raw-copper:1",10)
-            ,Init("coal","raw-coal:1, iron:1, copper:1",100)
-            ,Init("dudxo-flour","raw-dudxo:1",100)
+            ,Init("rice", "raw-rice:1,clean-water:1", 10,3f)
+            ,Init("clean-water","dirty-water:1",10,3f)
+            ,Init("iron-bar","raw-iron:1",10,3f)
+            ,Init("copper-bar","raw-copper:1",10,3f)
+            ,Init("processed-coal","raw-coal:1, iron:10, copper:10",100,20f)
+            ,Init("rice-flour","rice:1,clean-water:1",10,1f)
         };
     }
 
-    private ItemInfo Init(string name, string needs = null, int energy = 0) {
+    private ItemInfo Init(string name, string needs = null, int energy = 0, float time = 0f) {
         if (needs == null)
             return new ItemInfo(name);
-        return new ItemInfo(name, needs, energy);
+        return new ItemInfo(name, needs, energy, time);
     }
 
     public ItemInfo GetItemInfo(string name) {
