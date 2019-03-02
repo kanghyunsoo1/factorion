@@ -41,7 +41,7 @@ public class SpawnManager :MonoBehaviour {
                         continue;
                     if (UnityEngine.Random.Range(0f, 1f) <= ri.chance) {
                         GameObject go = _riceCakeManager.Instantiate(ri.name);
-                        go.transform.position = new Vector3(i, j, 0);
+                        go.transform.position = new Vector3(i, 0, j);
                         break;
                     }
                 }
