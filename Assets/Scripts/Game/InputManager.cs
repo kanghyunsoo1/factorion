@@ -12,12 +12,14 @@ public class InputManager :MonoBehaviour {
     private bool _isOverUI;
     private int _fingerId;
     private InventoryGuiManager _inventoryGuiManager;
+    private EventSystem _eventSystem;
 
     private void Awake() {
         _areaManager = GetComponent<AreaManager>();
         _inventoryGuiManager = GetComponent<InventoryGuiManager>();
         _showerManager = GetComponent<ShowerManager>();
         _camera = Camera.main;
+        _eventSystem = EventSystem.current;
     }
 
     private void Start() {
@@ -40,7 +42,7 @@ public class InputManager :MonoBehaviour {
                 case TouchPhase.Began:
                     _fingerId = touch.fingerId;
                     _startPos = touch.position;
-                    _isOverUI = EventSystem.current.IsPointerOverGameObject(touch.fingerId);
+                    _isOverUI = _eventSystem.IsPointerOverGameObject(touch.fingerId);
                     break;
 
                 case TouchPhase.Ended:

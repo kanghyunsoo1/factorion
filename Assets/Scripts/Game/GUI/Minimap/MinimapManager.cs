@@ -11,13 +11,13 @@ public class MinimapManager :MonoBehaviour {
 
     private Dictionary<MinimapEntity, GameObject> _dic;
     private Rect _backRect;
-    private Camera _camera;
+    private LookAtMe _lam;
     private RectTransform _cameraRectTransform;
 
     private void Awake() {
         _dic = new Dictionary<MinimapEntity, GameObject>();
         _backRect = minimap.GetComponent<RectTransform>().rect;
-        _camera = Camera.main;
+        _lam = FindObjectOfType<LookAtMe>();
         _cameraRectTransform = cameraRect.GetComponent<RectTransform>();
     }
 
@@ -55,20 +55,19 @@ public class MinimapManager :MonoBehaviour {
 
     IEnumerator RefreshCamera() {
         while (true) {
-            _cameraRectTransform.sizeDelta = WorldToMinimapPoint(CameraScreenToUnit());
-            _cameraRectTransform.localPosition = WorldToMinimapPoint(_camera.transform.position);
+            _cameraRectTransform.sizeDelta = new Vector2(_lam.height, _lam.height) * 0.7f;
+            _cameraRectTransform.localPosition = WorldToMinimapPoint(_lam.transform.position);
 
             yield return new WaitForSeconds(0.1f);
         }
     }
 
-    public Vector2 WorldToMinimapPoint(Vector2 vec) {
+    public Vector2 WorldToMinimapPoint(Vector3 vec) {
         vec /= (float)StaticDatas.SIZE;
         vec *= _backRect.width / 2;
+        vec.y = vec.z;
+        vec.z = 0;
         return vec;
     }
 
-    public Vector2 CameraScreenToUnit() {
-        return new Vector2(_camera.orthographicSize * 2 * _camera.aspect, _camera.orthographicSize * 2);
-    }
 }
