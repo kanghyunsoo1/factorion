@@ -1,80 +1,89 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class CameraHandler :MonoBehaviour {
-    private static readonly float _zoomSpeedTouch = 0.05f;
-    private static readonly float[] _bounds = new float[] { -StaticDatas.SIZE, StaticDatas.SIZE };
-    private static readonly float[] _zoomBounds = new float[] { 6f, 50f };
-    private Camera _camera;
-    private Vector3 _lastPanPosition;
-    private int _panFingerId;
-    private bool _wasZoomingLastFrame;
-    private Vector2[] _lastZoomPositions;
+    private static readonly float ZoomSpeedTouch = 0.1f;
+    private static readonly float[] ZoomBounds = new float[] { 10f, 85f };
+
+    private Camera cam;
+
+    private Vector3 lastPanPosition;
+    private int panFingerId;
+
+    private bool wasZoomingLastFrame;
+    private Vector2[] lastZoomPositions;
 
     void Awake() {
-        _camera = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
     }
 
     void Update() {
         HandleTouch();
-        var v = _camera.transform.position;
-        var c = CameraScreenToUnit();
-        v.x = Mathf.Clamp(v.x, _bounds[0] + c.x / 2, _bounds[1] - c.x / 2);
-        v.y = Mathf.Clamp(v.y, _bounds[0] + c.y / 2, _bounds[1] - c.y / 2);
-        _camera.transform.position = v;
     }
 
     void HandleTouch() {
         switch (Input.touchCount) {
-            case 1:
-                _wasZoomingLastFrame = false;
 
+            case 1: // Panning
+                wasZoomingLastFrame = false;
                 Touch touch = Input.GetTouch(0);
+
+                RaycastHit hit;
+                Physics.Raycast(cam.ScreenPointToRay(touch.position), out hit);
+
                 if (touch.phase == TouchPhase.Began) {
-                    _lastPanPosition = touch.position;
-                    _panFingerId = touch.fingerId;
-                } else if (touch.fingerId == _panFingerId && touch.phase == TouchPhase.Moved) {
-                    PanCamera(touch.position);
+                    lastPanPosition = hit.point;
+                    panFingerId = touch.fingerId;
+                } else if (touch.fingerId == panFingerId && touch.phase == TouchPhase.Moved) {
+                    PanCamera(hit.point);
                 }
                 break;
-            case 2:
+
+            case 2: // Zooming
                 Vector2[] newPositions = new Vector2[] { Input.GetTouch(0).position, Input.GetTouch(1).position };
-                if (!_wasZoomingLastFrame) {
-                    _lastZoomPositions = newPositions;
-                    _wasZoomingLastFrame = true;
+                if (!wasZoomingLastFrame) {
+                    lastZoomPositions = newPositions;
+                    wasZoomingLastFrame = true;
                 } else {
+                    // Zoom based on the distance between the new positions compared to the 
+                    // distance between the previous positions.
                     float newDistance = Vector2.Distance(newPositions[0], newPositions[1]);
-                    float oldDistance = Vector2.Distance(_lastZoomPositions[0], _lastZoomPositions[1]);
+                    float oldDistance = Vector2.Distance(lastZoomPositions[0], lastZoomPositions[1]);
                     float offset = newDistance - oldDistance;
 
-                    ZoomCamera(offset, _zoomSpeedTouch);
+                    ZoomCamera(offset, ZoomSpeedTouch);
 
-                    _lastZoomPositions = newPositions;
+                    lastZoomPositions = newPositions;
                 }
                 break;
+
             default:
-                _wasZoomingLastFrame = false;
+                wasZoomingLastFrame = false;
                 break;
         }
     }
 
     void PanCamera(Vector3 newPanPosition) {
-        Vector3 lastScreen = _camera.ScreenToWorldPoint(_lastPanPosition);
-        Vector3 newScreen = _camera.ScreenToWorldPoint(newPanPosition);
-        Vector3 offset = lastScreen - newScreen;
-        transform.Translate(offset, Space.World);
-        Vector3 pos = transform.position;
-        pos.z = -10f;
-        transform.position = pos;
-        _lastPanPosition = newPanPosition;
+        // Determine how much to move the camera
+        Vector3 offset = lastPanPosition - newPanPosition;
+        print(offset);
+        print(lastPanPosition);
+        print(newPanPosition);
+        print(" ");
+        Vector3 move = new Vector3(offset.x, 0, offset.z);
+
+        // Perform the movement
+        transform.Translate(move, Space.World);
+
+        // Cache the position
+        lastPanPosition = newPanPosition;
     }
 
     void ZoomCamera(float offset, float speed) {
         if (offset == 0) {
             return;
         }
-        _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize - (offset * speed), _zoomBounds[0], _zoomBounds[1]);
-    }
-    public Vector2 CameraScreenToUnit() {
-        return new Vector2(_camera.orthographicSize * 2 * _camera.aspect, _camera.orthographicSize * 2);
+
+        cam.fieldOfView = Mathf.Clamp(cam.fieldOfView - (offset * speed), ZoomBounds[0], ZoomBounds[1]);
     }
 }

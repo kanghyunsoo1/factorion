@@ -108,7 +108,7 @@ public class InventoryGuiManager :MonoBehaviour {
         _nameText.text = _textManager.GetText("item", _selectBundle.name);
         _countText.text = _selectBundle.count + "";
     }
-
+    /*
     public void Update() {
         var target = _camera.transform.position;
         if (_isOpen) {
@@ -118,9 +118,9 @@ public class InventoryGuiManager :MonoBehaviour {
                 target = _savedCameraPosition;
             }
         }
-        target.z = -10;
+        target.y = -10;
         _camera.transform.position = Vector3.Lerp(_camera.transform.position, target, 0.2f);
-        if (Vector2.Distance(_camera.transform.position, _savedCameraPosition) < 0.1f)
+        if (Vector3.Distance(_camera.transform.position, _savedCameraPosition) < 0.1f)
             _isGoingBack = false;
-    }
+    }*/
 }

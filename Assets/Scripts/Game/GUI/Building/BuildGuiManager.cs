@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BuildGuiManager :MonoBehaviour {
-    public SpriteRenderer center;
     public GameObject content;
     public GameObject buildingButtonPrefab;
 
@@ -45,17 +44,6 @@ public class BuildGuiManager :MonoBehaviour {
         OnBuildingButtonClick("miner");
     }
 
-    private void FixedUpdate() {
-        if (_build.transform.localScale.y == 0f) {
-            center.color = new Color(1f, 1f, 1f, 0f);
-        } else {
-            if (_areaManager.GetUser(center.transform.position) == null) {
-                center.color = new Color(1f, 1f, 1f, 0.7f);
-            } else {
-                center.color = new Color(1f, 0f, 0f, 0.7f);
-            }
-        }
-    }
 
     public void OnBuildingButtonClick(string name) {
         foreach (var bb in _buttons) {
@@ -67,7 +55,7 @@ public class BuildGuiManager :MonoBehaviour {
         _selectBuildingInfo = _buildingManager.GetBuildingInfo(name);
         FindObjectOfType<BuildingNameHolder>().SetText(_textManager.GetText("name", name));
         FindObjectOfType<BuildingDesHolder>().SetText(_textManager.GetText("des", name));
-        center.sprite = _spriteManager.GetSprite("block", name);
+        //center.sprite = _spriteManager.GetSprite("block", name);
         foreach (var a in _requiredHolders) {
             a.gameObject.SetActive(false);
         }
@@ -103,7 +91,7 @@ public class BuildGuiManager :MonoBehaviour {
                 _alertManager.AddAlert("notEnoughItem", Color.red);
                 return;
             }
-        }
+        }/*
         var user = _areaManager.GetUser(center.transform.position);
         if (_selectBuildingInfo.name.Equals("miner")) {
             if (user == null) {
@@ -119,7 +107,7 @@ public class BuildGuiManager :MonoBehaviour {
             baseInventory.PullItem(bundle.name, bundle.count);
         }
         var go = _riceCakeManager.Instantiate(_selectBuildingInfo.name);
-        go.transform.position = center.transform.position;
+        go.transform.position = center.transform.position;*/
         _alertManager.AddAlert("build", Color.black);
     }
 }
