@@ -23,12 +23,12 @@ public class AreaManager :MonoBehaviour {
         }
     }
 
-    public GameObject GetUser(Vector2 position) {
+    public GameObject GetUser(Vector3 position) {
         var vi = GetAreaVectorFromVector(position);
         return _area[vi.x, vi.y];
     }
 
-    public static Vector2Int GetAreaVectorFromVector(Vector2 vector) {
-        return new Vector2Int(Mathf.Clamp(Mathf.RoundToInt(vector.x), -StaticDatas.SIZE, StaticDatas.SIZE - 1) + StaticDatas.SIZE, Mathf.Clamp(Mathf.RoundToInt(vector.y), -StaticDatas.SIZE, StaticDatas.SIZE - 1) + StaticDatas.SIZE);
+    public static Vector2Int GetAreaVectorFromVector(Vector3 vector) {
+        return new Vector2Int(Mathf.Clamp(Mathf.RoundToInt(vector.x), -StaticDatas.SIZE, StaticDatas.SIZE - 1) + StaticDatas.SIZE, Mathf.Clamp(Mathf.RoundToInt(vector.z), -StaticDatas.SIZE, StaticDatas.SIZE - 1) + StaticDatas.SIZE);
     }
 }
