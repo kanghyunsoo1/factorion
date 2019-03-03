@@ -28,8 +28,9 @@ public class ShowerManager :MonoBehaviour {
         if (inventory != null) {
             inventoryShower.SetActive(true);
             inventoryShower.GetComponent<InventoryShower>().SetInventory(inventory, go.name);
+            sbInfo.Append("<color=#400000>");
             sbInfo.Append(_textManager.GetText("gui", "inventory-exists"));
-            sbInfo.Append("\r\n");
+            sbInfo.Append("</color>\r\n");
         }
 
         if (resource != null) {
@@ -47,7 +48,7 @@ public class ShowerManager :MonoBehaviour {
         sb.Append("<size=50>");
         sb.Append(tName);
         sb.Append("</size>");
-        sb.Append("\r\n");
+        sb.Append("\r\n\r\n");
         sb.Append("<size=25>");
         sb.Append(sbInfo.ToString());
         sb.Append("</size>");
