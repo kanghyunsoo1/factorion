@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class LookAtMe :MonoBehaviour {
     private readonly float _zOffset = -6;
-    private readonly float _minHeight = 8f, _maxHeight = 60f;
+    private readonly float _minHeight = 4f, _maxHeight = 60f;
     private readonly float _panSpeed = 0.001f, _zoomSpeed = 0.1f;
     private Camera _camera;
     private float _innerHeight;
