@@ -1,22 +1,40 @@
 fileFormatVersion: 2
-guid: a997ebc67c548bb42a5950587969a497
+guid: 426a96ae9c642014984b7c585543d436
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Cube
+    100004: Plane
     400000: //RootNode
-    2100000: No Name
+    400002: Cube
+    400004: Plane
+    2100000: Material
+    2100002: Head
+    2100004: Body
     2300000: //RootNode
+    2300002: Cube
+    2300004: Plane
     3300000: //RootNode
-    4300000: Plane
+    3300002: Cube
+    3300004: Plane
+    4300000: Cube
+    4300002: Plane
+    7400000: Default Take
+    9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: No Name
-    second: {fileID: 2100000, guid: de7e47dcaeb12fd4fa6ddc05bd6b5658, type: 2}
+      name: Body
+    second: {fileID: 2100000, guid: 03b38b20ad1ed94429babd03908ec698, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Head
+    second: {fileID: 2100000, guid: c52c0bc93e970a049a0b4962ddbbb377, type: 2}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -64,15 +82,15 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
