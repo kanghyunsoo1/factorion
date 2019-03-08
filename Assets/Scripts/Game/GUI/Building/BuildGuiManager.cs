@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class BuildGuiManager :MonoBehaviour {
     public GameObject content;
     public GameObject buildingButtonPrefab;
+    public GameObject buildHereObject;
 
     private BuildingButton[] _buttons;
     private BuildingManager _buildingManager;
@@ -16,6 +17,7 @@ public class BuildGuiManager :MonoBehaviour {
     private BuildingInfo _selectBuildingInfo;
     private BuildingRequiredItemsHolder[] _requiredHolders;
     private GameObject _build;
+    private Transform _lookAtMe;
 
     void Awake() {
         _alertManager = GetComponent<AlertManager>();
@@ -26,6 +28,8 @@ public class BuildGuiManager :MonoBehaviour {
         _buildingManager = GetComponent<BuildingManager>();
         _requiredHolders = FindObjectsOfType<BuildingRequiredItemsHolder>();
         _build = GameObject.Find("Canvas").transform.Find("Build").Find("Build").gameObject;
+        _lookAtMe = FindObjectOfType<LookAtMe>().transform;
+        buildHereObject.SetActive(false);
     }
 
     private void Start() {
@@ -43,6 +47,8 @@ public class BuildGuiManager :MonoBehaviour {
 
         OnBuildingButtonClick("miner");
     }
+
+
 
 
     public void OnBuildingButtonClick(string name) {
@@ -109,5 +115,16 @@ public class BuildGuiManager :MonoBehaviour {
         var go = _riceCakeManager.Instantiate(_selectBuildingInfo.name);
         go.transform.position = center.transform.position;*/
         _alertManager.AddAlert("build", Color.black);
+    }
+
+    void Update() {
+        if (!buildHereObject.activeInHierarchy && content.transform.localScale.x == 1f) {
+            buildHereObject.SetActive(true);
+        } else if (content.transform.localScale.x == 0f) {
+
+            buildHereObject.SetActive(false);
+        }
+        buildHereObject.transform.position = new Vector3(Mathf.Round(_lookAtMe.position.x), 0f, Mathf.Round(_lookAtMe.position.z));
+
     }
 }
