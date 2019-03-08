@@ -9,15 +9,18 @@ public class ShowerManager :MonoBehaviour {
     public GameObject inventoryShower;
 
     private TextManager _textManager;
+    private AudioManager _audioManager;
 
     void Awake() {
         _textManager = GetComponent<TextManager>();
+        _audioManager = GetComponent<AudioManager>();
     }
 
     public void OnTouch(GameObject go) {
         if (go == null)
             return;
         OffAll();
+        _audioManager.Play("beep");
         var objName = go.name.Replace("(Clone)", "").ToLower();
         var tName = _textManager.GetText("name", objName);
         var sbInfo = new StringBuilder();
