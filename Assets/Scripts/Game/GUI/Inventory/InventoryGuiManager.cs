@@ -13,7 +13,6 @@ public class InventoryGuiManager :MonoBehaviour {
     private int _refreshCount;
     private bool _isOpen = true;
     private bool _isGoingBack = true;
-    private Vector3 _savedCameraPosition;
     private Camera _camera;
 
     private void Awake() {
@@ -56,7 +55,6 @@ public class InventoryGuiManager :MonoBehaviour {
 
     public void Open(Inventory inventory, string owner) {
         Close();
-        _savedCameraPosition = _camera.transform.position;
         _isGoingBack = false;
         _isOpen = true;
         _selectInventory = inventory;
@@ -108,19 +106,4 @@ public class InventoryGuiManager :MonoBehaviour {
         _nameText.text = _textManager.GetText("item", _selectBundle.name);
         _countText.text = _selectBundle.count + "";
     }
-    /*
-    public void Update() {
-        var target = _camera.transform.position;
-        if (_isOpen) {
-            target = _selectInventory.transform.position;
-        } else {
-            if (_isGoingBack) {
-                target = _savedCameraPosition;
-            }
-        }
-        target.y = -10;
-        _camera.transform.position = Vector3.Lerp(_camera.transform.position, target, 0.2f);
-        if (Vector3.Distance(_camera.transform.position, _savedCameraPosition) < 0.1f)
-            _isGoingBack = false;
-    }*/
 }
