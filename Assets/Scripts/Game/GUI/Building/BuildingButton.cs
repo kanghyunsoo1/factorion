@@ -12,5 +12,6 @@ public class BuildingButton :MonoBehaviour {
 
     public void OnClick() {
         FindObjectOfType<BuildGuiManager>().OnBuildingButtonClick(buildingName);
+        FindObjectOfType<AudioManager>().Play("beep");
     }
 }
