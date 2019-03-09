@@ -97,8 +97,8 @@ public class BuildGuiManager :MonoBehaviour {
                 _alertManager.AddAlert("notEnoughItem", Color.red);
                 return;
             }
-        }/*
-        var user = _areaManager.GetUser(center.transform.position);
+        }
+        var user = _areaManager.GetUser(buildHereObject.transform.position);
         if (_selectBuildingInfo.name.Equals("miner")) {
             if (user == null) {
                 _alertManager.AddAlert("minerShould", Color.red);
@@ -113,7 +113,7 @@ public class BuildGuiManager :MonoBehaviour {
             baseInventory.PullItem(bundle.name, bundle.count);
         }
         var go = _riceCakeManager.Instantiate(_selectBuildingInfo.name);
-        go.transform.position = center.transform.position;*/
+        go.transform.position = buildHereObject.transform.position;
         _alertManager.AddAlert("build", Color.black);
     }
 
