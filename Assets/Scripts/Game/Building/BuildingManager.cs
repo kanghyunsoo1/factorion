@@ -7,7 +7,7 @@ public class BuildingManager :MonoBehaviour {
     private void Awake() {
         buildingInfos = new BuildingInfo[] {
             Init("inserter","iron:10")
-            ,Init("belt","iron:5")
+            ,Init("fan","iron:10")
             ,Init("miner","iron:30")
             ,Init("millstone","iron:30, copper:20")
             ,Init("furance","iron:10")
