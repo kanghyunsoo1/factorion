@@ -7,7 +7,7 @@ public class BuildingButton :MonoBehaviour {
     public string buildingName;
 
     private void Start() {
-        transform.Find("Image").GetComponent<Image>().sprite = FindObjectOfType<SpriteManager>().GetSprite("block", buildingName);
+        transform.Find("Image").GetComponent<Image>().sprite = FindObjectOfType<SpriteManager>().GetSprite("building", buildingName);
     }
 
     public void OnClick() {

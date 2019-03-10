@@ -5,7 +5,7 @@ build				#건설
 inventory			#인벤토리
 inventory-exists	#인벤토리 있음
 resource			#자원
-
+	
 @spinner
 save				#게임 데이터를 저장하는 중입니다...
 load				#게임 데이터를 불러오는 중입니다...
@@ -46,7 +46,7 @@ rice-flour			#쌀 가루
 @name
 warehouse			#창고
 inserter			#투입기
-belt				#컨테이너 벨트
+fan					#선풍기
 miner				#채광기
 millstone			#맷돌
 furance				#화로
@@ -61,9 +61,8 @@ water				#물
 rice				#벼
 
 @des
-warehouse			#아이템들을 저장합니다.
 inserter			#투입기입니다.
-belt				#아이템을 지정한 방향으로 운송합니다.
+fan					#아이템들을 지정한 방향으로 밀어냅니다.
 miner				#광물을 채광합니다.
 millstone			#아이템을 가루로 만듭니다.
 furance				#아이템을 굽습니다.
