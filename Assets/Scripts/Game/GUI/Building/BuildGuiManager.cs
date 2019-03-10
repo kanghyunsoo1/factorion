@@ -18,6 +18,7 @@ public class BuildGuiManager :MonoBehaviour {
     private BuildingRequiredItemsHolder[] _requiredHolders;
     private GameObject _build;
     private Transform _lookAtMe;
+    private GameObject _select;
 
     void Awake() {
         _alertManager = GetComponent<AlertManager>();
@@ -29,6 +30,7 @@ public class BuildGuiManager :MonoBehaviour {
         _requiredHolders = FindObjectsOfType<BuildingRequiredItemsHolder>();
         _build = GameObject.Find("Canvas").transform.Find("Build").Find("Build").gameObject;
         _lookAtMe = FindObjectOfType<LookAtMe>().transform;
+        _select = content.transform.Find("Select").gameObject;
         buildHereObject.SetActive(false);
     }
 
@@ -45,18 +47,18 @@ public class BuildGuiManager :MonoBehaviour {
         }
         StartCoroutine(RefreshLoop());
 
-        OnBuildingButtonClick("miner");
+        OnBuildingButtonClick("fan");
     }
 
 
 
 
     public void OnBuildingButtonClick(string name) {
+        _select.transform.SetSiblingIndex(99);
         foreach (var bb in _buttons) {
-            if (bb.buildingName.Equals(name))
-                bb.GetComponent<Image>().color = new Color(1f, 0.8f, 0.8f, 1f);
-            else
-                bb.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+            if (bb.buildingName.Equals(name)) {
+                _select.transform.position = bb.transform.position;
+            }
         }
         _selectBuildingInfo = _buildingManager.GetBuildingInfo(name);
         FindObjectOfType<BuildingNameHolder>().SetText(_textManager.GetText("name", name));
