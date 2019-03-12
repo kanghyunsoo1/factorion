@@ -2,15 +2,15 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpawnManager :MonoBehaviour {
+public class SpawnManager :Manager {
     public SpawnableInfo[] spawnableInfos;
 
     private SpinnerManager _spinnerManager;
     private RiceCakeManager _riceCakeManager;
 
     void Awake() {
-        _riceCakeManager = GetComponent<RiceCakeManager>();
-        _spinnerManager = GetComponent<SpinnerManager>();
+        _riceCakeManager = ManagerManager.GetManager<RiceCakeManager>();
+        _spinnerManager = ManagerManager.GetManager<SpinnerManager>();
 
         spawnableInfos = new SpawnableInfo[]{
              new SpawnableInfo(){ name="rice",chance=0.001f, minRange = 4f }

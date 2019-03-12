@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
-public class DataManager :MonoBehaviour {
+public class DataManager :Manager {
     private SpinnerManager _spinnerManager;
     private RiceCakeManager _riceCakeManager;
     private ShowerManager _showerManager;
     private string _mapName;
 
     void Awake() {
-        _spinnerManager = GetComponent<SpinnerManager>();
-        _riceCakeManager = GetComponent<RiceCakeManager>();
-        _showerManager = GetComponent<ShowerManager>();
+        _spinnerManager = ManagerManager.GetManager<SpinnerManager>();
+        _riceCakeManager = ManagerManager.GetManager<RiceCakeManager>();
+        _showerManager = ManagerManager.GetManager<ShowerManager>();
         _mapName = StaticDatas.mapName;
     }
 

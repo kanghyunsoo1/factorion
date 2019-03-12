@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class NewGridEffectManager :MonoBehaviour {
+public class NewGridEffectManager :Manager {
     public GameObject grid;
 
     private readonly float _delay = 0.03f;

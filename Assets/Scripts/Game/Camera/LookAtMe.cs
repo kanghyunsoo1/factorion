@@ -7,7 +7,7 @@ public class LookAtMe :MonoBehaviour {
     private readonly float _panSpeed = 0.001f, _zoomSpeed = 0.1f;
     private Camera _camera;
     private float _innerHeight;
-    public float height {
+    public float Height {
         get { return _innerHeight; }
         set {
             _innerHeight = value;
@@ -25,7 +25,7 @@ public class LookAtMe :MonoBehaviour {
 
     private void Awake() {
         _camera = Camera.main;
-        height = 10f;
+        Height = 10f;
         _eventSystem = EventSystem.current;
     }
 
@@ -45,8 +45,8 @@ public class LookAtMe :MonoBehaviour {
                     var delta = _lastPanPosition - touch.position;
                     delta.x = Mathf.Clamp(delta.x, -30f, 30f);
                     delta.y = Mathf.Clamp(delta.y, -30f, 30f);
-                    var dx = delta.x * _panSpeed * height;
-                    var dy = delta.y * _panSpeed * height;
+                    var dx = delta.x * _panSpeed * Height;
+                    var dy = delta.y * _panSpeed * Height;
                     transform.Translate(dx, 0, dy, Space.World);
                     _lastPanPosition = touch.position;
                     var x = Mathf.Clamp(transform.position.x, -StaticDatas.SIZE, StaticDatas.SIZE);
@@ -65,7 +65,7 @@ public class LookAtMe :MonoBehaviour {
                     float oldDistance = Vector2.Distance(_lastZoomPositions[0], _lastZoomPositions[1]);
                     float delta = newDistance - oldDistance;
 
-                    height = Mathf.Clamp(height - delta * _zoomSpeed, _minHeight, _maxHeight);
+                    Height = Mathf.Clamp(Height - delta * _zoomSpeed, _minHeight, _maxHeight);
 
                     _lastZoomPositions = newPositions;
                 }
@@ -77,7 +77,7 @@ public class LookAtMe :MonoBehaviour {
         }
 
 
-        _camera.transform.position = new Vector3(transform.position.x, height, transform.position.z + _zOffset);
+        _camera.transform.position = new Vector3(transform.position.x, Height, transform.position.z + _zOffset);
     }
 
     private void LateUpdate() {

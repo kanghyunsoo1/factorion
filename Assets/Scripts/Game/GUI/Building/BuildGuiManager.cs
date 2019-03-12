@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildGuiManager :MonoBehaviour {
+public class BuildGuiManager :Manager {
     public GameObject content;
     public GameObject buildingButtonPrefab;
     public GameObject buildHereObject;
@@ -16,19 +16,17 @@ public class BuildGuiManager :MonoBehaviour {
     private RiceCakeManager _riceCakeManager;
     private BuildingInfo _selectBuildingInfo;
     private BuildingRequiredItemsHolder[] _requiredHolders;
-    private GameObject _build;
     private Transform _lookAtMe;
     private GameObject _select;
 
     void Awake() {
-        _alertManager = GetComponent<AlertManager>();
-        _textManager = GetComponent<TextManager>();
-        _spriteManager = GetComponent<SpriteManager>();
-        _areaManager = GetComponent<AreaManager>();
-        _riceCakeManager = GetComponent<RiceCakeManager>();
-        _buildingManager = GetComponent<BuildingManager>();
+        _alertManager = ManagerManager.GetManager<AlertManager>();
+        _textManager = ManagerManager.GetManager<TextManager>();
+        _spriteManager = ManagerManager.GetManager<SpriteManager>();
+        _areaManager = ManagerManager.GetManager<AreaManager>();
+        _riceCakeManager = ManagerManager.GetManager<RiceCakeManager>();
+        _buildingManager = ManagerManager.GetManager<BuildingManager>();
         _requiredHolders = FindObjectsOfType<BuildingRequiredItemsHolder>();
-        _build = GameObject.Find("Canvas").transform.Find("Build").Find("Build").gameObject;
         _lookAtMe = FindObjectOfType<LookAtMe>().transform;
         _select = content.transform.Find("Select").gameObject;
         buildHereObject.SetActive(false);
@@ -63,7 +61,6 @@ public class BuildGuiManager :MonoBehaviour {
         _selectBuildingInfo = _buildingManager.GetBuildingInfo(name);
         FindObjectOfType<BuildingNameHolder>().SetText(_textManager.GetText("name", name));
         FindObjectOfType<BuildingDesHolder>().SetText(_textManager.GetText("des", name));
-        //center.sprite = _spriteManager.GetSprite("block", name);
         foreach (var a in _requiredHolders) {
             a.gameObject.SetActive(false);
         }

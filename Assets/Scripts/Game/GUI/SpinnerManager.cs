@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class SpinnerManager :MonoBehaviour {
+public class SpinnerManager :Manager {
     public GameObject spinnerObject;
 
     private Text _text;
@@ -9,7 +9,7 @@ public class SpinnerManager :MonoBehaviour {
 
     private void Awake() {
         _text = spinnerObject.transform.Find("Text").GetComponent<Text>();
-        _textManager = GetComponent<TextManager>();
+        _textManager = ManagerManager.GetManager<TextManager>();
     }
 
     public void SpinnerOn(string msg) {

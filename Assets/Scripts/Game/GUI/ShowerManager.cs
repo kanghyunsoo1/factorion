@@ -3,7 +3,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowerManager :MonoBehaviour {
+public class ShowerManager :Manager {
     public Text infoShower;
     public GameObject select;
     public GameObject inventoryShower;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class TextManager :MonoBehaviour {
+public class TextManager :Manager {
     private Dictionary<string, string> _dic;
 
     private void Awake() {

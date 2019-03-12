@@ -7,11 +7,11 @@ public class BuildingButton :MonoBehaviour {
     public string buildingName;
 
     private void Start() {
-        transform.Find("Image").GetComponent<Image>().sprite = FindObjectOfType<SpriteManager>().GetSprite("building", buildingName);
+        transform.Find("Image").GetComponent<Image>().sprite = ManagerManager.GetManager<SpriteManager>().GetSprite("building", buildingName);
     }
 
     public void OnClick() {
-        FindObjectOfType<BuildGuiManager>().OnBuildingButtonClick(buildingName);
-        FindObjectOfType<AudioManager>().Play("beep");
+        ManagerManager.GetManager<BuildGuiManager>().OnBuildingButtonClick(buildingName);
+        ManagerManager.GetManager<AudioManager>().Play("beep");
     }
 }

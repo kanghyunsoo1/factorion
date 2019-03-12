@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class ValueManager :MonoBehaviour {
+public class ValueManager :Manager {
     [Serializable]
     public class Wraper {
         public UpgradableValue[] v;
@@ -10,7 +10,7 @@ public class ValueManager :MonoBehaviour {
 
     private RiceCakeManager _riceCakeManager;
     void Awake() {
-        _riceCakeManager = GetComponent<RiceCakeManager>();
+        _riceCakeManager = ManagerManager.GetManager<RiceCakeManager>();
         values = new UpgradableValue[] {
              Init("gustn",             100f)
             ,Init("maxRobotCount",     10f,    5f,     100,    503,    50 )

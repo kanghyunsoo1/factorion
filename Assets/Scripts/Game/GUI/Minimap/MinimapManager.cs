@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MinimapManager :MonoBehaviour {
+public class MinimapManager :Manager {
     public GameObject dot;
     public GameObject cameraRect;
     public Image minimap;
@@ -55,7 +55,7 @@ public class MinimapManager :MonoBehaviour {
 
     IEnumerator RefreshCamera() {
         while (true) {
-            _cameraRectTransform.sizeDelta = new Vector2(_lam.height, _lam.height) * 0.7f;
+            _cameraRectTransform.sizeDelta = new Vector2(_lam.Height, _lam.Height) * 0.7f;
             _cameraRectTransform.localPosition = WorldToMinimapPoint(_lam.transform.position);
 
             yield return new WaitForSeconds(0.1f);

@@ -19,7 +19,7 @@ public class InventorySlot :MonoBehaviour {
 
     public void SetBundle(ItemBundle bundle) {
         _bundle = bundle;
-        _image.sprite = FindObjectOfType<SpriteManager>().GetSprite("item", bundle.name);
+        _image.sprite = ManagerManager.GetManager<SpriteManager>().GetSprite("item", bundle.name);
     }
 
     private void FixedUpdate() {

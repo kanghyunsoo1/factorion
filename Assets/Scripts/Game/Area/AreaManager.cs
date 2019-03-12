@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AreaManager :MonoBehaviour {
+public class AreaManager :Manager {
     private GameObject[,] _area = new GameObject[StaticDatas.SIZE * 2, StaticDatas.SIZE * 2];
     private List<Item> _items;
 

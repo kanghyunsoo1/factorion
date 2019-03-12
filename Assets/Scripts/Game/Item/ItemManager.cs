@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class ItemManager :MonoBehaviour {
+public class ItemManager :Manager {
     public ItemInfo[] itemInfos;
 
     private void Awake() {

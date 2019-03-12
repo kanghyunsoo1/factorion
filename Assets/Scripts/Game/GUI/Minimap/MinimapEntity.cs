@@ -6,12 +6,12 @@ public class MinimapEntity :MonoBehaviour {
     public float size;
 
     private void Start() {
-        FindObjectOfType<MinimapManager>().Register(this);
+        ManagerManager.GetManager<MinimapManager>().Register(this);
     }
 
     private void OnDestroy() {
         try {
-            FindObjectOfType<MinimapManager>().Unregister(this);
+            ManagerManager.GetManager<MinimapManager>().Unregister(this);
         } catch (NullReferenceException) {
 
         }

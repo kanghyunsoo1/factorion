@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-public class InventoryGuiManager :MonoBehaviour {
+public class InventoryGuiManager :Manager {
     public GameObject inventoryObject;
     public GameObject slotPrefab;
 
@@ -12,12 +12,9 @@ public class InventoryGuiManager :MonoBehaviour {
     private Inventory _selectInventory;
     private int _refreshCount;
     private bool _isOpen = true;
-    private bool _isGoingBack = true;
-    private Camera _camera;
 
     private void Awake() {
-        _camera = Camera.main;
-        _textManager = GetComponent<TextManager>();
+        _textManager = ManagerManager.GetManager<TextManager>();
         _nameText = inventoryObject.transform.Find("Name").GetComponent<Text>();
         _countText = inventoryObject.transform.Find("Count").GetComponent<Text>();
         _slots = new InventorySlot[_x * _y];
@@ -55,7 +52,6 @@ public class InventoryGuiManager :MonoBehaviour {
 
     public void Open(Inventory inventory, string owner) {
         Close();
-        _isGoingBack = false;
         _isOpen = true;
         _selectInventory = inventory;
         inventoryObject.SetActive(true);
@@ -87,7 +83,6 @@ public class InventoryGuiManager :MonoBehaviour {
         _selectInventory = null;
         _selectBundle = null;
         _isOpen = false;
-        _isGoingBack = true;
     }
 
     public void OnSlotClick(ItemBundle bundle) {

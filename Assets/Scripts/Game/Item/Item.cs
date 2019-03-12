@@ -6,7 +6,7 @@ public class Item :RiceCakeComponent {
     private AreaManager _areaManager;
 
     private void Awake() {
-        _areaManager = FindObjectOfType<AreaManager>();
+        _areaManager = ManagerManager.GetManager<AreaManager>();
     }
 
     private void Start() {

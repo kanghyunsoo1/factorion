@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InputManager :MonoBehaviour {
+public class InputManager :Manager {
     public float maxTouchDistance;
 
     private ShowerManager _showerManager;
@@ -15,9 +15,9 @@ public class InputManager :MonoBehaviour {
     private EventSystem _eventSystem;
 
     private void Awake() {
-        _areaManager = GetComponent<AreaManager>();
-        _inventoryGuiManager = GetComponent<InventoryGuiManager>();
-        _showerManager = GetComponent<ShowerManager>();
+        _areaManager = ManagerManager.GetManager<AreaManager>();
+        _inventoryGuiManager = ManagerManager.GetManager<InventoryGuiManager>();
+        _showerManager = ManagerManager.GetManager<ShowerManager>();
         _camera = Camera.main;
         _eventSystem = EventSystem.current;
     }

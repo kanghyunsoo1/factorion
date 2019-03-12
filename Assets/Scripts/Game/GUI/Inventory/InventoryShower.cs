@@ -10,7 +10,7 @@ public class InventoryShower :MonoBehaviour {
     private string _owner;
 
     void Awake() {
-        _spriteManager = FindObjectOfType<SpriteManager>();
+        _spriteManager = ManagerManager.GetManager<SpriteManager>();
         _slots = new ShowerInventorySlot[] {
             Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
             ,Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
@@ -56,6 +56,6 @@ public class InventoryShower :MonoBehaviour {
     }
 
     public void OnOpenClick() {
-        FindObjectOfType<InventoryGuiManager>().Switch(_inventory, _owner);
+        ManagerManager.GetManager<InventoryGuiManager>().Switch(_inventory, _owner);
     }
 }

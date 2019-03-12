@@ -2,14 +2,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AlertManager :MonoBehaviour {
+public class AlertManager :Manager {
     public AlertBox alertBox;
     private List<AlertBox> _list;
     private TextManager _textManager;
     private AudioManager _audioManager;
     void Awake() {
-        _audioManager = GetComponent<AudioManager>();
-        _textManager = GetComponent<TextManager>();
+        _audioManager = ManagerManager.GetManager<AudioManager>();
+        _textManager = ManagerManager.GetManager<TextManager>();
         _list = new List<AlertBox>();
     }
 

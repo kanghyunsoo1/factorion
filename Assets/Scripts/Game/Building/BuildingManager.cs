@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class BuildingManager :MonoBehaviour {
+public class BuildingManager :Manager {
     public BuildingInfo[] buildingInfos;
 
     private void Awake() {

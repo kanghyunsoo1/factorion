@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogManager :MonoBehaviour {
+public class DialogManager :Manager {
     public delegate void VoidCallback();
     public delegate void StringCallback(string result);
 
@@ -17,7 +17,7 @@ public class DialogManager :MonoBehaviour {
         _dialogs = GameObject.Find("Canvas").transform.Find("Dialogs").transform;
         _yesOrNo = _dialogs.Find("YesOrNo");
         _yesOrNoText = _yesOrNo.Find("Text").GetComponent<Text>();
-        _textManager = GetComponent<TextManager>();
+        _textManager = ManagerManager.GetManager<TextManager>();
     }
 
     private void Start() {

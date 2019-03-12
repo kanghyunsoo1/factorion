@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpriteManager :MonoBehaviour {
+public class SpriteManager :Manager {
 
     private Sprite[] _sprites;
     void Awake() {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class AudioManager :MonoBehaviour {
+public class AudioManager :Manager {
     public AudioSource audioSourcePrefab;
     private AudioClip[] _audios;
 

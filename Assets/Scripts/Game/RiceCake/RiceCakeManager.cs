@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-public class RiceCakeManager :MonoBehaviour {
+public class RiceCakeManager :Manager {
     private readonly int offset = 5;
     private readonly string fileName = "data.rcm";
     private readonly string directoryName = "RiceCakePrefabs";
