@@ -37,4 +37,5 @@ public class ItemManager :MonoBehaviour {
     public ItemInfo GetItemInfo(string name) {
         return Array.Find(itemInfos, x => x.name.Equals(name));
     }
+    
 }

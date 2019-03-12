@@ -8,12 +8,12 @@ public class AreaUser :MonoBehaviour {
         _areaManager = FindObjectOfType<AreaManager>();
     }
     void Start() {
-        _areaManager.LockArea(gameObject);
+        _areaManager.RegisterUser(gameObject);
     }
 
     private void OnDestroy() {
         try {
-            _areaManager.UnlockArea(gameObject);
+            _areaManager.UnregisterUser(gameObject);
         } catch (Exception) { };
     }
 }
