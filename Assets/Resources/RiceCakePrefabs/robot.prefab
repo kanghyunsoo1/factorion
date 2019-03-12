@@ -96,17 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05481d716d408bc42b5053f643f03df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stack:
-    name: 
-    count: 0
-  destination: {x: 0, y: 0}
-  inventoryPos: {x: 0, y: 0}
-  requestInventoryPos: {x: 0, y: 0}
-  containerPos: {x: 0, y: 0}
-  phase: 0
-  speed: 0
-  willItem: 
-  willCount: 0
 --- !u!212 &212050212853166864
 SpriteRenderer:
   m_ObjectHideFlags: 1
