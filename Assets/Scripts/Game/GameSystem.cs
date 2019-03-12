@@ -15,7 +15,7 @@ public class GameSystem :MonoBehaviour {
     }
 
     private void Start() {
-        if(_dataManager.IsDataExists())
+        if (_dataManager.IsDataExists())
             _dataManager.Load();
         else
             _spawnManager.Spawn();

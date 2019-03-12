@@ -10,7 +10,7 @@ public class ItemInfo {
         this.name = name;
     }
 
-    public ItemInfo(string name, string items, int needEnergy,float needTime) {
+    public ItemInfo(string name, string items, int needEnergy, float needTime) {
         this.name = name;
         this.requireBundles = ItemBundle.GetBundles(items);
         this.needEnergy = needEnergy;

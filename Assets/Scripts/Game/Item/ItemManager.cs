@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 public class ItemManager :Manager {
     public ItemInfo[] itemInfos;
@@ -37,5 +36,5 @@ public class ItemManager :Manager {
     public ItemInfo GetItemInfo(string name) {
         return Array.Find(itemInfos, x => x.name.Equals(name));
     }
-    
+
 }

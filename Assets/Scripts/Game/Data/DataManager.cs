@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using UnityEngine;
 public class DataManager :Manager {
     private SpinnerManager _spinnerManager;
     private RiceCakeManager _riceCakeManager;

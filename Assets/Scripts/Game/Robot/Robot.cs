@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-
-public class Robot :RiceCakeComponent {/*
+﻿public class Robot :RiceCakeComponent {/*
     public ItemBundle bundle;
     public Vector2 destination;
     public Vector2 inventoryPos;

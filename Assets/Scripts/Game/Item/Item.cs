@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class Item :RiceCakeComponent {
+﻿public class Item :RiceCakeComponent {
     public new string name;
 
     private AreaManager _areaManager;

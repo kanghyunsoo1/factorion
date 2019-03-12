@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Manager : MonoBehaviour {
+public class Manager :MonoBehaviour {
 }

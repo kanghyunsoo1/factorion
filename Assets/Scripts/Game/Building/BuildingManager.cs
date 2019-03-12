@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 public class BuildingManager :Manager {
     public BuildingInfo[] buildingInfos;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
-
-public class RobotManager :Manager {/*
+﻿public class RobotManager :Manager {/*
     private readonly float _delay = 1f;
     private RiceCakeManager _riceCakeManager;
     private ValueManager _valueManager;
