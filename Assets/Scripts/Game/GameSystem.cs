@@ -6,11 +6,12 @@ public class GameSystem :MonoBehaviour {
     private SpawnManager _spawnManager;
 
     void Awake() {
-        _dataManager = ManagerManager.GetManager<DataManager>();
-        _spawnManager = ManagerManager.GetManager<SpawnManager>();
         if (!StaticDatas.wasMainLoad) {
             SceneManager.LoadScene("Main");
         }
+        _dataManager = ManagerManager.GetManager<DataManager>();
+        _spawnManager = ManagerManager.GetManager<SpawnManager>();
+
     }
 
     private void Start() {
