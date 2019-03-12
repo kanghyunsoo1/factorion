@@ -39,4 +39,8 @@ public class DataManager :Manager {
     public void Delete() {
         _riceCakeManager.Delete(_mapName);
     }
+
+    public bool IsDataExists() {
+        return _riceCakeManager.IsDataExists(_mapName);
+    }
 }
