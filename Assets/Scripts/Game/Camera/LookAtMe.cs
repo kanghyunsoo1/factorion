@@ -30,6 +30,8 @@ public class LookAtMe :MonoBehaviour {
     }
 
     private void Update() {
+        Height -= Input.mouseScrollDelta.y * 3;
+        transform.Translate(Input.GetAxis("Horizontal") / 2, 0, Input.GetAxis("Vertical") / 2, Space.World);
         switch (Input.touchCount) {
             case 1:
                 _wasZoom = false;
@@ -49,9 +51,6 @@ public class LookAtMe :MonoBehaviour {
                     var dy = delta.y * _panSpeed * Height;
                     transform.Translate(dx, 0, dy, Space.World);
                     _lastPanPosition = touch.position;
-                    var x = Mathf.Clamp(transform.position.x, -StaticDatas.SIZE, StaticDatas.SIZE);
-                    var z = Mathf.Clamp(transform.position.z, -StaticDatas.SIZE, StaticDatas.SIZE);
-                    transform.position = new Vector3(x, transform.position.y, z);
                 }
                 break;
 
@@ -65,7 +64,7 @@ public class LookAtMe :MonoBehaviour {
                     float oldDistance = Vector2.Distance(_lastZoomPositions[0], _lastZoomPositions[1]);
                     float delta = newDistance - oldDistance;
 
-                    Height = Mathf.Clamp(Height - delta * _zoomSpeed, _minHeight, _maxHeight);
+                    Height -= delta * _zoomSpeed;
 
                     _lastZoomPositions = newPositions;
                 }
@@ -76,10 +75,13 @@ public class LookAtMe :MonoBehaviour {
                 break;
         }
 
+        var x = Mathf.Clamp(transform.position.x, -StaticDatas.SIZE, StaticDatas.SIZE);
+        var z = Mathf.Clamp(transform.position.z, -StaticDatas.SIZE, StaticDatas.SIZE);
+        transform.position = new Vector3(x, transform.position.y, z);
 
         _camera.transform.position = new Vector3(transform.position.x, Height, transform.position.z + _zOffset);
+        Height = Mathf.Clamp(Height, _minHeight, _maxHeight);
+        
     }
-
-    private void LateUpdate() {
-    }
+    
 }
