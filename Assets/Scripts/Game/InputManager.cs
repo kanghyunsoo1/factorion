@@ -57,7 +57,7 @@ public class InputManager :Manager {
             }
         }
         if (Input.GetMouseButtonDown(0)) {
-            if (!_eventSystem.IsPointerOverGameObject(0)) {
+            if (!_eventSystem.IsPointerOverGameObject()) {
                 RaycastHit hit;
                 Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out hit);
                 OnWorldTouch(hit.point);
