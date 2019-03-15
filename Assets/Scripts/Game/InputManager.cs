@@ -56,6 +56,13 @@ public class InputManager :Manager {
                     break;
             }
         }
+        if (Input.GetMouseButtonDown(0)) {
+            if (!_eventSystem.IsPointerOverGameObject(0)) {
+                RaycastHit hit;
+                Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out hit);
+                OnWorldTouch(hit.point);
+            }
+        }
     }
 
     public void OnWorldTouch(Vector3 position) {
