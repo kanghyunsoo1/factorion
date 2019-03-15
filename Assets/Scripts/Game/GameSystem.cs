@@ -17,7 +17,13 @@ public class GameSystem :MonoBehaviour {
     private void Start() {
         if (_dataManager.IsDataExists())
             _dataManager.Load();
-        else
+        else {
             _spawnManager.Spawn();
+            FindObjectOfType<Warehouse>().GetComponent<Inventory>().AddItem("iron-bar", 500);
+            FindObjectOfType<Warehouse>().GetComponent<Inventory>().AddItem("copper-bar", 500);
+            FindObjectOfType<Warehouse>().GetComponent<Inventory>().AddItem("brick", 500);
+            FindObjectOfType<Warehouse>().GetComponent<Inventory>().AddItem("rice", 500);
+            FindObjectOfType<Warehouse>().GetComponent<Inventory>().AddItem("raw-coal", 500);
+        }
     }
 }
