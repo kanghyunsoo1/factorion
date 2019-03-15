@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114861721036603386}
   - component: {fileID: 114745642669591080}
   - component: {fileID: 114056727874735474}
+  - component: {fileID: 114603025697483158}
   m_Layer: 0
   m_Name: water
   m_TagString: Untagged
@@ -55,6 +56,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: dirty-water
+--- !u!114 &114603025697483158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1757065757395782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01825f328996dc04a98893bdce0fb407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 0.59962577, b: 0.754717, a: 1}
+  size: 2
 --- !u!114 &114745642669591080
 MonoBehaviour:
   m_ObjectHideFlags: 1

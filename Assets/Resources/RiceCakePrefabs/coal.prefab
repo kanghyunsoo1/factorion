@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114692985010700010}
   - component: {fileID: 33676796205311746}
   - component: {fileID: 23778349768956460}
+  - component: {fileID: 114806236548688016}
   m_Layer: 0
   m_Name: coal
   m_TagString: Untagged
@@ -122,3 +123,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: raw-coal
+--- !u!114 &114806236548688016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1607758881304586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01825f328996dc04a98893bdce0fb407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0.2509804, g: 0.2509804, b: 0.2509804, a: 1}
+  size: 2
