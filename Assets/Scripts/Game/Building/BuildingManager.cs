@@ -5,13 +5,13 @@ public class BuildingManager :Manager {
 
     private void Awake() {
         buildingInfos = new BuildingInfo[] {
-            Init("inserter","iron:10")
-            ,Init("fan","iron:10")
-            ,Init("miner","iron:30")
-            ,Init("millstone","iron:30, copper:20")
-            ,Init("furance","iron:10")
-            ,Init("purifier","iron:10,copper:10")
-            ,Init("generator","iron:10,copper:10")
+            Init("inserter","iron-bar:10")
+            ,Init("fan","iron-bar:10")
+            ,Init("miner","iron-bar:30")
+            ,Init("millstone","iron-bar:30, copper-bar:20")
+            ,Init("furance","iron-bar:10")
+            ,Init("purifier","iron-bar:10,copper-bar:10")
+            ,Init("generator","iron-bar:10,copper-bar:10")
         };
     }
 
