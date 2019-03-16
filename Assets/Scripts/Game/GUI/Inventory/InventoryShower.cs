@@ -6,11 +6,12 @@ public class InventoryShower :MonoBehaviour {
 
     private ShowerInventorySlot[] _slots;
     private SpriteManager _spriteManager;
+    private InventoryGuiManager _inventoryGuiManager;
     private Inventory _inventory;
     private string _owner;
 
     void Awake() {
-        _spriteManager = ManagerManager.GetManager<SpriteManager>();
+        ManagerManager.SetManagers(this);
         _slots = new ShowerInventorySlot[] {
             Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
             ,Instantiate(inventorySlot).GetComponent<ShowerInventorySlot>()
@@ -56,6 +57,6 @@ public class InventoryShower :MonoBehaviour {
     }
 
     public void OnOpenClick() {
-        ManagerManager.GetManager<InventoryGuiManager>().Switch(_inventory, _owner);
+        _inventoryGuiManager.Switch(_inventory, _owner);
     }
 }

@@ -9,7 +9,7 @@ public class SpinnerManager :Manager {
 
     private void Awake() {
         _text = spinnerObject.transform.Find("Text").GetComponent<Text>();
-        _textManager = ManagerManager.GetManager<TextManager>();
+        ManagerManager.SetManagers(this);
     }
 
     public void SpinnerOn(string msg) {

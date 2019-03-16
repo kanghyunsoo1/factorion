@@ -5,7 +5,7 @@ public class AreaUser :MonoBehaviour {
     private AreaManager _areaManager;
 
     private void Awake() {
-        _areaManager = ManagerManager.GetManager<AreaManager>();
+        ManagerManager.SetManagers(this);
     }
     void Start() {
         _areaManager.RegisterUser(gameObject);

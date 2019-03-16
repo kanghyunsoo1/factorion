@@ -4,14 +4,16 @@ using UnityEngine;
 public class MinimapEntity :MonoBehaviour {
     public Color color;
     public float size;
+    private MinimapManager _minimapManager;
 
     private void Start() {
-        ManagerManager.GetManager<MinimapManager>().Register(this);
+        ManagerManager.SetManagers(this);
+        _minimapManager.Register(this);
     }
 
     private void OnDestroy() {
         try {
-            ManagerManager.GetManager<MinimapManager>().Unregister(this);
+            _minimapManager.Unregister(this);
         } catch (NullReferenceException) {
 
         }

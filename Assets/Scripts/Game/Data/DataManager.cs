@@ -6,9 +6,7 @@ public class DataManager :Manager {
     private string _mapName;
 
     void Awake() {
-        _spinnerManager = ManagerManager.GetManager<SpinnerManager>();
-        _riceCakeManager = ManagerManager.GetManager<RiceCakeManager>();
-        _showerManager = ManagerManager.GetManager<ShowerManager>();
+        ManagerManager.SetManagers(this);
         _mapName = StaticDatas.mapName;
     }
 

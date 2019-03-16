@@ -9,8 +9,7 @@ public class SpawnManager :Manager {
     private RiceCakeManager _riceCakeManager;
 
     void Awake() {
-        _riceCakeManager = ManagerManager.GetManager<RiceCakeManager>();
-        _spinnerManager = ManagerManager.GetManager<SpinnerManager>();
+        ManagerManager.SetManagers(this);
 
         spawnableInfos = new SpawnableInfo[]{
              new SpawnableInfo(){ name="rice",chance=0.001f, minRange = 4f }

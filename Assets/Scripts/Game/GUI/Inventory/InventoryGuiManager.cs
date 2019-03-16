@@ -14,7 +14,7 @@ public class InventoryGuiManager :Manager {
     private bool _isOpen = true;
 
     private void Awake() {
-        _textManager = ManagerManager.GetManager<TextManager>();
+        ManagerManager.SetManagers(this);
         _nameText = inventoryObject.transform.Find("Name").GetComponent<Text>();
         _countText = inventoryObject.transform.Find("Count").GetComponent<Text>();
         _slots = new InventorySlot[_x * _y];

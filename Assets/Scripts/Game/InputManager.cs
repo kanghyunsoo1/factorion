@@ -15,9 +15,7 @@ public class InputManager :Manager {
     private EventSystem _eventSystem;
 
     private void Awake() {
-        _areaManager = ManagerManager.GetManager<AreaManager>();
-        _inventoryGuiManager = ManagerManager.GetManager<InventoryGuiManager>();
-        _showerManager = ManagerManager.GetManager<ShowerManager>();
+        ManagerManager.SetManagers(this);
         _camera = Camera.main;
         _eventSystem = EventSystem.current;
     }

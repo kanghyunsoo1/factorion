@@ -14,10 +14,10 @@ public class DialogManager :Manager {
     private TextManager _textManager;
 
     private void Awake() {
+        ManagerManager.SetManagers(this);
         _dialogs = GameObject.Find("Canvas").transform.Find("Dialogs").transform;
         _yesOrNo = _dialogs.Find("YesOrNo");
         _yesOrNoText = _yesOrNo.Find("Text").GetComponent<Text>();
-        _textManager = ManagerManager.GetManager<TextManager>();
     }
 
     private void Start() {

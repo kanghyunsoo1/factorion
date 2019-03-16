@@ -4,7 +4,7 @@
     private AreaManager _areaManager;
 
     private void Awake() {
-        _areaManager = ManagerManager.GetManager<AreaManager>();
+        ManagerManager.SetManagers(this);
     }
 
     private void Start() {

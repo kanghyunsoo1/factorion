@@ -3,13 +3,18 @@ using UnityEngine.UI;
 
 public class BuildingButton :MonoBehaviour {
     public string buildingName;
+    private SpriteManager _spriteManager;
+    private BuildGuiManager _buildGuiManager;
+
+    private void Awake() {
+        ManagerManager.SetManagers(this);
+    }
 
     private void Start() {
-        transform.Find("Image").GetComponent<Image>().sprite = ManagerManager.GetManager<SpriteManager>().GetSprite("building", buildingName);
+        transform.Find("Image").GetComponent<Image>().sprite = _spriteManager.GetSprite("building", buildingName);
     }
 
     public void OnClick() {
-        ManagerManager.GetManager<BuildGuiManager>().OnBuildingButtonClick(buildingName);
-        ManagerManager.GetManager<AudioManager>().Play("beep");
+        _buildGuiManager.OnBuildingButtonClick(buildingName);
     }
 }

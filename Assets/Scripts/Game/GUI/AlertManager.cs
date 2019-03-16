@@ -8,8 +8,7 @@ public class AlertManager :Manager {
     private TextManager _textManager;
     private AudioManager _audioManager;
     void Awake() {
-        _audioManager = ManagerManager.GetManager<AudioManager>();
-        _textManager = ManagerManager.GetManager<TextManager>();
+        ManagerManager.SetManagers(this);
         _list = new List<AlertBox>();
     }
 

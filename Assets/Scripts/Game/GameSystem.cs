@@ -9,8 +9,7 @@ public class GameSystem :MonoBehaviour {
         if (!StaticDatas.wasMainLoad) {
             SceneManager.LoadScene("Main");
         }
-        _dataManager = ManagerManager.GetManager<DataManager>();
-        _spawnManager = ManagerManager.GetManager<SpawnManager>();
+        ManagerManager.SetManagers(this);
 
     }
 

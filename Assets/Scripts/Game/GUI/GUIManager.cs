@@ -11,10 +11,7 @@ public class GuiManager :MonoBehaviour {
     private AudioManager _audioManager;
 
     void Awake() {
-        _dataManager = ManagerManager.GetManager<DataManager>();
-        _dialogManager = ManagerManager.GetManager<DialogManager>();
-        _alertManager = ManagerManager.GetManager<AlertManager>();
-        _audioManager = ManagerManager.GetManager<AudioManager>();
+        ManagerManager.SetManagers(this);
         mapNameText.text = StaticDatas.mapName;
     }
 

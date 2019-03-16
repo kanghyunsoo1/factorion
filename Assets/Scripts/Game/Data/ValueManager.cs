@@ -9,7 +9,7 @@ public class ValueManager :Manager {
 
     private RiceCakeManager _riceCakeManager;
     void Awake() {
-        _riceCakeManager = ManagerManager.GetManager<RiceCakeManager>();
+        ManagerManager.SetManagers(this);
         values = new UpgradableValue[] {
              Init("gustn",             100f)
             ,Init("maxRobotCount",     10f,    5f,     100,    503,    50 )

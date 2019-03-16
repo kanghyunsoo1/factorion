@@ -13,18 +13,14 @@ public class BuildGuiManager :Manager {
     private AlertManager _alertManager;
     private AreaManager _areaManager;
     private RiceCakeManager _riceCakeManager;
+    private ShowerManager _showerManager;
     private BuildingInfo _selectBuildingInfo;
     private BuildingRequiredItemsHolder[] _requiredHolders;
     private Transform _lookAtMe;
     private GameObject _select;
 
     void Awake() {
-        _alertManager = ManagerManager.GetManager<AlertManager>();
-        _textManager = ManagerManager.GetManager<TextManager>();
-        _spriteManager = ManagerManager.GetManager<SpriteManager>();
-        _areaManager = ManagerManager.GetManager<AreaManager>();
-        _riceCakeManager = ManagerManager.GetManager<RiceCakeManager>();
-        _buildingManager = ManagerManager.GetManager<BuildingManager>();
+        ManagerManager.SetManagers(this);
         _requiredHolders = FindObjectsOfType<BuildingRequiredItemsHolder>();
         _lookAtMe = FindObjectOfType<LookAtMe>().transform;
         _select = content.transform.Find("Select").gameObject;
@@ -42,8 +38,6 @@ public class BuildGuiManager :Manager {
             _buttons[i].buildingName = _buildingManager.buildingInfos[i].name;
             go.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, i * -100);
         }
-        StartCoroutine(RefreshLoop());
-
         OnBuildingButtonClick("fan");
     }
 
@@ -58,44 +52,22 @@ public class BuildGuiManager :Manager {
             }
         }
         _selectBuildingInfo = _buildingManager.GetBuildingInfo(name);
-        FindObjectOfType<BuildingNameHolder>().SetText(_textManager.GetText("name", name));
-        FindObjectOfType<BuildingDesHolder>().SetText(_textManager.GetText("des", name));
-        foreach (var a in _requiredHolders) {
-            a.gameObject.SetActive(false);
-        }
-        RefreshRequires();
+        
+
     }
 
-    void RefreshRequires() {
-        var baseInventory = FindObjectOfType<Warehouse>().GetComponent<Inventory>();
-        for (int i = 0; i < _selectBuildingInfo.requireBundles.Length; i++) {
-            _requiredHolders[i].gameObject.SetActive(true);
-            var item = _selectBuildingInfo.requireBundles[i].name;
-            _requiredHolders[i].SetItemInfo(_textManager.GetText("item", item)
-                , _spriteManager.GetSprite("item", item)
-                , _selectBuildingInfo.requireBundles[i].count
-                , baseInventory.GetItemCount(item));
-        }
-    }
 
-    IEnumerator RefreshLoop() {
-        while (true) {
-            yield return new WaitForSeconds(1f);
-            if (_selectBuildingInfo != null)
-                RefreshRequires();
-        }
-    }
 
     public void OnBuildButtonClick() {
         if (_selectBuildingInfo == null)
             return;
         var baseInventory = FindObjectOfType<Warehouse>().GetComponent<Inventory>();
-        foreach (var bundle in _selectBuildingInfo.requireBundles) {
+        /*foreach (var bundle in _selectBuildingInfo.requireBundles) {
             if (baseInventory.GetItemCount(bundle.name) < bundle.count) {
                 _alertManager.AddAlert("notEnoughItem", Color.red);
                 return;
             }
-        }
+        }*/
         var user = _areaManager.GetUser(buildHereObject.transform.position);
         if (_selectBuildingInfo.name.Equals("miner")) {
             if (user == null) {
@@ -107,9 +79,9 @@ public class BuildGuiManager :Manager {
             return;
         }
 
-        foreach (var bundle in _selectBuildingInfo.requireBundles) {
+       /* foreach (var bundle in _selectBuildingInfo.requireBundles) {
             baseInventory.PullItem(bundle.name, bundle.count);
-        }
+        }*/
         var go = _riceCakeManager.Instantiate(_selectBuildingInfo.name);
         go.transform.position = buildHereObject.transform.position;
         _alertManager.AddAlert("build", Color.black);
