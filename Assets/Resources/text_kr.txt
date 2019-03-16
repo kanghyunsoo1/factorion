@@ -45,8 +45,9 @@ rice-flour			#쌀 가루
 
 @name
 warehouse			#창고
-inserter			#투입기
 fan					#선풍기
+wall				#벽
+inserter			#투입기
 miner				#채광기
 millstone			#맷돌
 furance				#화로
@@ -61,8 +62,9 @@ water				#물
 rice				#벼
 
 @des
+fan					#아이템을 지정한 방향으로 무한히 밀어냅니다.
+wall				#아이템이 더 이상 밀려나지 않게 막습니다.
 inserter			#투입기입니다.
-fan					#아이템들을 지정한 방향으로 밀어냅니다.
 miner				#광물을 채광합니다.
 millstone			#아이템을 가루로 만듭니다.
 furance				#아이템을 굽습니다.
