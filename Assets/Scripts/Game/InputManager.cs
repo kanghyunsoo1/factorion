@@ -82,7 +82,7 @@ public class InputManager :Manager {
                 }
             }
         }
-        _showerManager.OffAll();
+        _showerManager.OffAll(false);
         _inventoryGuiManager.Close();
     }
 }

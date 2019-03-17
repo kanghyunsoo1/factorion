@@ -29,7 +29,7 @@ public class DataManager :Manager {
         _spinnerManager.SpinnerOn("load");
         yield return null;
         _riceCakeManager.Load(_mapName);
-        _showerManager.OffAll();
+        _showerManager.OffAll(true);
         _spinnerManager.SpinnerOff();
     }
 

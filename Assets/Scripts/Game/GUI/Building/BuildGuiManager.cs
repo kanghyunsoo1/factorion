@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildGuiManager :Manager {
     public GameObject content;
     public GameObject buildingButtonPrefab;
     public GameObject buildHereObject;
+    public Scrollbar scrollbarObject;
 
     private BuildingButton[] _buttons;
     private BuildingManager _buildingManager;
@@ -14,21 +16,20 @@ public class BuildGuiManager :Manager {
     private AreaManager _areaManager;
     private RiceCakeManager _riceCakeManager;
     private ShowerManager _showerManager;
+    private AudioManager _audioManager;
+    private ValueManager _valueManager;
     private BuildingInfo _selectBuildingInfo;
-    private BuildingRequiredItemsHolder[] _requiredHolders;
     private Transform _lookAtMe;
-    private GameObject _select;
+    private GameObject _selectBackground;
 
     void Awake() {
         ManagerManager.SetManagers(this);
-        _requiredHolders = FindObjectsOfType<BuildingRequiredItemsHolder>();
         _lookAtMe = FindObjectOfType<LookAtMe>().transform;
-        _select = content.transform.Find("Select").gameObject;
+        _selectBackground = content.transform.Find("Select").gameObject;
         buildHereObject.SetActive(false);
     }
 
     private void Start() {
-
         _buttons = new BuildingButton[_buildingManager.buildingInfos.Length];
         content.GetComponent<RectTransform>().sizeDelta = new Vector2(0, _buildingManager.buildingInfos.Length * 100);
         for (int i = 0; i < _buildingManager.buildingInfos.Length; i++) {
@@ -38,36 +39,47 @@ public class BuildGuiManager :Manager {
             _buttons[i].buildingName = _buildingManager.buildingInfos[i].name;
             go.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, i * -100);
         }
-        OnBuildingButtonClick("fan");
+        _selectBackground.transform.SetSiblingIndex(99);
+        _selectBuildingInfo = _buildingManager.GetBuildingInfo("fan");
     }
 
-
-
-
     public void OnBuildingButtonClick(string name) {
-        _select.transform.SetSiblingIndex(99);
         foreach (var bb in _buttons) {
             if (bb.buildingName.Equals(name)) {
-                _select.transform.position = bb.transform.position;
+                _selectBackground.transform.position = bb.transform.position;
             }
         }
         _selectBuildingInfo = _buildingManager.GetBuildingInfo(name);
-        
-
+        _showerManager.OnTouch(_selectBuildingInfo);
     }
 
+    public void OnFoldButtonClick() {
+        StartCoroutine(ProcShower());
+    }
 
+    IEnumerator ProcShower() {
+        yield return new WaitForSeconds(0.3f);
+        if (buildHereObject.activeInHierarchy) {
+            _showerManager.OnTouch(_selectBuildingInfo);
+            var infos = _buildingManager.buildingInfos;
+            var i = 0;
+            for (i = 0; i < infos.Length; i++) {
+                if (infos[i].Equals(_selectBuildingInfo))
+                    break;
+            }
+            scrollbarObject.value = 1f - i / (float)infos.Length;
+        } else {
+            _showerManager.OffAll(true);
+        }
+    }
 
     public void OnBuildButtonClick() {
         if (_selectBuildingInfo == null)
             return;
-        var baseInventory = FindObjectOfType<Warehouse>().GetComponent<Inventory>();
-        /*foreach (var bundle in _selectBuildingInfo.requireBundles) {
-            if (baseInventory.GetItemCount(bundle.name) < bundle.count) {
-                _alertManager.AddAlert("notEnoughItem", Color.red);
-                return;
-            }
-        }*/
+        if (_valueManager.GetValue("gustn").Value < _selectBuildingInfo.price) {
+            _alertManager.AddAlert("notEnoughItem", Color.red);
+            return;
+        }
         var user = _areaManager.GetUser(buildHereObject.transform.position);
         if (_selectBuildingInfo.name.Equals("miner")) {
             if (user == null) {
@@ -79,9 +91,7 @@ public class BuildGuiManager :Manager {
             return;
         }
 
-       /* foreach (var bundle in _selectBuildingInfo.requireBundles) {
-            baseInventory.PullItem(bundle.name, bundle.count);
-        }*/
+        _valueManager.GetValue("gustn").defaultValue -= _selectBuildingInfo.price;
         var go = _riceCakeManager.Instantiate(_selectBuildingInfo.name);
         go.transform.position = buildHereObject.transform.position;
         _alertManager.AddAlert("build", Color.black);
@@ -95,6 +105,5 @@ public class BuildGuiManager :Manager {
             buildHereObject.SetActive(false);
         }
         buildHereObject.transform.position = new Vector3(Mathf.Round(_lookAtMe.position.x), 0f, Mathf.Round(_lookAtMe.position.z));
-
     }
 }
